@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BeamDesgin.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,7 @@ namespace BeamDesgin.Elements
 
         public double CornerShearAs { get; set; }
 
-        public string BeamMark { get; set; }
+        public BeamMark Mark { get; set; }
 
         public double Breadth { get; set; }
 
@@ -40,6 +41,17 @@ namespace BeamDesgin.Elements
 
         public ShearRFT ChosenShearAsMid { get; set; }
 
+        //Data exported to Revit
+
+        public string BeamMark => $"{Mark.Type}{Mark.Number}";
+        public string BotAsCornerData => $"{ChosenCornerAsBot.NumberOfBars}T{ChosenCornerAsBot.Diameter}";
+        public string BotAsMidData => $"{ChosenAsMidBot.NumberOfBars}T{ChosenAsMidBot.Diameter}";
+        public string TopAsCornerData => $"{ChosenCornerAsTop.NumberOfBars}T{ChosenCornerAsTop.Diameter}";
+        public string TopAsMidData => $"{ChosenMidAsTop.NumberOfBars}T{ChosenMidAsTop.Diameter}";
+        public string Corner_Astr_Data => $"{ChosenShearAsCorner.NumberOfBars}LT{ChosenShearAsCorner.Diameter}@{ChosenShearAsCorner.spacing}";
+        public string Mid_Astr_Data => $"{ChosenShearAsMid.NumberOfBars}LT{ChosenShearAsMid.Diameter}@{ChosenShearAsMid.spacing}";
+
+
         public Beam()
         {
             ChosenCornerAsTop = new FlexuralRft();
@@ -48,6 +60,7 @@ namespace BeamDesgin.Elements
             ChosenAsMidBot = new FlexuralRft();
             ChosenShearAsCorner = new ShearRFT();
             ChosenShearAsMid = new ShearRFT();
+            Mark = new BeamMark();
         }
     }
 }

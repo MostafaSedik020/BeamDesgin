@@ -97,6 +97,7 @@
     <Compile Include="UI\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\BeamMark.cs" />
     <Compile Include="Utils\MathFun.cs" />
   </ItemGroup>
   <ItemGroup>

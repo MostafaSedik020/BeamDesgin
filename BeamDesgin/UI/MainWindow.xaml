@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BeamDesgin.UI"
-             mc:Ignorable="d" d:DesignWidth="800" Height="160"
+             mc:Ignorable="d" d:DesignWidth="800" Height="800"
              Loaded="Window_Loaded"
         Title="Beam Desgin"
         Background="Transparent"
@@ -24,8 +24,11 @@
             </Grid.Background>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
             </Grid.RowDefinitions>
+            
             <!-- Title bar with close button -->
             <Grid Grid.Row="0" Background="Transparent">
                 <Grid.ColumnDefinitions>
@@ -35,8 +38,39 @@
                 <Label Content="Beam Desgin" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="16" FontWeight="Bold" FontFamily="Arial" Foreground="Black" Grid.Column="0"/>
                 <Button Content="X" Width="30" Height="30" Click="CloseButton_Click" Background="Transparent" BorderBrush="Transparent" Foreground="Black" Grid.Column="1"/>
             </Grid>
-            <Button Content="Browse" HorizontalAlignment="Left" Margin="600,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="70" Height="30"/>
-            <TextBox HorizontalAlignment="Left" Height="30" Margin="81,0,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="384"/>
+            
+            <Button Name="Browse_btn" Content="Browse" HorizontalAlignment="Left" Margin="600,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="70" Height="30" Click="Browse_Button_Click"/>
+            <TextBox x:Name="Path_TxtBox" HorizontalAlignment="Left" Height="20" Margin="81,0,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Center" Width="384"/>
+
+
+            <!-- Data after sorting -->
+            <DataGrid x:Name="BeamDataGrid" Grid.Row="2" AutoGenerateColumns="False" IsReadOnly="True" Margin="10">
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="Aquamarine"/>
+                        <Setter Property="FontWeight" Value="SemiBold"/>
+                        <Setter Property="BorderThickness" Value="0,0,1,2"/>
+                        <Setter Property="BorderBrush" Value="Black"/>
+                    </Style>
+                </DataGrid.Resources>
+                
+                <DataGrid.Columns>
+
+                    <DataGridTextColumn Header="BeamMark"  Binding="{Binding BeamMark}" Width="*" />
+                    <DataGridTextColumn Header="size Breadth" Binding="{Binding Breadth}" Width="*"/>
+                    <DataGridTextColumn Header="sizeDepth" Binding="{Binding Depth}" Width="*"/>
+                    <DataGridTextColumn Header="Bot left" Binding="{Binding BotAsCornerData}" Width="*"/>
+                    <DataGridTextColumn Header="Bot mid" Binding="{Binding BotAsMidData}" Width="*"/>
+                    <DataGridTextColumn Header="Bot right" Binding="{Binding BotAsCornerData}" Width="*"/>
+                    <DataGridTextColumn Header="Top left" Binding="{Binding TopAsCornerData}" Width="*"/>
+                    <DataGridTextColumn Header="Top mid" Binding="{Binding TopAsMidData}" Width="*"/>
+                    <DataGridTextColumn Header="Top right" Binding="{Binding TopAsCornerData}" Width="*"/>
+                    <DataGridTextColumn Header="Links Left" Binding="{Binding Corner_Astr_Data}" Width="*"/>
+                    <DataGridTextColumn Header="Links Mid" Binding="{Binding Mid_Astr_Data}" Width="*"/>
+                    <DataGridTextColumn Header="Links Right" Binding="{Binding Corner_Astr_Data}" Width="*"/>
+                   
+                </DataGrid.Columns>
+            </DataGrid>
         </Grid>
     </Border>
 </Window>

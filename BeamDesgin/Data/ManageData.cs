@@ -70,25 +70,26 @@ namespace BeamDesgin.Data
                                          .ToList();
 
 
-            string currentMark = "B1";
+            string currentMarkType = "B";
             int markNumber = 1;
 
             if (sortedBeamList.Any())
             {
                 Beam previousBeam = sortedBeamList.First();
-                previousBeam.BeamMark = currentMark;
-
+                previousBeam.Mark.Type = currentMarkType;
+                previousBeam.Mark.Number = markNumber;
                 foreach (var beam in sortedBeamList.Skip(1))
                 {
                     if (ManageBeams.AreBeamsSimilar(beam, previousBeam))
                     {
-                        beam.BeamMark = previousBeam.BeamMark;
+                        beam.Mark.Number = previousBeam.Mark.Number;
+                        beam.Mark.Type = currentMarkType;
                     }
                     else
                     {
                         // Assign a new mark
-                        currentMark = $"B{markNumber + 1}";
-                        beam.BeamMark = currentMark;
+
+                        beam.Mark.Number = markNumber + 1;
                         markNumber++;
                     }
                     previousBeam = beam;
