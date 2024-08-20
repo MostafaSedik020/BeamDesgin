@@ -78,25 +78,38 @@ namespace BeamDesgin.Data
                 Beam previousBeam = sortedBeamList.First();
                 previousBeam.Mark.Type = currentMarkType;
                 previousBeam.Mark.Number = markNumber;
+
                 foreach (var beam in sortedBeamList.Skip(1))
                 {
                     if (ManageBeams.AreBeamsSimilar(beam, previousBeam))
                     {
+                        // Assign the same mark as the previous beam
                         beam.Mark.Number = previousBeam.Mark.Number;
-                        beam.Mark.Type = currentMarkType;
+                        beam.Mark.Type = previousBeam.Mark.Type;
                     }
                     else
                     {
                         // Assign a new mark
-
-                        beam.Mark.Number = markNumber + 1;
                         markNumber++;
+                        beam.Mark.Number = markNumber;
+                        beam.Mark.Type = currentMarkType;
                     }
                     previousBeam = beam;
                 }
             }
 
             return sortedBeamList;
+        }
+
+        public static List<Beam> UniqueSortedData (List<Beam> sortedBeamList)
+        {
+            // Group the beams by BeamMark and select the first beam from each group
+            var uniqueSortedList = sortedBeamList
+                .GroupBy(beam => beam.Mark.Number) // Group by BeamMark's Number
+                .Select(group => group.First())    // Select the first beam from each group
+                .ToList();
+
+            return uniqueSortedList;
         }
     }
 }

@@ -13,7 +13,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Autodesk.Revit.DB;
+using BeamDesgin.Excel;
 using Microsoft.Win32;
+using BeamDesgin.Elements;
+using BeamDesgin.Data;
 
 namespace BeamDesgin.UI
 {
@@ -68,6 +71,88 @@ namespace BeamDesgin.UI
 
                 Path_TxtBox.Text = selectedFilePath;
             }
+        }
+
+        private void desin_btn_click(object sender, RoutedEventArgs e)
+        {
+            
+            if (string.IsNullOrWhiteSpace(Path_TxtBox.Text))
+            {
+                MessageBox.Show("Please select a valid file path.", "Invalid Path", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            UpdateDataGrid();
+
+            ItemizeCheckBox.Visibility = System.Windows.Visibility.Visible;
+        }
+        private void ItemizeCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            UpdateDataGrid();
+        }
+
+        private void ItemizeCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            UpdateDataGrid();
+        }
+
+
+
+
+
+        /// <summary>
+        /// return the selected rebar sizes 
+        /// </summary>
+        /// <returns> List of integers</returns>
+        private List<int> GetSelectedRebarSizes()
+        {
+            var selectedRebars = new List<int>();
+
+            // Iterate through each CheckBox in the Expander's Grid
+            foreach (var child in (RebarExpander.Content as System.Windows.Controls.Grid).Children)
+            {
+                if (child is CheckBox checkBox && checkBox.IsChecked == true)
+                {
+                    // Convert the CheckBox content to an integer and add it to the list
+                    if (int.TryParse(checkBox.Content.ToString(), out int rebarSize))
+                    {
+                        selectedRebars.Add(rebarSize);
+                    }
+                }
+                
+            }
+            
+
+            return selectedRebars;
+        }
+
+        private void UpdateDataGrid()
+        {
+            BeamDataGrid.Items.Clear();
+
+            List<Beam> beamsData = ManageExcel.GetBeamsData(Path_TxtBox.Text);
+
+            List<int> selectedRebars = GetSelectedRebarSizes();
+
+            var sortedList = ManageData.SortData(beamsData, selectedRebars);
+
+            if (ItemizeCheckBox.IsChecked == true)
+            {
+                foreach (Beam beam in sortedList)
+                {
+                    BeamDataGrid.Items.Add(beam);
+                }
+            }
+            else
+            {
+                var uniqueList = ManageData.UniqueSortedData(sortedList);
+
+                foreach (Beam beam in uniqueList)
+                {
+                    BeamDataGrid.Items.Add(beam);
+                }
+            }
+
         }
     }
     
