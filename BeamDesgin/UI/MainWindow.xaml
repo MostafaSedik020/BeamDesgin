@@ -10,12 +10,14 @@
         Background="Transparent"
         WindowStyle="None"
         AllowsTransparency="True"
-        ResizeMode="NoResize"
-        MouseLeftButtonDown="Window_MouseLeftButtonDown">
+        ResizeMode="CanResizeWithGrip"
+        MouseMove="Window_MouseMove">
+
+        
 
     
 
-    <Border CornerRadius="25" BorderThickness="1" BorderBrush="Transparent" Background="Transparent">
+    <Border CornerRadius="25" BorderThickness="1" BorderBrush="Transparent" Background="Transparent" >
         <Grid>
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -46,64 +48,73 @@
             <TextBox x:Name="Path_TxtBox" HorizontalAlignment="Left" Height="20" Margin="39,34,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="384"/>
 
             <!--check boxes-->
-            <Expander x:Name="RebarExpander" HorizontalAlignment="Left" Height="100" Header="Choose Rebar" Margin="24,10,0,0" Grid.RowSpan="2" Grid.Row="2" VerticalAlignment="Top" Width="400" >
-                <Grid Background="Gray">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
+            <Expander x:Name="RebarExpander" HorizontalAlignment="Left" Height="80" Header="Choose Rebar" Margin="24,10,0,0" Grid.RowSpan="2" Grid.Row="2" VerticalAlignment="Top" Width="300" >
+                <Grid Background="Gray" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <CheckBox Content="8" Grid.Row="0" Grid.Column="0" />
-                    <CheckBox Content="10" Grid.Row="0" Grid.Column="1"/>
-                    <CheckBox Content="12" Grid.Row="0" Grid.Column="2"/>
-                    <CheckBox Content="14" Grid.Row="1" Grid.Column="0"/>
-                    <CheckBox Content="16" Grid.Row="1" Grid.Column="1"/>
-                    <CheckBox Content="18" Grid.Row="1" Grid.Column="2"/>
-                    <CheckBox Content="20" Grid.Row="2" Grid.Column="0"/>
-                    <CheckBox Content="22" Grid.Row="2" Grid.Column="1"/>
-                    <CheckBox Content="25" Grid.Row="2" Grid.Column="2"/>
-                    
+                    <StackPanel Grid.Column="0">
+                        <CheckBox Content="8"  Grid.Column="0" Margin="0,2,0,2" />
+                        <CheckBox Content="10"  Grid.Column="1" Margin="0,2,0,2"/>
+                        <CheckBox Content="12"  Grid.Column="2" Margin="0,2,0,2"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" >
+                        <CheckBox Content="14"  Grid.Column="0" Margin="0,2,0,2" />
+                        <CheckBox Content="16"  Grid.Column="1" Margin="0,2,0,2"/>
+                        <CheckBox Content="18"  Grid.Column="2" Margin="0,2,0,2"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <CheckBox Content="20"  Grid.Column="0" Margin="0,2,0,2"/>
+                        <CheckBox Content="22"  Grid.Column="1" Margin="0,2,0,2"/>
+                        <CheckBox Content="25"  Grid.Column="2" Margin="0,2,0,2"/>
+                    </StackPanel>
                 </Grid>
             </Expander>
+            <Button x:Name="desgin_btn" Content="Desgin" HorizontalAlignment="Left" Margin="469,40,0,0" Grid.Row="2"
+                            VerticalAlignment="Top" Width="70" Height="30" Click="desgin_btn_click"/>
+
 
             <!-- Data after sorting -->
-            <DataGrid x:Name="BeamDataGrid" Grid.Row="3" AutoGenerateColumns="False" IsReadOnly="True" Margin="10">
-                <DataGrid.Resources>
-                    <Style TargetType="{x:Type DataGridColumnHeader}">
-                        <Setter Property="Background" Value="PaleVioletRed"/>
-                        <Setter Property="FontWeight" Value="SemiBold"/>
-                        <Setter Property="BorderThickness" Value="0,0,1,2"/>
-                        <Setter Property="BorderBrush" Value="Black"/>
-                    </Style>
-                </DataGrid.Resources>
 
-                
+                <DataGrid x:Name="BeamDataGrid" Grid.Row="3" AutoGenerateColumns="False" IsReadOnly="False" Margin="10"
+                          CanUserResizeRows="False" CanUserResizeColumns="False" CanUserSortColumns="False"
+                          CanUserReorderColumns="False">
+                    
+                    <DataGrid.Resources>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="Background" Value="PaleVioletRed"/>
+                            <Setter Property="FontWeight" Value="SemiBold"/>
+                            <Setter Property="BorderThickness" Value="0,0,1,2"/>
+                            <Setter Property="BorderBrush" Value="Black"/>
+                        </Style>
+                    </DataGrid.Resources>
 
-                <DataGrid.Columns>
 
-                    <DataGridTextColumn Header="BeamMark"  Binding="{Binding BeamMark}" Width="*" />
-                    <DataGridTextColumn Header="size Breadth" Binding="{Binding Breadth}" Width="*"/>
-                    <DataGridTextColumn Header="sizeDepth" Binding="{Binding Depth}" Width="*"/>
-                    <DataGridTextColumn Header="Bot left" Binding="{Binding BotAsCornerData}" Width="*"/>
-                    <DataGridTextColumn Header="Bot mid" Binding="{Binding BotAsMidData}" Width="*"/>
-                    <DataGridTextColumn Header="Bot right" Binding="{Binding BotAsCornerData}" Width="*"/>
-                    <DataGridTextColumn Header="Top left" Binding="{Binding TopAsCornerData}" Width="*"/>
-                    <DataGridTextColumn Header="Top mid" Binding="{Binding TopAsMidData}" Width="*"/>
-                    <DataGridTextColumn Header="Top right" Binding="{Binding TopAsCornerData}" Width="*"/>
-                    <DataGridTextColumn Header="Links Left" Binding="{Binding Corner_Astr_Data}" Width="*"/>
-                    <DataGridTextColumn Header="Links Mid" Binding="{Binding Mid_Astr_Data}" Width="*"/>
-                    <DataGridTextColumn Header="Links Right" Binding="{Binding Corner_Astr_Data}" Width="*"/>
 
-                </DataGrid.Columns>
-            </DataGrid>
+                    <DataGrid.Columns>
 
-            <Button x:Name="desgin_btn" Content="Desgin" HorizontalAlignment="Left" Margin="469,40,0,0" Grid.Row="2" VerticalAlignment="Top" Width="70" Height="30" Click="desin_btn_click"/>
-            <CheckBox x:Name="ItemizeCheckBox"  Content="Itemize Every Object" HorizontalAlignment="Left" Margin="24,10,0,0" Grid.Row="4" VerticalAlignment="Top" Checked="ItemizeCheckBox_Checked" Unchecked="ItemizeCheckBox_Unchecked" Visibility="Collapsed"/>
+                    <DataGridCheckBoxColumn Header="Select" Width="Auto" Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged , Mode=TwoWay}"  />
+
+                        <DataGridTextColumn Header="BeamMark"  Binding="{Binding BeamMark}" Width="*" />
+                        <DataGridTextColumn Header="size Breadth" Binding="{Binding Breadth}" Width="*"/>
+                        <DataGridTextColumn Header="sizeDepth" Binding="{Binding Depth}" Width="*"/>
+                        <DataGridTextColumn Header="Bot left" Binding="{Binding BotAsCornerData}" Width="*"/>
+                        <DataGridTextColumn Header="Bot mid" Binding="{Binding BotAsMidData}" Width="*"/>
+                        <DataGridTextColumn Header="Bot right" Binding="{Binding BotAsCornerData}" Width="*"/>
+                        <DataGridTextColumn Header="Top left" Binding="{Binding TopAsCornerData}" Width="*"/>
+                        <DataGridTextColumn Header="Top mid" Binding="{Binding TopAsMidData}" Width="*"/>
+                        <DataGridTextColumn Header="Top right" Binding="{Binding TopAsCornerData}" Width="*"/>
+                        <DataGridTextColumn Header="Links Left" Binding="{Binding Corner_Astr_Data}" Width="*"/>
+                        <DataGridTextColumn Header="Links Mid" Binding="{Binding Mid_Astr_Data}" Width="*"/>
+                        <DataGridTextColumn Header="Links Right" Binding="{Binding Corner_Astr_Data}" Width="*"/>
+
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            <!--<CheckBox x:Name="ItemizeCheckBox"  Content="Itemize Every Object" HorizontalAlignment="Left" Margin="24,10,0,0" Grid.Row="4" VerticalAlignment="Top" Checked="ItemizeCheckBox_Checked" 
+            Unchecked="ItemizeCheckBox_Unchecked" Visibility="Collapsed"/>-->
 
         </Grid>
     </Border>

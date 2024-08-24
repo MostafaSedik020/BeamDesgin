@@ -36,16 +36,43 @@ namespace BeamDesgin.UI
         {
 
         }
-
-        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Window_MouseMove(object sender, MouseEventArgs e)
         {
+            // Only allow moving the window when the left mouse button is pressed
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                DragMove();
+                // Get the mouse position relative to the window
+                System.Windows.Point position = e.GetPosition(this);
+
+                // Check if the mouse is within the top 30 pixels of the window
+                if (position.Y <= 30)
+                {
+                    // If the window is maximized and dragging from the top 30 pixels
+                    if (this.WindowState == WindowState.Maximized)
+                    {
+                        // Calculate the mouse position relative to the screen
+                        var mousePosition = PointToScreen(e.MouseDevice.GetPosition(this));
+
+                        // Restore the window size
+                        this.WindowState = WindowState.Normal;
+
+                        // Set the window position so the top of the window aligns with the mouse pointer
+                        // Offset the window's Left and Top based on the mouse position
+                        this.Left = mousePosition.X - (this.RestoreBounds.Width / 2);
+                        this.Top = 0; // Align the window's top with the screen's top
+
+                        // Move the window
+                        this.DragMove();
+                    }
+                    else if (this.WindowState == WindowState.Normal)
+                    {
+                        // If the window is already normal, just move it
+                        this.DragMove();
+                    }
+                }
             }
-
-
         }
+
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
@@ -73,7 +100,7 @@ namespace BeamDesgin.UI
             }
         }
 
-        private void desin_btn_click(object sender, RoutedEventArgs e)
+        private void desgin_btn_click(object sender, RoutedEventArgs e)
         {
             
             if (string.IsNullOrWhiteSpace(Path_TxtBox.Text))
@@ -84,17 +111,8 @@ namespace BeamDesgin.UI
 
             UpdateDataGrid();
 
-            ItemizeCheckBox.Visibility = System.Windows.Visibility.Visible;
-        }
-        private void ItemizeCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            UpdateDataGrid();
         }
 
-        private void ItemizeCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            UpdateDataGrid();
-        }
 
 
 
@@ -108,20 +126,26 @@ namespace BeamDesgin.UI
         {
             var selectedRebars = new List<int>();
 
-            // Iterate through each CheckBox in the Expander's Grid
-            foreach (var child in (RebarExpander.Content as System.Windows.Controls.Grid).Children)
+            // Ensure the Expander's content is a Grid and not null
+            if (RebarExpander.Content is System.Windows.Controls.Grid rebarGrid)
             {
-                if (child is CheckBox checkBox && checkBox.IsChecked == true)
+                // Iterate through each StackPanel in the Grid
+                foreach (var panel in rebarGrid.Children.OfType<StackPanel>())
                 {
-                    // Convert the CheckBox content to an integer and add it to the list
-                    if (int.TryParse(checkBox.Content.ToString(), out int rebarSize))
+                    // Iterate through each CheckBox in the StackPanel
+                    foreach (var child in panel.Children.OfType<CheckBox>())
                     {
-                        selectedRebars.Add(rebarSize);
+                        if (child.IsChecked == true)
+                        {
+                            // Convert the CheckBox content to an integer and add it to the list
+                            if (int.TryParse(child.Content.ToString(), out int rebarSize))
+                            {
+                                selectedRebars.Add(rebarSize);
+                            }
+                        }
                     }
                 }
-                
             }
-            
 
             return selectedRebars;
         }
@@ -136,23 +160,10 @@ namespace BeamDesgin.UI
 
             var sortedList = ManageData.SortData(beamsData, selectedRebars);
 
-            if (ItemizeCheckBox.IsChecked == true)
-            {
-                foreach (Beam beam in sortedList)
-                {
+               foreach (Beam beam in sortedList)
+               {
                     BeamDataGrid.Items.Add(beam);
-                }
-            }
-            else
-            {
-                var uniqueList = ManageData.UniqueSortedData(sortedList);
-
-                foreach (Beam beam in uniqueList)
-                {
-                    BeamDataGrid.Items.Add(beam);
-                }
-            }
-
+               }
         }
     }
     

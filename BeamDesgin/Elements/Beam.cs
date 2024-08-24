@@ -1,13 +1,14 @@
 ﻿using BeamDesgin.Utils;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BeamDesgin.Elements
 {
-    public class Beam
+    public class Beam : INotifyPropertyChanged
     {
         public string UniqueName { get; set; }
 
@@ -41,6 +42,21 @@ namespace BeamDesgin.Elements
 
         public ShearRFT ChosenShearAsMid { get; set; }
 
+        private bool _isSelected;
+        public bool IsSelected
+        {
+            get { return _isSelected; }
+            set
+            {
+                if (_isSelected != value)
+                {
+                    _isSelected = value;
+                    OnPropertyChanged(nameof(IsSelected));
+                }
+            }
+
+        }
+
         //Data exported to Revit
 
         public string BeamMark => $"{Mark.Type}{Mark.Number}";
@@ -61,6 +77,12 @@ namespace BeamDesgin.Elements
             ChosenShearAsCorner = new ShearRFT();
             ChosenShearAsMid = new ShearRFT();
             Mark = new BeamMark();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
