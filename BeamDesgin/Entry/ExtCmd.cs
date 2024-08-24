@@ -16,7 +16,7 @@ namespace BeamDesgin.Entry
         
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
-            string filePath = @"E:\Development\beam data.xlsx";
+
             UIDocument uidoc = commandData.Application.ActiveUIDocument;
 
             Document doc = uidoc.Document;
