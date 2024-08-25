@@ -10,6 +10,7 @@ using Autodesk.Revit.DB;
 using BeamDesgin.Excel;
 using BeamDesgin.Elements;
 using BeamDesgin.Data;
+using System.Text;
 
 namespace BeamDesgin.UI
 {
@@ -19,7 +20,7 @@ namespace BeamDesgin.UI
     public partial class MainWindow : Window
     {
         Document doc;
-        private ObservableCollection<Beam> _beamsData = new ObservableCollection<Beam>();
+        private ObservableCollection<Beam> _beamsData;
         public ObservableCollection<Beam> BeamsData
         {
             get { return _beamsData; }
@@ -99,6 +100,13 @@ namespace BeamDesgin.UI
             {
                 BeamsData.Add(beam); // Add the new data to the ObservableCollection
             }
+
+            StringBuilder sb = new StringBuilder();
+            foreach (Beam beam in BeamsData)
+            {
+                sb.Append(beam.BotAsMidData.ToString());
+            }
+            //MessageBox.Show($"BeamsData count: {sb}", "Debug", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         /// <summary>
