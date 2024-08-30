@@ -3,11 +3,11 @@
   "WorkspaceRootPath": "E:\\Development\\BeamDesgin\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|E:\\Development\\BeamDesgin\\beamdesgin\\ui\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|e:\\development\\beamdesgin\\beamdesgin\\ui\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\ui\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|e:\\development\\beamdesgin\\beamdesgin\\elements\\beam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|E:\\Development\\BeamDesgin\\beamdesgin\\elements\\beam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\elements\\beam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -32,11 +32,10 @@
               "RelativeDocumentMoniker": "BeamDesgin\\Elements\\Beam.cs",
               "ToolTip": "E:\\Development\\BeamDesgin\\BeamDesgin\\Elements\\Beam.cs",
               "RelativeToolTip": "BeamDesgin\\Elements\\Beam.cs",
-              "ViewState": "AQIAAJoAAAAAAAAAAAAIwKsAAABnAAAA",
+              "ViewState": "AQIAAIAAAAAAAAAAAAAqwJUAAAAGAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-17T20:06:05.795Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Bookmark",
@@ -64,8 +63,7 @@
               "RelativeToolTip": "BeamDesgin\\UI\\MainWindow.xaml.cs",
               "ViewState": "AQIAAFoAAAAAAAAAAAAIwGwAAABzAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-17T15:20:32.64Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-17T15:20:32.64Z"
             }
           ]
         }

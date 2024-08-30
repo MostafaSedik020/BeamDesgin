@@ -5,6 +5,10 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Autodesk.Revit.DB;
+using Autodesk.Revit.UI;
+using Autodesk.Revit.UI.Events;
+using System.Windows;
 
 namespace BeamDesgin.Elements
 {
@@ -135,6 +139,7 @@ namespace BeamDesgin.Elements
                 {
                     _isSelected = value;
                     OnPropertyChanged(nameof(IsSelected));
+                    MessageBox.Show("done");
                 }
             }
         }
@@ -148,6 +153,7 @@ namespace BeamDesgin.Elements
                 {
                     _Mark = value;
                     OnPropertyChanged(nameof(Mark));
+                    
                 }
             }
         }
