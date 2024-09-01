@@ -10,7 +10,7 @@ namespace BeamDesgin.Data
 {
     public static class ManageData
     {
-        public static List<Beam> SortData(List<Beam> beamList,List<int> bars)
+        public static List<Beam> transAreaData(List<Beam> beamList,List<int> bars)
         {
 
 
@@ -57,17 +57,7 @@ namespace BeamDesgin.Data
 
             }
             //sorting
-            var sortedBeamList = beamList.OrderBy(b => b.Breadth)
-                                         .ThenBy(b => b.Depth)
-                                         .ThenBy(b => b.ChosenAsMidBot.Diameter)
-                                         .ThenBy(b => b.ChosenAsMidBot.NumberOfBars + b.ChosenCornerAsBot.NumberOfBars)
-                                         .ThenBy(b => b.ChosenCornerAsTop.Diameter)
-                                         .ThenBy(b => b.ChosenCornerAsTop.NumberOfBars)
-                                         .ThenBy(b => b.ChosenMidAsTop.Diameter)
-                                         .ThenBy(b => b.ChosenMidAsTop.NumberOfBars)
-                                         .ThenBy(b => b.ChosenShearAsCorner.Diameter)
-                                         .ThenBy(b => b.ChosenShearAsCorner.spacing)
-                                         .ToList();
+            var sortedBeamList = sortData(beamList);
 
 
             string currentMarkType = "B";
@@ -110,6 +100,23 @@ namespace BeamDesgin.Data
                 .ToList();
 
             return uniqueSortedList;
+        }
+
+        public static List<Beam> sortData(List<Beam> beamList)
+        {
+            var sortedList =  beamList.OrderBy(b => b.Breadth)
+                                         .ThenBy(b => b.Depth)
+                                         .ThenBy(b => b.ChosenAsMidBot.Diameter)
+                                         .ThenBy(b => b.ChosenAsMidBot.NumberOfBars + b.ChosenCornerAsBot.NumberOfBars)
+                                         .ThenBy(b => b.ChosenCornerAsTop.Diameter)
+                                         .ThenBy(b => b.ChosenCornerAsTop.NumberOfBars)
+                                         .ThenBy(b => b.ChosenMidAsTop.Diameter)
+                                         .ThenBy(b => b.ChosenMidAsTop.NumberOfBars)
+                                         .ThenBy(b => b.ChosenShearAsCorner.Diameter)
+                                         .ThenBy(b => b.ChosenShearAsCorner.spacing)
+                                         .ToList();
+
+            return sortedList;
         }
     }
 }

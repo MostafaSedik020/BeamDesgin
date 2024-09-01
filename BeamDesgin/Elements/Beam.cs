@@ -139,7 +139,6 @@ namespace BeamDesgin.Elements
                 {
                     _isSelected = value;
                     OnPropertyChanged(nameof(IsSelected));
-                    MessageBox.Show("done");
                 }
             }
         }

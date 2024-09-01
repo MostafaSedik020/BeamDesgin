@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BeamDesgin.Elements;
 using BeamDesgin.Utils;
+using OfficeOpenXml.Table.PivotTable;
 
 namespace BeamDesgin.ManageElements
 {
@@ -18,6 +20,30 @@ namespace BeamDesgin.ManageElements
                 areaBars.Add(area);
             }
             return areaBars;
+        }
+
+        public static double GetAreaRFT (Reinforcement reinforcement)
+        {
+            var shearRft = reinforcement as ShearRFT;
+            double singleArea = 0;
+            double totalArea = 0;
+            
+
+            if (shearRft != null)
+            {
+                singleArea = (Math.PI * Math.Pow(shearRft.Diameter, 2)) / 4;
+                 totalArea = singleArea * shearRft.NumberOfBars * (1000/shearRft.spacing);
+
+            }
+            else
+            {
+                singleArea = (Math.PI * Math.Pow(reinforcement.Diameter, 2)) / 4;
+                 totalArea = singleArea * reinforcement.NumberOfBars;
+            }
+            
+            
+
+            return totalArea;
         }
         public static (int diameter, double noOfBars) GetChosenFlexRFT(double As, double breadth, List<int> bars, int? forcedBarDiameter = null)
         {

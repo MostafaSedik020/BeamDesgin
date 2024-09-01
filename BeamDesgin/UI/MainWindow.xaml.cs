@@ -11,6 +11,8 @@ using BeamDesgin.Excel;
 using BeamDesgin.Elements;
 using BeamDesgin.Data;
 using System.Text;
+using System.Diagnostics;
+using BeamDesgin.ManageElements;
 
 namespace BeamDesgin.UI
 {
@@ -21,6 +23,9 @@ namespace BeamDesgin.UI
     {
         Document doc;
         private ObservableCollection<Beam> _beamsData;
+
+        private List<Beam> ParentList;
+        private List<int> selectedRebars;
         public ObservableCollection<Beam> BeamsData
         {
             get { return _beamsData; }
@@ -93,20 +98,102 @@ namespace BeamDesgin.UI
             BeamsData.Clear(); // Clear any existing data in the ObservableCollection
 
             List<Beam> beamsData = ManageExcel.GetBeamsData(Path_TxtBox.Text);
-            List<int> selectedRebars = GetSelectedRebarSizes();
-            var sortedList = ManageData.SortData(beamsData, selectedRebars);
+            selectedRebars = GetSelectedRebarSizes();
+            ParentList = ManageData.transAreaData(beamsData, selectedRebars);
 
-            foreach (Beam beam in sortedList)
+            var uniqueList = ManageData.UniqueSortedData(ParentList);
+
+            foreach (Beam beam in uniqueList)
             {
                 BeamsData.Add(beam); // Add the new data to the ObservableCollection
+
             }
 
-            StringBuilder sb = new StringBuilder();
-            foreach (Beam beam in BeamsData)
+            desgin_btn.IsEnabled = false;
+
+        }
+
+        private void Update_btn_Click(object sender, RoutedEventArgs e)
+        {
+
+            var selectedBeams = BeamDataGrid.Items
+                     .OfType<Beam>() // Filter out non-Beam items
+                     .Where(b => b.IsSelected)
+                     .ToList();
+
+            if (selectedBeams.Any())
             {
-                sb.Append(beam.BotAsMidData.ToString());
+                foreach (Beam selectedBeam in selectedBeams)
+                {
+                    // Get the mark of the selected beam
+                    int selectedMarkNumber = selectedBeam.Mark.Number;
+
+                    Beam incrementedBeam = null;
+
+                    // get the qualified beams to be upgraded to
+                    //this loop select the next strongest beam after the selected beam
+                    foreach (Beam pBeam in ParentList)
+                    {
+                        if (pBeam.Depth == selectedBeam.Depth &&
+                            pBeam.Breadth == selectedBeam.Breadth &&
+                            pBeam.Mark.Number >= selectedBeam.Mark.Number &&
+                            ManageRft.GetAreaRFT(pBeam.ChosenAsMidBot) + ManageRft.GetAreaRFT(pBeam.ChosenCornerAsBot) > ManageRft.GetAreaRFT(selectedBeam.ChosenAsMidBot) + ManageRft.GetAreaRFT(selectedBeam.ChosenCornerAsBot) &&
+                            ManageRft.GetAreaRFT(pBeam.ChosenCornerAsTop) > ManageRft.GetAreaRFT(selectedBeam.ChosenCornerAsTop) &&
+                            ManageRft.GetAreaRFT(pBeam.ChosenShearAsCorner) > ManageRft.GetAreaRFT(selectedBeam.ChosenShearAsCorner))
+                        {
+                            incrementedBeam = pBeam;
+                            break;
+                        }
+                    }
+
+                    if (incrementedBeam != null)
+                    {
+                        foreach (Beam beam in ParentList.Where(b => b.Mark.Number == selectedMarkNumber))
+                        {
+                            beam.Mark = incrementedBeam.Mark;
+                            beam.ChosenCornerAsTop = incrementedBeam.ChosenCornerAsTop;
+                            beam.ChosenMidAsTop = incrementedBeam.ChosenMidAsTop;
+                            beam.ChosenCornerAsBot = incrementedBeam.ChosenCornerAsBot;
+                            beam.ChosenAsMidBot = incrementedBeam.ChosenAsMidBot;
+                            beam.ChosenShearAsCorner = incrementedBeam.ChosenShearAsCorner;
+                            beam.ChosenShearAsMid = incrementedBeam.ChosenShearAsMid;
+                        }
+                    }
+                }
+
+                UpdateDataGrid(); // Call once after all updates are done
             }
-            //MessageBox.Show($"BeamsData count: {sb}", "Debug", MessageBoxButton.OK, MessageBoxImage.Information);
+            else
+            {
+                MessageBox.Show("No beams selected.");
+            }
+        }
+
+        private void BeamDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(BeamDataGrid.SelectedItems.Count > 0)
+            {
+                Update_btn.IsEnabled=true;
+            }
+            else { Update_btn.IsEnabled=false; }
+            
+            
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            UpdateButtonState();
+        }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            UpdateButtonState();
+        }
+
+        private void Clear_btn_Click(object sender, RoutedEventArgs e)
+        {
+            desgin_btn.IsEnabled= true;
+            BeamsData.Clear();
         }
 
         /// <summary>
@@ -135,6 +222,55 @@ namespace BeamDesgin.UI
             }
 
             return selectedRebars;
+        }
+
+        private void UpdateButtonState()
+        {
+            var anyChecked = BeamDataGrid.Items
+                            .OfType<Beam>() // Filter out non-Beam items
+                            .Any(b => b.IsSelected);
+
+            Update_btn.IsEnabled = anyChecked;
+        }
+
+        /// <summary>
+        /// update the data grid in the UI
+        /// needs List of Beams
+        /// </summary>
+        /// <param name="beamList"> the beam list that will be represented to the user (aka  a unique list)</param>
+        private void UpdateDataGrid()
+        {
+            BeamsData.Clear();
+
+            ParentList = ManageData.sortData(ParentList);
+
+            int newMarkNumber = 1;
+
+            int oldMarkNumber = 0;
+
+            foreach (var beam in ParentList)
+            {
+                if (beam.Mark.Number > oldMarkNumber)
+                {
+                    oldMarkNumber = beam.Mark.Number;
+
+                    beam.Mark.Number = newMarkNumber;
+
+                    newMarkNumber++;
+                }
+                else if( beam.Mark.Number == oldMarkNumber)
+                {
+                    beam.Mark.Number = newMarkNumber;
+                }
+            }
+
+            var uniqueList = ManageData.UniqueSortedData(ParentList);
+
+            foreach (Beam beam in uniqueList)
+            {
+                BeamsData.Add(beam); // Add the new data to the ObservableCollection
+                
+            }
         }
     }
 }
