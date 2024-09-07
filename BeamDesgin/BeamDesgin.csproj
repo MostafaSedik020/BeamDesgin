@@ -94,15 +94,14 @@
     <Compile Include="ManageElements\ManageBeams.cs" />
     <Compile Include="ManageElements\ManageRft.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Revit\RevitUtils.cs" />
     <Compile Include="UI\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\BeamMark.cs" />
     <Compile Include="Utils\MathFun.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Revit\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

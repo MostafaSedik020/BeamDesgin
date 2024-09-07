@@ -4,15 +4,15 @@
 library
 C#
 .cs
-E:\Development\BeamDesgin\BeamDesgin\obj\Debug\
+E:\Development\BeamDesgin\BeamDesgin\obj\Release\
 BeamDesgin
 none
 false
-DEBUG;TRACE
+TRACE
 
 11533086365
 
-15-864160130
+13-724502420
 29-1656963693
 UI\MainWindow.xaml;
 

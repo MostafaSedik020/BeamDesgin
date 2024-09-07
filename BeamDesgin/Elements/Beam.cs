@@ -167,14 +167,16 @@ namespace BeamDesgin.Elements
         public double CornerShearAs { get; set; }
 
         // Data exported to Revit
+        // paramerter names a all uppercase because it mimic
+        // the their apperance in revit
         
         public string BeamMark => $"{Mark.Type}{Mark.Number}";
-        public string BotAsCornerData => $"{ChosenCornerAsBot.NumberOfBars}T{ChosenCornerAsBot.Diameter}";
-        public string BotAsMidData => $"{ChosenAsMidBot.NumberOfBars}T{ChosenAsMidBot.Diameter}";
-        public string TopAsCornerData => $"{ChosenCornerAsTop.NumberOfBars}T{ChosenCornerAsTop.Diameter}";
-        public string TopAsMidData => $"{ChosenMidAsTop.NumberOfBars}T{ChosenMidAsTop.Diameter}";
-        public string Corner_Astr_Data => $"{ChosenShearAsCorner.NumberOfBars}LT{ChosenShearAsCorner.Diameter}@{ChosenShearAsCorner.spacing}";
-        public string Mid_Astr_Data => $"{ChosenShearAsMid.NumberOfBars}LT{ChosenShearAsMid.Diameter}@{ChosenShearAsMid.spacing}";
+        public string BOTTOM_RFT_CORNER => $"{ChosenCornerAsBot.NumberOfBars}T{ChosenCornerAsBot.Diameter}";
+        public string BOTTOM_RFT_MID => $"{ChosenAsMidBot.NumberOfBars}T{ChosenAsMidBot.Diameter}";
+        public string TOP_RFT_CORNER => $"{ChosenCornerAsTop.NumberOfBars}T{ChosenCornerAsTop.Diameter}";
+        public string TOP_RFT_MID => $"{ChosenMidAsTop.NumberOfBars}T{ChosenMidAsTop.Diameter}";
+        public string LINKS_CORNER => $"{ChosenShearAsCorner.NumberOfBars}LT{ChosenShearAsCorner.Diameter}@{ChosenShearAsCorner.spacing}";
+        public string LINKS_MID => $"{ChosenShearAsMid.NumberOfBars}LT{ChosenShearAsMid.Diameter}@{ChosenShearAsMid.spacing}";
 
         public Beam()
         {

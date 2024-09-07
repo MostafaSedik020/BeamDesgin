@@ -233,6 +233,11 @@ namespace BeamDesgin.UI
             Update_btn.IsEnabled = anyChecked;
         }
 
+        private void refresh_btn_Click(object sender, RoutedEventArgs e)
+        {
+            BeamDataGrid.Items.Refresh();
+        }
+
         /// <summary>
         /// update the data grid in the UI
         /// needs List of Beams
@@ -272,5 +277,7 @@ namespace BeamDesgin.UI
                 
             }
         }
+
+        
     }
 }

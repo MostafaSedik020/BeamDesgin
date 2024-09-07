@@ -17,17 +17,16 @@ namespace BeamDesgin.Data
             // Calculate bottom Reinforcment
             foreach (Beam beam in beamList)
             {
-
-                #region Bottom Reinforcement
                 int domainDia = ManageRft.GetChosenFlexRFT(beam.BotMiddleAs, beam.Breadth, bars).diameter;
                 double breadth = beam.Breadth;
+
+                #region Bottom Reinforcement
 
                 var chosenCornerBot = ManageRft.GetChosenFlexRFT(beam.BotCornerAs, breadth, bars, domainDia);
                 beam.ChosenCornerAsBot.NumberOfBars = chosenCornerBot.noOfBars;
                 beam.ChosenCornerAsBot.Diameter = chosenCornerBot.diameter;
 
-                double steelDiff = Math.Abs(beam.BotMiddleAs - beam.BotCornerAs);
-                var chosenMidBot = ManageRft.GetChosenFlexRFT(steelDiff, breadth, bars, domainDia);
+                var chosenMidBot = ManageRft.GetChosenFlexRFT(beam.BotMiddleAs, breadth, bars, domainDia);
                 beam.ChosenAsMidBot.NumberOfBars = chosenMidBot.noOfBars;
                 beam.ChosenAsMidBot.Diameter = chosenMidBot.diameter;
                 #endregion
