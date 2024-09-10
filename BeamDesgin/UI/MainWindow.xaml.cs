@@ -117,58 +117,33 @@ namespace BeamDesgin.UI
         {
 
             var selectedBeams = BeamDataGrid.Items
-                     .OfType<Beam>() // Filter out non-Beam items
-                     .Where(b => b.IsSelected)
-                     .ToList();
+                                .OfType<Beam>() // Filter out non-Beam items
+                                .Where(b => b.IsSelected)
+                                .ToList();
 
             if (selectedBeams.Any())
             {
                 foreach (Beam selectedBeam in selectedBeams)
                 {
-                    // Get the mark of the selected beam
-                    int selectedMarkNumber = selectedBeam.Mark.Number;
-
-                    Beam incrementedBeam = null;
-
-                    // get the qualified beams to be upgraded to
-                    //this loop select the next strongest beam after the selected beam
-                    foreach (Beam pBeam in ParentList)
-                    {
-                        if (pBeam.Depth == selectedBeam.Depth &&
-                            pBeam.Breadth == selectedBeam.Breadth &&
-                            pBeam.Mark.Number >= selectedBeam.Mark.Number &&
-                            ManageRft.GetAreaRFT(pBeam.ChosenAsMidBot) + ManageRft.GetAreaRFT(pBeam.ChosenCornerAsBot) > ManageRft.GetAreaRFT(selectedBeam.ChosenAsMidBot) + ManageRft.GetAreaRFT(selectedBeam.ChosenCornerAsBot) &&
-                            ManageRft.GetAreaRFT(pBeam.ChosenCornerAsTop) > ManageRft.GetAreaRFT(selectedBeam.ChosenCornerAsTop) &&
-                            ManageRft.GetAreaRFT(pBeam.ChosenShearAsCorner) > ManageRft.GetAreaRFT(selectedBeam.ChosenShearAsCorner))
-                        {
-                            incrementedBeam = pBeam;
-                            break;
-                        }
-                    }
+                    Beam incrementedBeam = FindNextStrongerBeam(selectedBeam);
 
                     if (incrementedBeam != null)
                     {
-                        foreach (Beam beam in ParentList.Where(b => b.Mark.Number == selectedMarkNumber))
-                        {
-                            beam.Mark = incrementedBeam.Mark;
-                            beam.ChosenCornerAsTop = incrementedBeam.ChosenCornerAsTop;
-                            beam.ChosenMidAsTop = incrementedBeam.ChosenMidAsTop;
-                            beam.ChosenCornerAsBot = incrementedBeam.ChosenCornerAsBot;
-                            beam.ChosenAsMidBot = incrementedBeam.ChosenAsMidBot;
-                            beam.ChosenShearAsCorner = incrementedBeam.ChosenShearAsCorner;
-                            beam.ChosenShearAsMid = incrementedBeam.ChosenShearAsMid;
-                        }
+                        UpdateBeamsMark(selectedBeam.Mark.Number, incrementedBeam);
                     }
                 }
 
-                UpdateDataGrid(); // Call once after all updates are done
+                UpdateDataGrid(); // Update grid once after processing all beams
             }
             else
             {
                 MessageBox.Show("No beams selected.");
             }
         }
-
+        private void refresh_btn_Click(object sender, RoutedEventArgs e)
+        {
+            BeamDataGrid.Items.Refresh();
+        }
         private void BeamDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if(BeamDataGrid.SelectedItems.Count > 0)
@@ -233,10 +208,7 @@ namespace BeamDesgin.UI
             Update_btn.IsEnabled = anyChecked;
         }
 
-        private void refresh_btn_Click(object sender, RoutedEventArgs e)
-        {
-            BeamDataGrid.Items.Refresh();
-        }
+        
 
         /// <summary>
         /// update the data grid in the UI
@@ -273,11 +245,43 @@ namespace BeamDesgin.UI
 
             foreach (Beam beam in uniqueList)
             {
+                beam.IsSelected = false;
                 BeamsData.Add(beam); // Add the new data to the ObservableCollection
                 
             }
         }
 
-        
+        private Beam FindNextStrongerBeam(Beam selectedBeam)
+        {
+            return ParentList
+                .Where(pBeam =>
+                    pBeam.Depth == selectedBeam.Depth &&
+                    pBeam.Breadth == selectedBeam.Breadth &&
+                    pBeam.Mark.Number > selectedBeam.Mark.Number &&
+                    ManageRft.GetAreaRFT(pBeam.ChosenAsMidBot) + ManageRft.GetAreaRFT(pBeam.ChosenCornerAsBot) >=
+                    ManageRft.GetAreaRFT(selectedBeam.ChosenAsMidBot) + ManageRft.GetAreaRFT(selectedBeam.ChosenCornerAsBot) &&
+                    ManageRft.GetAreaRFT(pBeam.ChosenCornerAsTop) >= ManageRft.GetAreaRFT(selectedBeam.ChosenCornerAsTop) &&
+                    ManageRft.GetAreaRFT(pBeam.ChosenShearAsCorner) >= ManageRft.GetAreaRFT(selectedBeam.ChosenShearAsCorner))
+                .FirstOrDefault();
+        }
+
+        private void UpdateBeamsMark(int selectedMarkNumber, Beam incrementedBeam)
+        {
+            
+            foreach (Beam beam in ParentList.Where(b => b.Mark.Number == selectedMarkNumber))
+            {
+                MessageBox.Show($"before {beam.BeamMark}");
+                beam.Mark = incrementedBeam.Mark;
+                beam.ChosenCornerAsTop = incrementedBeam.ChosenCornerAsTop;
+                beam.ChosenMidAsTop = incrementedBeam.ChosenMidAsTop;
+                beam.ChosenCornerAsBot = incrementedBeam.ChosenCornerAsBot;
+                beam.ChosenAsMidBot = incrementedBeam.ChosenAsMidBot;
+                beam.ChosenShearAsCorner = incrementedBeam.ChosenShearAsCorner;
+                beam.ChosenShearAsMid = incrementedBeam.ChosenShearAsMid;
+                MessageBox.Show($"after {beam.BeamMark}");
+            }
+        }
+
+
     }
 }

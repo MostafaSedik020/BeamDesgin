@@ -121,197 +121,34 @@
                     </DataGridTemplateColumn>
 
                     <!-- BeamMark Column -->
-                    <DataGridTemplateColumn Header="BeamMark" Width="*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock>
-                                    <TextBlock.Text>
-                                        <MultiBinding StringFormat="{}{0}{1}" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding Path="Mark.Type" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
-                                            <Binding Path="Mark.Number" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" />
-                                        </MultiBinding>
-                                    </TextBlock.Text>
-                                </TextBlock>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-
+                    <DataGridTextColumn Header="Beam Mark" Binding="{Binding BeamMark, Mode=OneWay}" Width="*" IsReadOnly="True"/>
+                  
                     <!-- Size Breadth Column -->
-                    <DataGridTextColumn Header="Size Breadth" Binding="{Binding Breadth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Size Breadth" Binding="{Binding Breadth, Mode=OneWay}" Width="*" IsReadOnly="True"/>
 
                     <!-- Size Depth Column -->
-                    <DataGridTextColumn Header="Size Depth" Binding="{Binding Depth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Size Depth" Binding="{Binding Depth, Mode=OneWay}" Width="*" IsReadOnly="True"/>
 
-                    <!-- Bot Left Column -->
-                    <DataGridTemplateColumn Header="Bot Left" Width="*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock>
-                                    <TextBlock.Text>
-                                        <MultiBinding StringFormat="{}{0}T{1}" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding Path="ChosenCornerAsBot.NumberOfBars"
-                                                     Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
+                    <!-- Top Reinforcement -->
+                    <DataGridTextColumn Header="Bot Left" Binding="{Binding BOTTOM_RFT_CORNER, Mode=OneWay}" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Bot Mid" Binding="{Binding BOTTOM_RFT_MID, Mode=OneWay}" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Bot Right" Binding="{Binding BOTTOM_RFT_CORNER, Mode=OneWay}" Width="*" IsReadOnly="True"/>
+                    
+                    <!-- Top Reinforcemnt -->
+                    <DataGridTextColumn Header="Top Left" Binding="{Binding TOP_RFT_CORNER, Mode=OneWay}" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Top Mid" Binding="{Binding TOP_RFT_MID, Mode=OneWay}" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Top Right" Binding="{Binding TOP_RFT_CORNER, Mode=OneWay}" Width="*" IsReadOnly="True"/>
+                    
+                    <!-- Shear reinforcement -->
+                    <DataGridTextColumn Header="Links Left" Binding="{Binding LINKS_CORNER, Mode=OneWay}" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Links Mid" Binding="{Binding LINKS_MID, Mode=OneWay}" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Links right" Binding="{Binding LINKS_CORNER, Mode=OneWay}" Width="*" IsReadOnly="True"/>
 
-                                            <Binding Path="ChosenCornerAsBot.Diameter"
-                                                     Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
-                                        </MultiBinding>
-                                    </TextBlock.Text>
-                                </TextBlock>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
 
-                    <!-- Bot Mid Column -->
-                    <DataGridTemplateColumn Header="Bot Mid" Width="*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock>
-                                    <TextBlock.Text>
-                                        <MultiBinding StringFormat="{}{0}T{1}" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding Path="ChosenAsMidBot.NumberOfBars" 
-                                                     Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
-                                            <Binding Path="ChosenAsMidBot.Diameter" 
-                                                     Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
-                                        </MultiBinding>
-                                    </TextBlock.Text>
-                                </TextBlock>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-
-                    <!-- Bot Right Column -->
-                    <DataGridTemplateColumn Header="Bot Right" Width="*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock>
-                                    <TextBlock.Text>
-                                        <MultiBinding StringFormat="{}{0}T{1}" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding Path="ChosenCornerAsBot.NumberOfBars" 
-                                                     Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
-                                            <Binding Path="ChosenCornerAsBot.Diameter" 
-                                                     Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
-                                        </MultiBinding>
-                                    </TextBlock.Text>
-                                </TextBlock>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-
-                    <!-- Top Left Column -->
-                    <DataGridTemplateColumn Header="Top Left" Width="*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock>
-                                    <TextBlock.Text>
-                                        <MultiBinding StringFormat="{}{0}T{1}" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding Path="ChosenCornerAsTop.NumberOfBars" 
-                                                     Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
-                                            <Binding Path="ChosenCornerAsTop.Diameter" 
-                                                     Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
-                                        </MultiBinding>
-                                    </TextBlock.Text>
-                                </TextBlock>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-
-                    <!-- Top Mid Column -->
-                    <DataGridTemplateColumn Header="Top Mid" Width="*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock>
-                                    <TextBlock.Text>
-                                        <MultiBinding StringFormat="{}{0}T{1}" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding Path="ChosenMidAsTop.NumberOfBars" 
-                                                     Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
-                                            <Binding Path="ChosenMidAsTop.Diameter" 
-                                                     Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
-                                        </MultiBinding>
-                                    </TextBlock.Text>
-                                </TextBlock>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-
-                    <!-- Top Right Column -->
-                    <DataGridTemplateColumn Header="Top Right" Width="*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock>
-                                    <TextBlock.Text>
-                                        <MultiBinding StringFormat="{}{0}T{1}" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding Path="ChosenCornerAsTop.NumberOfBars" 
-                                                     Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
-                                            <Binding Path="ChosenCornerAsTop.Diameter" 
-                                                     Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
-                                        </MultiBinding>
-                                    </TextBlock.Text>
-                                </TextBlock>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-
-                    <!-- Links Left Column -->
-                    <DataGridTemplateColumn Header="Links Left" Width="*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock>
-                                    <TextBlock.Text>
-                                        <MultiBinding StringFormat="{}{0}LT{1}@{2}">
-                                            <Binding Path="ChosenShearAsCorner.NumberOfBars" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
-                                            <Binding Path="ChosenShearAsCorner.Diameter" 
-                                                     Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
-                                            <Binding Path="ChosenShearAsCorner.spacing" 
-                                                     Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
-                                        </MultiBinding>
-                                    </TextBlock.Text>
-                                </TextBlock>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-
-                    <!-- Links Mid Column -->
-                    <DataGridTemplateColumn Header="Links Mid" Width="*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock>
-                                    <TextBlock.Text>
-                                        <MultiBinding StringFormat="{}{0}LT{1}@{2}" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding Path="ChosenShearAsMid.NumberOfBars" 
-                                                     Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
-                                            <Binding Path="ChosenShearAsMid.Diameter" 
-                                                     Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
-                                            <Binding Path="ChosenShearAsMid.spacing" 
-                                                     Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
-                                        </MultiBinding>
-                                    </TextBlock.Text>
-                                </TextBlock>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-
-                    <!-- Links Right Column -->
-                    <DataGridTemplateColumn Header="Links Right" Width="*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock>
-                                    <TextBlock.Text>
-                                        <MultiBinding StringFormat="{}{0}LT{1}@{2}" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding Path="ChosenShearAsCorner.NumberOfBars" 
-                                                     Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
-                                            <Binding Path="ChosenShearAsCorner.Diameter" 
-                                                     Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
-                                            <Binding Path="ChosenShearAsCorner.spacing" 
-                                                     Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
-                                        </MultiBinding>
-                                    </TextBlock.Text>
-                                </TextBlock>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
             <Button x:Name="refresh_btn" Content="refresh" HorizontalAlignment="Left" Margin="599,75,0,0" Grid.Row="2" VerticalAlignment="Top" Click="refresh_btn_Click"/>
+            
 
 
         </Grid>
