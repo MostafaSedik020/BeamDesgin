@@ -85,6 +85,8 @@
 
             <Button x:Name="Clear_btn" Content="Clear" Width="70" HorizontalAlignment="Left" Margin="564,20,0,50" Grid.Row="2"
                      Click="Clear_btn_Click" />
+            <Button x:Name="Import_btn" Content="Import to Revit" Width="101" HorizontalAlignment="Left" Margin="654,20,0,50" Grid.Row="2"
+         Click="Import_btn_Click" />
 
 
 

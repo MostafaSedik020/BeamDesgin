@@ -13,6 +13,7 @@ using BeamDesgin.Data;
 using System.Text;
 using System.Diagnostics;
 using BeamDesgin.ManageElements;
+using BeamDesgin.Revit;
 
 namespace BeamDesgin.UI
 {
@@ -171,6 +172,11 @@ namespace BeamDesgin.UI
             BeamsData.Clear();
         }
 
+        private void Import_btn_Click(object sender, RoutedEventArgs e)
+        {
+            RevitUtils.SendDataToRevit(ParentList, doc);
+        }
+
         /// <summary>
         /// Return the selected rebar sizes.
         /// </summary>
@@ -282,6 +288,6 @@ namespace BeamDesgin.UI
             }
         }
 
-
+        
     }
 }

@@ -20,31 +20,54 @@ namespace BeamDesgin.Revit
                                  .WhereElementIsNotElementType()
                                  .ToElements()
                                  .ToList();
+            //foreach (var beam in beams)
+            //{
+            //    var ass = beam.GetParameters("ETABS Unique Name");
+            //    var ass2 = beam.LookupParameter("ETABS Unique Name");
+            //    var ass3 = beam.LookupParameter("ETABS Unique Name").AsValueString();
 
+            //    var value = ass as Parameter;
+
+
+                
+            //}
+            
+            
             foreach ( var beam in beamsData )
             {
-                var chosenBeams  = beams.Where(b => b.LookupParameter("ETABS Unique Name").AsValueString() == beam.UniqueName )
+                string uName = beam.UniqueName;
+                var chosenBeams = beams.Where(b => b.LookupParameter("ETABS Unique Name").HasValue &&
+                                        b.LookupParameter("ETABS Unique Name").AsString() == uName)
                                         .ToList();
-                
+                                   
+
                 foreach (var chosenBeam in chosenBeams)
                 {
+                    
                     if (chosenBeam == null) {  continue; }
                     using (Transaction trn = new Transaction(doc, "Apply Beam RFT"))
                     {
                         trn.Start();
-
-                        chosenBeam.LookupParameter("BEAM MARK").SetValueString(beam.BeamMark);
-                        chosenBeam.LookupParameter("TOP RFT_LEFT").SetValueString(beam.TOP_RFT_CORNER);
-                        chosenBeam.LookupParameter("TOP RFT_RIGHT").SetValueString(beam.TOP_RFT_CORNER);
-                        chosenBeam.LookupParameter("TOP RFT_MIDSPAN").SetValueString(beam.TOP_RFT_MID);
-                        chosenBeam.LookupParameter("BOTTOM RFT_LEFT").SetValueString(beam.BOTTOM_RFT_CORNER);
-                        chosenBeam.LookupParameter("BOTTOM RFT_RIGHT").SetValueString(beam.BOTTOM_RFT_CORNER);
-                        chosenBeam.LookupParameter("BOTTOM RFT_MIDSAPN").SetValueString(beam.BOTTOM_RFT_MID);
+                        
+                        chosenBeam.LookupParameter("BEAM MARK").Set(beam.BeamMark);
+                        chosenBeam.LookupParameter("TOP RFT_LEFT").Set(beam.TOP_RFT_CORNER);
+                        chosenBeam.LookupParameter("TOP RFT_RIGHT").Set(beam.TOP_RFT_CORNER);
+                        chosenBeam.LookupParameter("TOP RFT_MIDSPAN").Set(beam.TOP_RFT_MID);
+                        chosenBeam.LookupParameter("BOTTOM RFT_LEFT").Set(beam.BOTTOM_RFT_CORNER);
+                        chosenBeam.LookupParameter("BOTTOM RFT_RIGHT").Set(beam.BOTTOM_RFT_CORNER);
+                        chosenBeam.LookupParameter("BOTTOM RFT_MIDSAPN").Set(beam.BOTTOM_RFT_MID);
+                        chosenBeam.LookupParameter("LINKS_LEFT").Set(beam.LINKS_CORNER);
+                        chosenBeam.LookupParameter("LINKS_RIGHT").Set(beam.LINKS_CORNER);
+                        chosenBeam.LookupParameter("LINKS_SPAN").Set(beam.LINKS_MID);
 
                         trn.Commit();
                     }
+
+                    
                         
                 }
+
+                
             }
                 
 

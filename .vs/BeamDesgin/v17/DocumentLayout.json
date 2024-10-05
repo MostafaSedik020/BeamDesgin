@@ -7,28 +7,8 @@
       "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\data\\managedata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|E:\\Development\\BeamDesgin\\beamdesgin\\ui\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|e:\\development\\beamdesgin\\beamdesgin\\ui\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\ui\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|E:\\Development\\BeamDesgin\\beamdesgin\\ui\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\ui\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|E:\\Development\\BeamDesgin\\beamdesgin\\elements\\beam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\elements\\beam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|E:\\Development\\BeamDesgin\\beamdesgin\\revit\\revitutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\revit\\revitutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|E:\\Development\\BeamDesgin\\beamdesgin\\manageelements\\managebeams.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\manageelements\\managebeams.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|E:\\Development\\BeamDesgin\\beamdesgin\\excel\\manageexcel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\excel\\manageexcel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,70 +18,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 352,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "MainWindow.xaml",
-              "DocumentMoniker": "E:\\Development\\BeamDesgin\\BeamDesgin\\UI\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "BeamDesgin\\UI\\MainWindow.xaml",
-              "ToolTip": "E:\\Development\\BeamDesgin\\BeamDesgin\\UI\\MainWindow.xaml",
-              "RelativeToolTip": "BeamDesgin\\UI\\MainWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-08-16T19:04:56.393Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Beam.cs",
-              "DocumentMoniker": "E:\\Development\\BeamDesgin\\BeamDesgin\\Elements\\Beam.cs",
-              "RelativeDocumentMoniker": "BeamDesgin\\Elements\\Beam.cs",
-              "ToolTip": "E:\\Development\\BeamDesgin\\BeamDesgin\\Elements\\Beam.cs",
-              "RelativeToolTip": "BeamDesgin\\Elements\\Beam.cs",
-              "ViewState": "AQIAAKIAAAAAAAAAAAAqwLIAAAAfAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-07T20:39:10.37Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "RevitUtils.cs",
-              "DocumentMoniker": "E:\\Development\\BeamDesgin\\BeamDesgin\\Revit\\RevitUtils.cs",
-              "RelativeDocumentMoniker": "BeamDesgin\\Revit\\RevitUtils.cs",
-              "ToolTip": "E:\\Development\\BeamDesgin\\BeamDesgin\\Revit\\RevitUtils.cs",
-              "RelativeToolTip": "BeamDesgin\\Revit\\RevitUtils.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAACAAAAAVAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-07T15:22:49.783Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ManageBeams.cs",
-              "DocumentMoniker": "E:\\Development\\BeamDesgin\\BeamDesgin\\ManageElements\\ManageBeams.cs",
-              "RelativeDocumentMoniker": "BeamDesgin\\ManageElements\\ManageBeams.cs",
-              "ToolTip": "E:\\Development\\BeamDesgin\\BeamDesgin\\ManageElements\\ManageBeams.cs",
-              "RelativeToolTip": "BeamDesgin\\ManageElements\\ManageBeams.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-31T16:27:44.88Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ManageExcel.cs",
-              "DocumentMoniker": "E:\\Development\\BeamDesgin\\BeamDesgin\\Excel\\ManageExcel.cs",
-              "RelativeDocumentMoniker": "BeamDesgin\\Excel\\ManageExcel.cs",
-              "ToolTip": "E:\\Development\\BeamDesgin\\BeamDesgin\\Excel\\ManageExcel.cs",
-              "RelativeToolTip": "BeamDesgin\\Excel\\ManageExcel.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAA1wAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-31T16:27:23.852Z"
             },
             {
               "$type": "Document",
@@ -111,9 +32,9 @@
               "RelativeDocumentMoniker": "BeamDesgin\\Data\\ManageData.cs",
               "ToolTip": "E:\\Development\\BeamDesgin\\BeamDesgin\\Data\\ManageData.cs",
               "RelativeToolTip": "BeamDesgin\\Data\\ManageData.cs",
-              "ViewState": "AQIAAFMAAAAAAAAAAAAAAGcAAAAhAAAA",
+              "ViewState": "AQIAAEQAAAAAAAAAAAAhwEMAAAAtAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-30T20:51:44.383Z",
+              "WhenOpened": "2024-10-05T15:50:24.403Z",
               "EditorCaption": ""
             },
             {
@@ -124,9 +45,10 @@
               "RelativeDocumentMoniker": "BeamDesgin\\UI\\MainWindow.xaml.cs",
               "ToolTip": "E:\\Development\\BeamDesgin\\BeamDesgin\\UI\\MainWindow.xaml.cs",
               "RelativeToolTip": "BeamDesgin\\UI\\MainWindow.xaml.cs",
-              "ViewState": "AQIAAMkAAAAAAAAAAAD4v98AAAAiAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAGYAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-17T15:20:32.64Z"
+              "WhenOpened": "2024-08-17T15:20:32.64Z",
+              "EditorCaption": ""
             }
           ]
         }

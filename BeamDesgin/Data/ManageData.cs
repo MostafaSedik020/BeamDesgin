@@ -1,4 +1,5 @@
-﻿using BeamDesgin.Elements;
+﻿using Autodesk.Revit.UI;
+using BeamDesgin.Elements;
 using BeamDesgin.ManageElements;
 using System;
 using System.Collections.Generic;
@@ -58,6 +59,16 @@ namespace BeamDesgin.Data
             //sorting
             var sortedBeamList = sortData(beamList);
 
+            StringBuilder sb = new StringBuilder();
+
+            int num = 0;
+
+            foreach (var beam in sortedBeamList)
+            {
+                sb.AppendLine($"{num}+"+ beam.Depth.ToString());
+                num++;
+            }
+            TaskDialog.Show("test",sb.ToString());
 
             string currentMarkType = "B";
             int markNumber = 1;
@@ -106,7 +117,7 @@ namespace BeamDesgin.Data
             var sortedList =  beamList.OrderBy(b => b.Breadth)
                                          .ThenBy(b => b.Depth)
                                          .ThenBy(b => b.ChosenAsMidBot.Diameter)
-                                         .ThenBy(b => b.ChosenAsMidBot.NumberOfBars + b.ChosenCornerAsBot.NumberOfBars)
+                                         .ThenBy(b => b.ChosenAsMidBot.NumberOfBars)
                                          .ThenBy(b => b.ChosenCornerAsTop.Diameter)
                                          .ThenBy(b => b.ChosenCornerAsTop.NumberOfBars)
                                          .ThenBy(b => b.ChosenMidAsTop.Diameter)
