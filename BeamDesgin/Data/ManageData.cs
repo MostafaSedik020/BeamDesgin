@@ -3,6 +3,7 @@ using BeamDesgin.Elements;
 using BeamDesgin.ManageElements;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -59,16 +60,17 @@ namespace BeamDesgin.Data
             //sorting
             var sortedBeamList = sortData(beamList);
 
-            StringBuilder sb = new StringBuilder();
+            //StringBuilder sb = new StringBuilder();
 
-            int num = 0;
+            //int num = 0;
 
-            foreach (var beam in sortedBeamList)
-            {
-                sb.AppendLine($"{num}+"+ beam.Depth.ToString());
-                num++;
-            }
-            TaskDialog.Show("test",sb.ToString());
+            //DEMO SHOW THAT THE DATA AR LISTED PROPERLY
+            //foreach (var beam in sortedBeamList)
+            //{
+            //    sb.AppendLine($"{num}+"+ beam.Depth.ToString());
+            //    num++;
+            //}
+            //TaskDialog.Show("test",sb.ToString());
 
             string currentMarkType = "B";
             int markNumber = 1;
@@ -111,10 +113,36 @@ namespace BeamDesgin.Data
 
             return uniqueSortedList;
         }
+        public static List<Beam> UniqueSortedData(ObservableCollection<Beam> sortedBeamList)
+        {
+            // Group the beams by BeamMark and select the first beam from each group
+            var uniqueSortedList = sortedBeamList
+                .GroupBy(beam => beam.Mark.Number) // Group by BeamMark's Number
+                .Select(group => group.First())    // Select the first beam from each group
+                .ToList();
+
+            return uniqueSortedList;
+        }
 
         public static List<Beam> sortData(List<Beam> beamList)
         {
             var sortedList =  beamList.OrderBy(b => b.Breadth)
+                                         .ThenBy(b => b.Depth)
+                                         .ThenBy(b => b.ChosenAsMidBot.Diameter)
+                                         .ThenBy(b => b.ChosenAsMidBot.NumberOfBars)
+                                         .ThenBy(b => b.ChosenCornerAsTop.Diameter)
+                                         .ThenBy(b => b.ChosenCornerAsTop.NumberOfBars)
+                                         .ThenBy(b => b.ChosenMidAsTop.Diameter)
+                                         .ThenBy(b => b.ChosenMidAsTop.NumberOfBars)
+                                         .ThenBy(b => b.ChosenShearAsCorner.Diameter)
+                                         .ThenBy(b => b.ChosenShearAsCorner.spacing)
+                                         .ToList();
+
+            return sortedList;
+        }
+        public static List<Beam> sortData(ObservableCollection<Beam> beamList)
+        {
+            var sortedList = beamList.OrderBy(b => b.Breadth)
                                          .ThenBy(b => b.Depth)
                                          .ThenBy(b => b.ChosenAsMidBot.Diameter)
                                          .ThenBy(b => b.ChosenAsMidBot.NumberOfBars)

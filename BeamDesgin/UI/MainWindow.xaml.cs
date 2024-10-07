@@ -14,30 +14,47 @@ using System.Text;
 using System.Diagnostics;
 using BeamDesgin.ManageElements;
 using BeamDesgin.Revit;
+using System.ComponentModel;
 
 namespace BeamDesgin.UI
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        Document doc;
-        private ObservableCollection<Beam> _beamsData;
+        // Declare the event from INotifyPropertyChanged interface
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        private List<Beam> ParentList;
+        // Method to raise the PropertyChanged event
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        Document doc;
+        private ObservableCollection<Beam> _BeamsData;
+        private ObservableCollection<Beam> _UserList;
+
+        
         private List<int> selectedRebars;
         public ObservableCollection<Beam> BeamsData
         {
-            get { return _beamsData; }
-            set { _beamsData = value; }
+            get { return _BeamsData; }
+            set { _BeamsData = value; }
+        }
+        public ObservableCollection<Beam> UserList
+        {
+            get { return _UserList; }
+            set { _UserList = value; OnPropertyChanged("UserList"); }
         }
 
         public MainWindow(Document doc)
         {
             InitializeComponent();
             this.doc = doc;
-            _beamsData = new ObservableCollection<Beam>(); // Initialize as an empty collection
+            _BeamsData = new ObservableCollection<Beam>(); // Initialize as an empty collection
+            _UserList = new ObservableCollection<Beam>(); // Now ObservableCollection
             this.DataContext = this; // Set DataContext to the window itself
         }
 
@@ -96,17 +113,23 @@ namespace BeamDesgin.UI
                 return;
             }
 
-            BeamsData.Clear(); // Clear any existing data in the ObservableCollection
+            
 
             List<Beam> beamsData = ManageExcel.GetBeamsData(Path_TxtBox.Text);
             selectedRebars = GetSelectedRebarSizes();
-            ParentList = ManageData.transAreaData(beamsData, selectedRebars);
+            var newList = ManageData.transAreaData(beamsData, selectedRebars);
 
-            var uniqueList = ManageData.UniqueSortedData(ParentList);
+            foreach (Beam beam in newList)
+            {
+                BeamsData.Add(beam); // Add the new data to the ObservableCollection
+
+            }
+
+            var uniqueList = ManageData.UniqueSortedData(newList);
 
             foreach (Beam beam in uniqueList)
             {
-                BeamsData.Add(beam); // Add the new data to the ObservableCollection
+                UserList.Add(beam); // Add the new data to the user
 
             }
 
@@ -130,7 +153,7 @@ namespace BeamDesgin.UI
 
                     if (incrementedBeam != null)
                     {
-                        UpdateBeamsMark(selectedBeam.Mark.Number, incrementedBeam);
+                        UpdateBeamsMark(selectedBeam.Mark.Number, incrementedBeam); //PROBLEM IS HERE
                     }
                 }
 
@@ -169,12 +192,14 @@ namespace BeamDesgin.UI
         private void Clear_btn_Click(object sender, RoutedEventArgs e)
         {
             desgin_btn.IsEnabled= true;
-            BeamsData.Clear();
+            UserList.Clear();
         }
 
         private void Import_btn_Click(object sender, RoutedEventArgs e)
         {
-            RevitUtils.SendDataToRevit(ParentList, doc);
+            RevitUtils.SendDataToRevit(BeamsData, doc);
+
+            
         }
 
         /// <summary>
@@ -223,15 +248,19 @@ namespace BeamDesgin.UI
         /// <param name="beamList"> the beam list that will be represented to the user (aka  a unique list)</param>
         private void UpdateDataGrid()
         {
-            BeamsData.Clear();
+            UserList.Clear();
 
-            ParentList = ManageData.sortData(ParentList);
+            var sortedData = ManageData.sortData(UserList);
+            foreach (var beam in sortedData)
+            {
+                UserList.Add(beam); // Add sorted beams back to the UserList
+            }
 
             int newMarkNumber = 1;
 
             int oldMarkNumber = 0;
 
-            foreach (var beam in ParentList)
+            foreach (var beam in UserList)
             {
                 if (beam.Mark.Number > oldMarkNumber)
                 {
@@ -247,41 +276,44 @@ namespace BeamDesgin.UI
                 }
             }
 
-            var uniqueList = ManageData.UniqueSortedData(ParentList);
+            var uniqueList = ManageData.UniqueSortedData(UserList);
 
-            foreach (Beam beam in uniqueList)
-            {
-                beam.IsSelected = false;
-                BeamsData.Add(beam); // Add the new data to the ObservableCollection
+            //foreach (Beam beam in uniqueList)
+            //{
+            //    beam.IsSelected = false;
+            //    BeamsData.Add(beam); // Add the new data to the ObservableCollection
                 
-            }
+            //}
         }
 
         private Beam FindNextStrongerBeam(Beam selectedBeam)
         {
-            return ParentList
-                .Where(pBeam =>
-                    pBeam.Depth == selectedBeam.Depth &&
-                    pBeam.Breadth == selectedBeam.Breadth &&
-                    pBeam.Mark.Number > selectedBeam.Mark.Number &&
-                    ManageRft.GetAreaRFT(pBeam.ChosenAsMidBot) + ManageRft.GetAreaRFT(pBeam.ChosenCornerAsBot) >=
-                    ManageRft.GetAreaRFT(selectedBeam.ChosenAsMidBot) + ManageRft.GetAreaRFT(selectedBeam.ChosenCornerAsBot) &&
-                    ManageRft.GetAreaRFT(pBeam.ChosenCornerAsTop) >= ManageRft.GetAreaRFT(selectedBeam.ChosenCornerAsTop) &&
-                    ManageRft.GetAreaRFT(pBeam.ChosenShearAsCorner) >= ManageRft.GetAreaRFT(selectedBeam.ChosenShearAsCorner))
-                .FirstOrDefault();
+            Beam newbeam = UserList.Where(b => b.Depth == selectedBeam.Depth &&
+                                            b.Breadth == selectedBeam.Breadth &&
+                                            b.Mark.Number > selectedBeam.Mark.Number &&
+                                            ManageRft.GetAreaRFT(b.ChosenAsMidBot) >= ManageRft.GetAreaRFT(selectedBeam.ChosenAsMidBot) &&
+                                            ManageRft.GetAreaRFT(b.ChosenCornerAsTop) >= ManageRft.GetAreaRFT(selectedBeam.ChosenCornerAsTop) &&
+                                            ManageRft.GetAreaRFT(b.ChosenShearAsCorner) >= ManageRft.GetAreaRFT(selectedBeam.ChosenShearAsCorner))
+                                      .FirstOrDefault();
+
+
+            return newbeam;
+                
         }
 
         private void UpdateBeamsMark(int selectedMarkNumber, Beam incrementedBeam)
         {
-            
-            foreach (Beam beam in ParentList.Where(b => b.Mark.Number == selectedMarkNumber))
+            var parentBeams = BeamsData.Where(b => b.Mark.Number == selectedMarkNumber).ToList();
+
+
+            foreach (Beam beam in parentBeams)
             {
                 MessageBox.Show($"before {beam.BeamMark}");
                 beam.Mark = incrementedBeam.Mark;
-                beam.ChosenCornerAsTop = incrementedBeam.ChosenCornerAsTop;
-                beam.ChosenMidAsTop = incrementedBeam.ChosenMidAsTop;
                 beam.ChosenCornerAsBot = incrementedBeam.ChosenCornerAsBot;
                 beam.ChosenAsMidBot = incrementedBeam.ChosenAsMidBot;
+                beam.ChosenCornerAsTop = incrementedBeam.ChosenCornerAsTop;
+                beam.ChosenMidAsTop = incrementedBeam.ChosenMidAsTop;
                 beam.ChosenShearAsCorner = incrementedBeam.ChosenShearAsCorner;
                 beam.ChosenShearAsMid = incrementedBeam.ChosenShearAsMid;
                 MessageBox.Show($"after {beam.BeamMark}");

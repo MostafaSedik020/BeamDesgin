@@ -7,12 +7,13 @@ using BeamDesgin.Elements;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using System.Windows.Controls;
+using System.Collections.ObjectModel;
 
 namespace BeamDesgin.Revit
 {
     public static class RevitUtils
     {
-        public static void SendDataToRevit(List<Beam> beamsData , Document doc)
+        public static void SendDataToRevit(ObservableCollection<Beam> beamsData , Document doc)
         {
             FilteredElementCollector collector = new FilteredElementCollector(doc);
 
@@ -20,17 +21,7 @@ namespace BeamDesgin.Revit
                                  .WhereElementIsNotElementType()
                                  .ToElements()
                                  .ToList();
-            //foreach (var beam in beams)
-            //{
-            //    var ass = beam.GetParameters("ETABS Unique Name");
-            //    var ass2 = beam.LookupParameter("ETABS Unique Name");
-            //    var ass3 = beam.LookupParameter("ETABS Unique Name").AsValueString();
-
-            //    var value = ass as Parameter;
-
-
-                
-            //}
+            
             
             
             foreach ( var beam in beamsData )

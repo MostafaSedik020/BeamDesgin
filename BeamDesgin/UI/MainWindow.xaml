@@ -94,7 +94,7 @@
 
             <DataGrid x:Name="BeamDataGrid" Grid.Row="3" AutoGenerateColumns="False" IsReadOnly="False" Margin="10"
           CanUserResizeRows="False" CanUserResizeColumns="False" CanUserSortColumns="False"
-          CanUserReorderColumns="False" ItemsSource="{Binding BeamsData}" SelectionChanged="BeamDataGrid_SelectionChanged" >
+          CanUserReorderColumns="False" ItemsSource="{Binding UserList}" SelectionChanged="BeamDataGrid_SelectionChanged" >
 
                 <!--<DataGrid.ItemsPanel>
                     <ItemsPanelTemplate>
