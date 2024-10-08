@@ -13,7 +13,7 @@ namespace BeamDesgin.Revit
 {
     public static class RevitUtils
     {
-        public static void SendDataToRevit(ObservableCollection<Beam> beamsData , Document doc)
+        public static void SendDataToRevit(ObservableCollection<Beam> beamsData, Document doc)
         {
             FilteredElementCollector collector = new FilteredElementCollector(doc);
 
@@ -21,25 +21,24 @@ namespace BeamDesgin.Revit
                                  .WhereElementIsNotElementType()
                                  .ToElements()
                                  .ToList();
-            
-            
-            
-            foreach ( var beam in beamsData )
-            {
-                string uName = beam.UniqueName;
-                var chosenBeams = beams.Where(b => b.LookupParameter("ETABS Unique Name").HasValue &&
-                                        b.LookupParameter("ETABS Unique Name").AsString() == uName)
-                                        .ToList();
-                                   
 
-                foreach (var chosenBeam in chosenBeams)
+            using (Transaction trn = new Transaction(doc, "Apply Beam RFT"))
+            {
+                trn.Start();
+
+                foreach (var beam in beamsData)
                 {
-                    
-                    if (chosenBeam == null) {  continue; }
-                    using (Transaction trn = new Transaction(doc, "Apply Beam RFT"))
+                    string uName = beam.UniqueName;
+                    var chosenBeams = beams.Where(b => b.LookupParameter("ETABS Unique Name").HasValue &&
+                                            b.LookupParameter("ETABS Unique Name").AsString() == uName)
+                                            .ToList();
+
+
+                    foreach (var chosenBeam in chosenBeams)
                     {
-                        trn.Start();
-                        
+
+                        if (chosenBeam == null) { continue; }
+
                         chosenBeam.LookupParameter("BEAM MARK").Set(beam.BeamMark);
                         chosenBeam.LookupParameter("TOP RFT_LEFT").Set(beam.TOP_RFT_CORNER);
                         chosenBeam.LookupParameter("TOP RFT_RIGHT").Set(beam.TOP_RFT_CORNER);
@@ -51,18 +50,12 @@ namespace BeamDesgin.Revit
                         chosenBeam.LookupParameter("LINKS_RIGHT").Set(beam.LINKS_CORNER);
                         chosenBeam.LookupParameter("LINKS_SPAN").Set(beam.LINKS_MID);
 
-                        trn.Commit();
                     }
-
-                    
-                        
                 }
 
-                
+                trn.Commit();
+
             }
-                
-
-
         }
     }
 }

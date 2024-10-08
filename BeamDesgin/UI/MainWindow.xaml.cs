@@ -129,6 +129,8 @@ namespace BeamDesgin.UI
 
             foreach (Beam beam in uniqueList)
             {
+                int count = BeamsData.Where(b => b.Mark.Number == beam.Mark.Number).Count();
+                beam.Count = count;
                 UserList.Add(beam); // Add the new data to the user
 
             }
@@ -153,7 +155,7 @@ namespace BeamDesgin.UI
 
                     if (incrementedBeam != null)
                     {
-                        UpdateBeamsMark(selectedBeam.Mark.Number, incrementedBeam); //PROBLEM IS HERE
+                        UpdateBeamsMark(selectedBeam.Mark.Number, incrementedBeam); 
                     }
                 }
 
@@ -250,40 +252,29 @@ namespace BeamDesgin.UI
         {
             UserList.Clear();
 
-            var sortedData = ManageData.sortData(UserList);
-            foreach (var beam in sortedData)
+            var newSortedData = ManageData.sortData(BeamsData);
+            BeamsData.Clear();
+
+            foreach (var beam in newSortedData)
             {
-                UserList.Add(beam); // Add sorted beams back to the UserList
+                BeamsData.Add(beam); // Add sorted beams back to the UserList
             }
 
-            int newMarkNumber = 1;
+           
 
-            int oldMarkNumber = 0;
+            var uniqueList = ManageData.UniqueSortedData(newSortedData);
 
-            foreach (var beam in UserList)
+            foreach (Beam beam in uniqueList)
             {
-                if (beam.Mark.Number > oldMarkNumber)
-                {
-                    oldMarkNumber = beam.Mark.Number;
-
-                    beam.Mark.Number = newMarkNumber;
-
-                    newMarkNumber++;
-                }
-                else if( beam.Mark.Number == oldMarkNumber)
-                {
-                    beam.Mark.Number = newMarkNumber;
-                }
-            }
-
-            var uniqueList = ManageData.UniqueSortedData(UserList);
-
-            //foreach (Beam beam in uniqueList)
-            //{
-            //    beam.IsSelected = false;
-            //    BeamsData.Add(beam); // Add the new data to the ObservableCollection
+                int count = BeamsData.Where(b=> b.Mark.Number == beam.Mark.Number).Count();
+                beam.Count = count;
+                beam.IsSelected = false;
                 
-            //}
+                UserList.Add(beam); // Add the new data to the user
+
+            }
+
+           
         }
 
         private Beam FindNextStrongerBeam(Beam selectedBeam)
@@ -303,21 +294,26 @@ namespace BeamDesgin.UI
 
         private void UpdateBeamsMark(int selectedMarkNumber, Beam incrementedBeam)
         {
-            var parentBeams = BeamsData.Where(b => b.Mark.Number == selectedMarkNumber).ToList();
+            //var parentBeams = BeamsData.Where(b => b.Mark.Number == selectedMarkNumber).ToList();
 
 
-            foreach (Beam beam in parentBeams)
+            foreach ( var beam in BeamsData )
             {
-                MessageBox.Show($"before {beam.BeamMark}");
-                beam.Mark = incrementedBeam.Mark;
-                beam.ChosenCornerAsBot = incrementedBeam.ChosenCornerAsBot;
-                beam.ChosenAsMidBot = incrementedBeam.ChosenAsMidBot;
-                beam.ChosenCornerAsTop = incrementedBeam.ChosenCornerAsTop;
-                beam.ChosenMidAsTop = incrementedBeam.ChosenMidAsTop;
-                beam.ChosenShearAsCorner = incrementedBeam.ChosenShearAsCorner;
-                beam.ChosenShearAsMid = incrementedBeam.ChosenShearAsMid;
-                MessageBox.Show($"after {beam.BeamMark}");
+                if (beam.Mark.Number == selectedMarkNumber)
+                {
+                    //MessageBox.Show($"before {beam.BeamMark}");
+                    beam.Mark = incrementedBeam.Mark;
+                    beam.ChosenCornerAsBot = incrementedBeam.ChosenCornerAsBot;
+                    beam.ChosenAsMidBot = incrementedBeam.ChosenAsMidBot;
+                    beam.ChosenCornerAsTop = incrementedBeam.ChosenCornerAsTop;
+                    beam.ChosenMidAsTop = incrementedBeam.ChosenMidAsTop;
+                    beam.ChosenShearAsCorner = incrementedBeam.ChosenShearAsCorner;
+                    beam.ChosenShearAsMid = incrementedBeam.ChosenShearAsMid;
+                    //MessageBox.Show($"after {beam.BeamMark}");
+                }
             }
+
+           
         }
 
         

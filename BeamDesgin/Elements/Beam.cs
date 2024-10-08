@@ -165,11 +165,12 @@ namespace BeamDesgin.Elements
         public double BotCornerAs { get; set; }
         public double BotMiddleAs { get; set; }
         public double CornerShearAs { get; set; }
+        public int Count { get; set; }
 
         // Data exported to Revit
         // paramerter names a all uppercase because it mimic
         // the their apperance in revit
-        
+
         public string BeamMark => $"{Mark.Type}{Mark.Number}";
         public string BOTTOM_RFT_CORNER => $"{ChosenCornerAsBot.NumberOfBars}T{ChosenCornerAsBot.Diameter}";
         public string BOTTOM_RFT_MID => $"{ChosenAsMidBot.NumberOfBars}T{ChosenAsMidBot.Diameter}";

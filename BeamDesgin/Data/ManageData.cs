@@ -24,13 +24,25 @@ namespace BeamDesgin.Data
 
                 #region Bottom Reinforcement
 
-                var chosenCornerBot = ManageRft.GetChosenFlexRFT(beam.BotCornerAs, breadth, bars, domainDia);
-                beam.ChosenCornerAsBot.NumberOfBars = chosenCornerBot.noOfBars;
-                beam.ChosenCornerAsBot.Diameter = chosenCornerBot.diameter;
-
                 var chosenMidBot = ManageRft.GetChosenFlexRFT(beam.BotMiddleAs, breadth, bars, domainDia);
                 beam.ChosenAsMidBot.NumberOfBars = chosenMidBot.noOfBars;
                 beam.ChosenAsMidBot.Diameter = chosenMidBot.diameter;
+
+                var chosenCornerBot = ManageRft.GetChosenFlexRFT(beam.BotCornerAs, breadth, bars, domainDia);
+                if(chosenCornerBot.noOfBars > chosenMidBot.noOfBars / 2 &&
+                    chosenCornerBot.noOfBars < chosenMidBot.noOfBars)
+                {
+                    beam.ChosenCornerAsBot.NumberOfBars = chosenMidBot.noOfBars;
+                    beam.ChosenCornerAsBot.Diameter = chosenMidBot.diameter;
+                }
+                else
+                {
+                    beam.ChosenCornerAsBot.NumberOfBars = chosenCornerBot.noOfBars;
+                    beam.ChosenCornerAsBot.Diameter = chosenCornerBot.diameter;
+                }
+                
+
+                
                 #endregion
 
                 #region Top Reinforcement
@@ -72,38 +84,38 @@ namespace BeamDesgin.Data
             //}
             //TaskDialog.Show("test",sb.ToString());
 
-            string currentMarkType = "B";
-            int markNumber = 1;
+            //string currentMarkType = "B";
+            //int markNumber = 1;
 
-            if (sortedBeamList.Any())
-            {
-                Beam previousBeam = sortedBeamList.First();
-                previousBeam.Mark.Type = currentMarkType;
-                previousBeam.Mark.Number = markNumber;
+            //if (sortedBeamList.Any())
+            //{
+            //    Beam previousBeam = sortedBeamList.First();
+            //    previousBeam.Mark.Type = currentMarkType;
+            //    previousBeam.Mark.Number = markNumber;
 
-                foreach (var beam in sortedBeamList.Skip(1))
-                {
-                    if (ManageBeams.AreBeamsSimilar(beam, previousBeam))
-                    {
-                        // Assign the same mark as the previous beam
-                        beam.Mark.Number = previousBeam.Mark.Number;
-                        beam.Mark.Type = previousBeam.Mark.Type;
-                    }
-                    else
-                    {
-                        // Assign a new mark
-                        markNumber++;
-                        beam.Mark.Number = markNumber;
-                        beam.Mark.Type = currentMarkType;
-                    }
-                    previousBeam = beam;
-                }
-            }
+            //    foreach (var beam in sortedBeamList.Skip(1))
+            //    {
+            //        if (ManageBeams.AreBeamsSimilar(beam, previousBeam))
+            //        {
+            //            // Assign the same mark as the previous beam
+            //            beam.Mark.Number = previousBeam.Mark.Number;
+            //            beam.Mark.Type = previousBeam.Mark.Type;
+            //        }
+            //        else
+            //        {
+            //            // Assign a new mark
+            //            markNumber++;
+            //            beam.Mark.Number = markNumber;
+            //            beam.Mark.Type = currentMarkType;
+            //        }
+            //        previousBeam = beam;
+            //    }
+            //}
 
             return sortedBeamList;
         }
 
-        public static List<Beam> UniqueSortedData (List<Beam> sortedBeamList)
+        public static List<Beam> UniqueSortedData(List<Beam> sortedBeamList)
         {
             // Group the beams by BeamMark and select the first beam from each group
             var uniqueSortedList = sortedBeamList
@@ -124,6 +136,7 @@ namespace BeamDesgin.Data
             return uniqueSortedList;
         }
 
+
         public static List<Beam> sortData(List<Beam> beamList)
         {
             var sortedList =  beamList.OrderBy(b => b.Breadth)
@@ -137,6 +150,43 @@ namespace BeamDesgin.Data
                                          .ThenBy(b => b.ChosenShearAsCorner.Diameter)
                                          .ThenBy(b => b.ChosenShearAsCorner.spacing)
                                          .ToList();
+
+            string currentMarkType = "B";
+            int markNumber = 1;
+
+            if (sortedList.Any())
+            {
+                Beam previousBeam = sortedList.First();
+                previousBeam.Mark.Type = currentMarkType;
+                previousBeam.Mark.Number = markNumber;
+
+                foreach (var beam in sortedList.Skip(1))
+                {
+                    if (ManageBeams.AreBeamsSimilar(beam, previousBeam))
+                    {
+                        // Assign the same mark as the previous beam
+                        beam.Mark.Number = previousBeam.Mark.Number;
+                        beam.Mark.Type = previousBeam.Mark.Type;
+                    }
+                    else
+                    {
+                        // Assign a new mark
+                        markNumber++;
+                        beam.Mark.Number = markNumber;
+                        beam.Mark.Type = currentMarkType;
+                    }
+                    previousBeam = beam;
+                }
+            }
+
+            //StringBuilder sb = new StringBuilder();
+
+            //foreach ( var beam in sortedList)
+            //{
+            //    sb.AppendLine(beam.BeamMark);
+            //}
+
+            //TaskDialog.Show("data",sb.ToString());
 
             return sortedList;
         }
@@ -153,7 +203,42 @@ namespace BeamDesgin.Data
                                          .ThenBy(b => b.ChosenShearAsCorner.Diameter)
                                          .ThenBy(b => b.ChosenShearAsCorner.spacing)
                                          .ToList();
+            string currentMarkType = "B";
+            int markNumber = 1;
 
+            if (sortedList.Any())
+            {
+                Beam previousBeam = sortedList.First();
+                previousBeam.Mark.Type = currentMarkType;
+                previousBeam.Mark.Number = markNumber;
+
+                foreach (var beam in sortedList.Skip(1))
+                {
+                    if (ManageBeams.AreBeamsSimilar(beam, previousBeam))
+                    {
+                        // Assign the same mark as the previous beam
+                        beam.Mark.Number = previousBeam.Mark.Number;
+                        beam.Mark.Type = previousBeam.Mark.Type;
+                    }
+                    else
+                    {
+                        // Assign a new mark
+                        markNumber++;
+                        beam.Mark.Number = markNumber;
+                        beam.Mark.Type = currentMarkType;
+                    }
+                    previousBeam = beam;
+                }
+            }
+
+            //StringBuilder sb = new StringBuilder();
+
+            //foreach (var beam in sortedList)
+            //{
+            //    sb.AppendLine(beam.BeamMark);
+            //}
+
+            //TaskDialog.Show("data", sb.ToString());
             return sortedList;
         }
     }

@@ -73,13 +73,19 @@ namespace BeamDesgin.Excel
                             }
                             else
                             {
-                                //get top middle
-                                object topMidAsValue = workSheetFlex.Cells[row, 8].Value;
-                                beam.TopMiddleAs = topMidAsValue != null ? double.Parse(topMidAsValue.ToString()) : 0;
 
                                 //get bot middle
                                 object botMidAsValue = workSheetFlex.Cells[row, 11].Value;
                                 beam.BotMiddleAs = botMidAsValue != null ? double.Parse(botMidAsValue.ToString()) : 0;
+
+                                //get top middle
+                                object topMidAsValue = workSheetFlex.Cells[row, 8].Value;
+                                beam.TopMiddleAs = topMidAsValue != null ? double.Parse(topMidAsValue.ToString()) : 0;
+
+                                if (beam.TopMiddleAs < beam.BotMiddleAs * 0.2)
+                                {
+                                    beam.TopMiddleAs = beam.BotMiddleAs * 0.2;
+                                }
                             }
 
 

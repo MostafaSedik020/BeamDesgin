@@ -93,8 +93,9 @@
             <!-- Data after sorting -->
 
             <DataGrid x:Name="BeamDataGrid" Grid.Row="3" AutoGenerateColumns="False" IsReadOnly="False" Margin="10"
-          CanUserResizeRows="False" CanUserResizeColumns="False" CanUserSortColumns="False"
-          CanUserReorderColumns="False" ItemsSource="{Binding UserList}" SelectionChanged="BeamDataGrid_SelectionChanged" >
+                             CanUserResizeRows="False" CanUserResizeColumns="False" CanUserSortColumns="False"
+                                CanUserReorderColumns="False" ItemsSource="{Binding UserList}" SelectionChanged="BeamDataGrid_SelectionChanged"
+                                CanUserAddRows="False">
 
                 <!--<DataGrid.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -122,7 +123,11 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-                    <!-- BeamMark Column -->
+                    <!-- Count Column -->
+                    <DataGridTextColumn Header="Count" Binding="{Binding Count, Mode=OneWay}" Width="Auto" IsReadOnly="True"/>
+                
+
+                     <!-- BeamMark Column -->
                     <DataGridTextColumn Header="Beam Mark" Binding="{Binding BeamMark, Mode=OneWay}" Width="*" IsReadOnly="True"/>
                   
                     <!-- Size Breadth Column -->
