@@ -13,15 +13,109 @@
         ResizeMode="CanResizeWithGrip"
         MouseMove="Window_MouseMove">
 
+    <Window.Resources>
+    <!-- Button Style with Gradient Background for Active and Inactive States -->
+    <Style TargetType="Button">
+        <Setter Property="Width" Value="100"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Foreground" Value="#e7f4ff"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Background">
+            <Setter.Value>
+                <!-- Active Button Gradient -->
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#4d75aa" Offset="0.0"/>
+                    <GradientStop Color="#3b5d8f" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+
+        <!-- Triggers for Disabled Buttons -->
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <!-- Inactive Button Gradient -->
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#e9edf5" Offset="0.0"/>
+                            <GradientStop Color="#e9edf5" Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Foreground" Value="#6f93c1"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- CheckBox Style with Custom Colors for Active and Disabled States -->
+    <Style TargetType="CheckBox">
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        
+        <!-- Background when unchecked -->
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="White" Offset="0.0"/>
+                        <GradientStop Color="White" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+
+        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="BorderThickness" Value="2"/>
+
+        <!-- Triggers for Checked, Unchecked, and Disabled States -->
+        <Style.Triggers>
+            <!-- Checked State -->
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#a2b8d7" Offset="0.0"/>
+                                <GradientStop Color="#a2b8d7" Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+                    <Setter Property="BorderBrush" Value="#3b5d8f"/>
+                <Setter Property="Foreground" Value="White"/>
+            </Trigger>
+
+            <!-- Disabled State -->
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="White" Offset="0.0"/>
+                                <GradientStop Color="White" Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="BorderBrush" Value="White"/>
+                    <Setter Property="Foreground" Value="White"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</Window.Resources>
+
+
+
 
 
     <Border CornerRadius="25" BorderThickness="1" BorderBrush="Transparent" Background="Transparent" >
         <Grid>
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="DarkGray" Offset="0.0"/>
-                    <GradientStop Color="DarkGoldenrod" Offset="0.5"/>
-                    <GradientStop Color="DarkGray" Offset="1.0"/>
+                    <GradientStop Color="#e9edf5" Offset="0.0"/>
+                    <GradientStop Color="#cdd9ea" Offset="0.5"/>
+                    <GradientStop Color="#e9edf5" Offset="1.0"/>
                 </LinearGradientBrush>
             </Grid.Background>
             <Grid.RowDefinitions>
@@ -29,7 +123,7 @@
                 <RowDefinition Height="70"></RowDefinition>
                 <RowDefinition Height="100"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
             </Grid.RowDefinitions>
 
             <!-- Title bar with close button -->
@@ -52,17 +146,19 @@
                      TextWrapping="Wrap"  VerticalAlignment="Top" Width="384"/>
 
             <!--check boxes-->
-            <Expander x:Name="RebarExpander" HorizontalAlignment="Left" Height="80" Header="Choose Rebar"
+            <Expander x:Name="RebarExpander" HorizontalAlignment="Left" Height="90" Header="Choose Rebar"
                       Margin="24,10,0,0" Grid.RowSpan="2" Grid.Row="2" VerticalAlignment="Top" Width="300" >
+                
+                
 
-                <Grid Background="Gray" >
+                <Grid Background="#a2b8d7" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0">
-                        <CheckBox Content="8"  Grid.Column="0" Margin="0,2,0,2" />
+                        <CheckBox Content="8"  Grid.Column="0" Margin="0,2,6,2" />
                         <CheckBox Content="10"  Grid.Column="1" Margin="0,2,0,2"/>
                         <CheckBox Content="12"  Grid.Column="2" Margin="0,2,0,2"/>
                     </StackPanel>
@@ -86,7 +182,7 @@
             <Button x:Name="Clear_btn" Content="Clear" Width="70" HorizontalAlignment="Left" Margin="564,20,0,50" Grid.Row="2"
                      Click="Clear_btn_Click" />
             <Button x:Name="Import_btn" Content="Import to Revit" Width="101" HorizontalAlignment="Left" Margin="654,20,0,50" Grid.Row="2"
-         Click="Import_btn_Click" />
+         Click="Import_btn_Click"/>
 
 
 
@@ -97,24 +193,30 @@
                                 CanUserReorderColumns="False" ItemsSource="{Binding UserList}" SelectionChanged="BeamDataGrid_SelectionChanged"
                                 CanUserAddRows="False">
 
-                <!--<DataGrid.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <VirtualizingStackPanel VirtualizationMode="Recycling" />
-                    </ItemsPanelTemplate>
-                </DataGrid.ItemsPanel>-->
+
 
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridColumnHeader}">
-                        <Setter Property="Background" Value="PaleVioletRed"/>
+                        <Setter Property="Background" Value="#acbfe6"/>
                         <Setter Property="FontWeight" Value="SemiBold"/>
                         <Setter Property="BorderThickness" Value="0,0,1,2"/>
-                        <Setter Property="BorderBrush" Value="Black"/>
+                        <Setter Property="BorderBrush" Value="#3b5d8f"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
                     </Style>
+
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                    </Style>
+                    
                 </DataGrid.Resources>
+
+                
+                
 
                 <DataGrid.Columns>
                     <!-- Select Column -->
-                    <DataGridTemplateColumn Header="Select" Width="Auto">
+                    <DataGridTemplateColumn Header="Select" Width="50">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}"
@@ -124,17 +226,17 @@
                     </DataGridTemplateColumn>
 
                     <!-- Count Column -->
-                    <DataGridTextColumn Header="Count" Binding="{Binding Count, Mode=OneWay}" Width="Auto" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Count" Binding="{Binding Count, Mode=OneWay}" Width="50" IsReadOnly="True"/>
                 
 
                      <!-- BeamMark Column -->
-                    <DataGridTextColumn Header="Beam Mark" Binding="{Binding BeamMark, Mode=OneWay}" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Beam Mark" Binding="{Binding BeamMark, Mode=OneWay}" Width="*" IsReadOnly="True" />
                   
                     <!-- Size Breadth Column -->
-                    <DataGridTextColumn Header="Size Breadth" Binding="{Binding Breadth, Mode=OneWay}" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Breadth" Binding="{Binding Breadth, Mode=OneWay}" Width="*" IsReadOnly="True"/>
 
                     <!-- Size Depth Column -->
-                    <DataGridTextColumn Header="Size Depth" Binding="{Binding Depth, Mode=OneWay}" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Depth" Binding="{Binding Depth, Mode=OneWay}" Width="*" IsReadOnly="True"/>
 
                     <!-- Top Reinforcement -->
                     <DataGridTextColumn Header="Bot Left" Binding="{Binding BOTTOM_RFT_CORNER, Mode=OneWay}" Width="*" IsReadOnly="True"/>
@@ -154,8 +256,7 @@
 
                 </DataGrid.Columns>
             </DataGrid>
-            <Button x:Name="refresh_btn" Content="refresh" HorizontalAlignment="Left" Margin="599,75,0,0" Grid.Row="2" VerticalAlignment="Top" Click="refresh_btn_Click"/>
-            
+
 
 
         </Grid>

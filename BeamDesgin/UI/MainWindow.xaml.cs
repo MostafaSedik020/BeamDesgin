@@ -195,6 +195,7 @@ namespace BeamDesgin.UI
         {
             desgin_btn.IsEnabled= true;
             UserList.Clear();
+            BeamsData.Clear();
         }
 
         private void Import_btn_Click(object sender, RoutedEventArgs e)
