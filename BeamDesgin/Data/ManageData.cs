@@ -84,33 +84,7 @@ namespace BeamDesgin.Data
             //}
             //TaskDialog.Show("test",sb.ToString());
 
-            //string currentMarkType = "B";
-            //int markNumber = 1;
-
-            //if (sortedBeamList.Any())
-            //{
-            //    Beam previousBeam = sortedBeamList.First();
-            //    previousBeam.Mark.Type = currentMarkType;
-            //    previousBeam.Mark.Number = markNumber;
-
-            //    foreach (var beam in sortedBeamList.Skip(1))
-            //    {
-            //        if (ManageBeams.AreBeamsSimilar(beam, previousBeam))
-            //        {
-            //            // Assign the same mark as the previous beam
-            //            beam.Mark.Number = previousBeam.Mark.Number;
-            //            beam.Mark.Type = previousBeam.Mark.Type;
-            //        }
-            //        else
-            //        {
-            //            // Assign a new mark
-            //            markNumber++;
-            //            beam.Mark.Number = markNumber;
-            //            beam.Mark.Type = currentMarkType;
-            //        }
-            //        previousBeam = beam;
-            //    }
-            //}
+            
 
             return sortedBeamList;
         }

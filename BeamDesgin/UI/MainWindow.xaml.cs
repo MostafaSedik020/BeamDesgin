@@ -200,6 +200,8 @@ namespace BeamDesgin.UI
 
         private void Import_btn_Click(object sender, RoutedEventArgs e)
         {
+
+            
             RevitUtils.SendDataToRevit(BeamsData, doc);
 
             
@@ -283,9 +285,10 @@ namespace BeamDesgin.UI
             Beam newbeam = UserList.Where(b => b.Depth == selectedBeam.Depth &&
                                             b.Breadth == selectedBeam.Breadth &&
                                             b.Mark.Number > selectedBeam.Mark.Number &&
+                                            //b.ChosenAsMidBot.Diameter == selectedBeam.ChosenAsMidBot.Diameter &&
                                             ManageRft.GetAreaRFT(b.ChosenAsMidBot) >= ManageRft.GetAreaRFT(selectedBeam.ChosenAsMidBot) &&
                                             ManageRft.GetAreaRFT(b.ChosenCornerAsTop) >= ManageRft.GetAreaRFT(selectedBeam.ChosenCornerAsTop) &&
-                                            ManageRft.GetAreaRFT(b.ChosenShearAsCorner) >= ManageRft.GetAreaRFT(selectedBeam.ChosenShearAsCorner))
+                                            ManageRft.GetAreaRFT(b.ChosenShearAsCorner) == ManageRft.GetAreaRFT(selectedBeam.ChosenShearAsCorner))
                                       .FirstOrDefault();
 
 

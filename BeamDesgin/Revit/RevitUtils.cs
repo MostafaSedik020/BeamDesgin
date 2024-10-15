@@ -8,6 +8,8 @@ using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using System.Windows.Controls;
 using System.Collections.ObjectModel;
+using System.Windows;
+using BeamDesgin.Utils;
 
 namespace BeamDesgin.Revit
 {
@@ -57,5 +59,63 @@ namespace BeamDesgin.Revit
 
             }
         }
+
+        public static (StringBuilder notFoundBeam, StringBuilder wrongBeams) CheckRevitModel(ObservableCollection<Beam> beamsData , Document doc)
+        {
+           
+            double revitDepth = 0;
+            double revitBreadth = 0;
+
+
+            FilteredElementCollector collector = new FilteredElementCollector(doc);
+
+            var beams = collector.OfCategory(BuiltInCategory.OST_StructuralFraming)
+                                 .WhereElementIsNotElementType()
+                                 .ToElements()
+                                 .ToList();
+            
+            StringBuilder notFoundBeam = new StringBuilder("Beams not found:\n");
+            StringBuilder wrongBeams = new StringBuilder("Beams with wrong dimensions:\n");
+            
+            foreach ( var beam in beams )
+            {
+                string revitUniName = beam.LookupParameter("ETABS Unique Name").AsString();
+                ElementId typeId = beam.GetTypeId();
+                ElementType beamType = doc.GetElement(typeId) as ElementType;
+
+                var depthParam = beamType.LookupParameter("D");
+                var breadthParam = beamType.LookupParameter("B");
+
+                if (depthParam == null || breadthParam == null )
+                {
+                    continue;
+                }
+                else
+                {
+                    revitDepth = MathFun.convertUnitsToMeters(depthParam.AsDouble());
+                    revitBreadth = MathFun.convertUnitsToMeters(breadthParam.AsDouble());
+                }
+
+                Beam etabsBeam = beamsData.Where(b => b.UniqueName == revitUniName).FirstOrDefault();
+
+                if ( etabsBeam == null)
+                {
+                    // Add the ID of the beam to notFoundBeam if it doesn't exist in ETABS data
+                    var idBeam = beam.Id.ToString();
+                    notFoundBeam.AppendLine(idBeam);
+                }
+                else if (etabsBeam.Depth != revitDepth || etabsBeam.Breadth != revitBreadth )
+                {
+                    // Add the ID of the beam to wrongBeams if the dimensions do not match
+                    var idBeam = beam.Id.ToString();
+                    wrongBeams.AppendLine(idBeam);
+                }
+
+            }
+
+            // Return both StringBuilders as a tuple
+            return (notFoundBeam, wrongBeams);
+        }
+    
     }
 }
