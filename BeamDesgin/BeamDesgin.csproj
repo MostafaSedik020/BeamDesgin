@@ -128,8 +128,5 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\PM24.png" />
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\PM32.png" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

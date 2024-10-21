@@ -12,7 +12,7 @@ namespace BeamDesgin.Data
 {
     public static class ManageData
     {
-        public static List<Beam> transAreaData(List<Beam> beamList,List<int> bars)
+        public static List<Beam> transAreaData(List<Beam> beamList,List<int> bars, string prequal)
         {
 
 
@@ -70,7 +70,7 @@ namespace BeamDesgin.Data
 
             }
             //sorting
-            var sortedBeamList = sortData(beamList);
+            var sortedBeamList = sortData(beamList ,prequal);
 
             //StringBuilder sb = new StringBuilder();
 
@@ -111,7 +111,7 @@ namespace BeamDesgin.Data
         }
 
 
-        public static List<Beam> sortData(List<Beam> beamList)
+        public static List<Beam> sortData(List<Beam> beamList ,string prequal)
         {
             var sortedList =  beamList.OrderBy(b => b.Breadth)
                                          .ThenBy(b => b.Depth)
@@ -125,7 +125,7 @@ namespace BeamDesgin.Data
                                          .ThenBy(b => b.ChosenShearAsCorner.spacing)
                                          .ToList();
 
-            string currentMarkType = "B";
+            string currentMarkType = prequal;
             int markNumber = 1;
 
             if (sortedList.Any())
@@ -164,7 +164,7 @@ namespace BeamDesgin.Data
 
             return sortedList;
         }
-        public static List<Beam> sortData(ObservableCollection<Beam> beamList)
+        public static List<Beam> sortData(ObservableCollection<Beam> beamList , string prequal)
         {
             var sortedList = beamList.OrderBy(b => b.Breadth)
                                          .ThenBy(b => b.Depth)
@@ -177,7 +177,7 @@ namespace BeamDesgin.Data
                                          .ThenBy(b => b.ChosenShearAsCorner.Diameter)
                                          .ThenBy(b => b.ChosenShearAsCorner.spacing)
                                          .ToList();
-            string currentMarkType = "B";
+            string currentMarkType = prequal;
             int markNumber = 1;
 
             if (sortedList.Any())

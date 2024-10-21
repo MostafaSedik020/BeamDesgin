@@ -3,40 +3,48 @@
   "WorkspaceRootPath": "E:\\Development\\BeamDesgin\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|E:\\Development\\BeamDesgin\\beamdesgin\\entry\\extapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|E:\\Development\\BeamDesgin\\beamdesgin\\ui\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\ui\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|e:\\development\\beamdesgin\\beamdesgin\\entry\\extapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\entry\\extapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|e:\\development\\beamdesgin\\beamdesgin\\promark.addin||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\promark.addin||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|E:\\Development\\BeamDesgin\\beamdesgin\\revit\\revitutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\revit\\revitutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|e:\\development\\beamdesgin\\beamdesgin\\ui\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|E:\\Development\\BeamDesgin\\beamdesgin\\ui\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\ui\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|e:\\development\\beamdesgin\\beamdesgin\\ui\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\ui\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|e:\\development\\beamdesgin\\beamdesgin\\data\\managedata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\data\\managedata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|e:\\development\\beamdesgin\\beamdesgin\\manageelements\\managebeams.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\manageelements\\managebeams.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|E:\\Development\\BeamDesgin\\beamdesgin\\manageelements\\managerft.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\manageelements\\managerft.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|e:\\development\\beamdesgin\\beamdesgin\\elements\\reinforcement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|E:\\Development\\BeamDesgin\\beamdesgin\\promark.addin||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\promark.addin||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|E:\\Development\\BeamDesgin\\beamdesgin\\elements\\reinforcement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\elements\\reinforcement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|e:\\development\\beamdesgin\\beamdesgin\\utils\\mathfun.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|E:\\Development\\BeamDesgin\\beamdesgin\\utils\\mathfun.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\utils\\mathfun.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|E:\\Development\\BeamDesgin\\beamdesgin\\elements\\beam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\elements\\beam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|e:\\development\\beamdesgin\\beamdesgin\\revit\\revitutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\revit\\revitutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,7 +54,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 352,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -54,20 +62,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ProMark.addin",
-              "DocumentMoniker": "E:\\Development\\BeamDesgin\\BeamDesgin\\ProMark.addin",
-              "RelativeDocumentMoniker": "BeamDesgin\\ProMark.addin",
-              "ToolTip": "E:\\Development\\BeamDesgin\\BeamDesgin\\ProMark.addin",
-              "RelativeToolTip": "BeamDesgin\\ProMark.addin",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAxAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000072|",
-              "WhenOpened": "2024-10-20T23:05:08.578Z",
+              "DocumentIndex": 4,
+              "Title": "ManageData.cs",
+              "DocumentMoniker": "E:\\Development\\BeamDesgin\\BeamDesgin\\Data\\ManageData.cs",
+              "RelativeDocumentMoniker": "BeamDesgin\\Data\\ManageData.cs",
+              "ToolTip": "E:\\Development\\BeamDesgin\\BeamDesgin\\Data\\ManageData.cs",
+              "RelativeToolTip": "BeamDesgin\\Data\\ManageData.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAywCMAAABMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T21:21:21.385Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
+              "Title": "ManageBeams.cs",
+              "DocumentMoniker": "E:\\Development\\BeamDesgin\\BeamDesgin\\ManageElements\\ManageBeams.cs",
+              "RelativeDocumentMoniker": "BeamDesgin\\ManageElements\\ManageBeams.cs",
+              "ToolTip": "E:\\Development\\BeamDesgin\\BeamDesgin\\ManageElements\\ManageBeams.cs",
+              "RelativeToolTip": "BeamDesgin\\ManageElements\\ManageBeams.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T21:21:16.741Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "Reinforcement.cs",
               "DocumentMoniker": "E:\\Development\\BeamDesgin\\BeamDesgin\\Elements\\Reinforcement.cs",
               "RelativeDocumentMoniker": "BeamDesgin\\Elements\\Reinforcement.cs",
@@ -75,12 +96,11 @@
               "RelativeToolTip": "BeamDesgin\\Elements\\Reinforcement.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-20T22:33:19.407Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-20T22:33:19.407Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "MathFun.cs",
               "DocumentMoniker": "E:\\Development\\BeamDesgin\\BeamDesgin\\Utils\\MathFun.cs",
               "RelativeDocumentMoniker": "BeamDesgin\\Utils\\MathFun.cs",
@@ -88,25 +108,24 @@
               "RelativeToolTip": "BeamDesgin\\Utils\\MathFun.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAABDAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-20T19:40:11.125Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-20T19:40:11.125Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 2,
               "Title": "RevitUtils.cs",
               "DocumentMoniker": "E:\\Development\\BeamDesgin\\BeamDesgin\\Revit\\RevitUtils.cs",
               "RelativeDocumentMoniker": "BeamDesgin\\Revit\\RevitUtils.cs",
               "ToolTip": "E:\\Development\\BeamDesgin\\BeamDesgin\\Revit\\RevitUtils.cs",
               "RelativeToolTip": "BeamDesgin\\Revit\\RevitUtils.cs",
-              "ViewState": "AQIAAEIAAAAAAAAAAAAQwGQAAAAAAAAA",
+              "ViewState": "AQIAAEIAAAAAAAAAAAAQwE8AAAAtAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-20T19:14:10.994Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "E:\\Development\\BeamDesgin\\BeamDesgin\\UI\\MainWindow.xaml",
               "RelativeDocumentMoniker": "BeamDesgin\\UI\\MainWindow.xaml",
@@ -118,26 +137,26 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "E:\\Development\\BeamDesgin\\BeamDesgin\\UI\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "BeamDesgin\\UI\\MainWindow.xaml.cs",
               "ToolTip": "E:\\Development\\BeamDesgin\\BeamDesgin\\UI\\MainWindow.xaml.cs",
               "RelativeToolTip": "BeamDesgin\\UI\\MainWindow.xaml.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAFABAAANAAAA",
+              "ViewState": "AQIAAPYAAAAAAAAAAAAQwPwAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-20T19:02:53.749Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "ExtApp.cs",
               "DocumentMoniker": "E:\\Development\\BeamDesgin\\BeamDesgin\\Entry\\ExtApp.cs",
               "RelativeDocumentMoniker": "BeamDesgin\\Entry\\ExtApp.cs",
               "ToolTip": "E:\\Development\\BeamDesgin\\BeamDesgin\\Entry\\ExtApp.cs",
               "RelativeToolTip": "BeamDesgin\\Entry\\ExtApp.cs",
-              "ViewState": "AQIAAB4AAAAAAAAAAAAYwD8AAABNAAAA",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAD8AAABQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-12T03:19:27.214Z",
               "EditorCaption": ""
@@ -145,6 +164,18 @@
             {
               "$type": "Document",
               "DocumentIndex": 7,
+              "Title": "ProMark.addin",
+              "DocumentMoniker": "E:\\Development\\BeamDesgin\\BeamDesgin\\ProMark.addin",
+              "RelativeDocumentMoniker": "BeamDesgin\\ProMark.addin",
+              "ToolTip": "E:\\Development\\BeamDesgin\\BeamDesgin\\ProMark.addin",
+              "RelativeToolTip": "BeamDesgin\\ProMark.addin",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAxAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000072|",
+              "WhenOpened": "2024-10-20T23:05:08.578Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "Beam.cs",
               "DocumentMoniker": "E:\\Development\\BeamDesgin\\BeamDesgin\\Elements\\Beam.cs",
               "RelativeDocumentMoniker": "BeamDesgin\\Elements\\Beam.cs",
@@ -152,18 +183,17 @@
               "RelativeToolTip": "BeamDesgin\\Elements\\Beam.cs",
               "ViewState": "AQIAACYAAAAAAAAAAAAAAKsAAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-07T20:47:14.48Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-07T20:47:14.48Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "ManageRft.cs",
               "DocumentMoniker": "E:\\Development\\BeamDesgin\\BeamDesgin\\ManageElements\\ManageRft.cs",
               "RelativeDocumentMoniker": "BeamDesgin\\ManageElements\\ManageRft.cs",
               "ToolTip": "E:\\Development\\BeamDesgin\\BeamDesgin\\ManageElements\\ManageRft.cs",
               "RelativeToolTip": "BeamDesgin\\ManageElements\\ManageRft.cs",
-              "ViewState": "AQIAAJUAAAAAAAAAAAAAAK8AAAApAAAA",
+              "ViewState": "AQIAAJIAAAAAAAAAAAAIwK8AAAApAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-06T14:42:43.503Z",
               "EditorCaption": ""

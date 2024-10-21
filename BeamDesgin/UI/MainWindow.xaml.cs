@@ -115,7 +115,13 @@ namespace BeamDesgin.UI
 
             List<Beam> beamsData = ManageExcel.GetBeamsData(Path_TxtBox.Text);
             selectedRebars = GetSelectedRebarSizes();
-            var newList = ManageData.transAreaData(beamsData, selectedRebars);
+            string prequal = "B";
+            if (!string.IsNullOrWhiteSpace(prequal_txtbox.Text))
+            {
+                prequal = prequal_txtbox.Text;
+            }
+            
+            var newList = ManageData.transAreaData(beamsData, selectedRebars,prequal);
 
             foreach (Beam beam in newList)
             {
@@ -153,6 +159,11 @@ namespace BeamDesgin.UI
                                 .OfType<Beam>() // Filter out non-Beam items
                                 .Where(b => b.IsSelected)
                                 .ToList();
+            string prequal = "B";
+            if (!string.IsNullOrWhiteSpace(prequal_txtbox.Text))
+            {
+                prequal = prequal_txtbox.Text;
+            }
 
             if (selectedBeams.Any())
             {
@@ -165,8 +176,8 @@ namespace BeamDesgin.UI
                         UpdateBeamsMark(selectedBeam.Mark.Number, incrementedBeam); 
                     }
                 }
-
-                UpdateDataGrid(); // Update grid once after processing all beams
+                
+                UpdateDataGrid(prequal); // Update grid once after processing all beams
             }
             else
             {
@@ -181,6 +192,11 @@ namespace BeamDesgin.UI
                                 .OfType<Beam>() // Filter out non-Beam items
                                 .Where(b => b.IsSelected)
                                 .ToList();
+            string prequal = "B";
+            if (!string.IsNullOrWhiteSpace(prequal_txtbox.Text))
+            {
+                prequal = prequal_txtbox.Text;
+            }
             if (selectedBeams.Any())
             {
                 bool IsChangeable = selectedBeams.Any(b => b.SelectedRebarSize1 != 0 || b.SelectedRebarSize2 != 0 ||
@@ -199,7 +215,7 @@ namespace BeamDesgin.UI
                         //MessageBox.Show("This button is not working now Please try again later XD");
                     }
 
-                    UpdateDataGrid();
+                    UpdateDataGrid(prequal);
                 }
                 else
                 {
@@ -302,11 +318,11 @@ namespace BeamDesgin.UI
         /// needs List of Beams
         /// </summary>
         /// <param name="beamList"> the beam list that will be represented to the user (aka  a unique list)</param>
-        private void UpdateDataGrid()
+        private void UpdateDataGrid(string prequal)
         {
             UserList.Clear();
 
-            var newSortedData = ManageData.sortData(BeamsData);
+            var newSortedData = ManageData.sortData(BeamsData, prequal);
             BeamsData.Clear();
 
             foreach (var beam in newSortedData)
