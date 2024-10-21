@@ -113,8 +113,6 @@ namespace BeamDesgin.UI
                 return;
             }
 
-            
-
             List<Beam> beamsData = ManageExcel.GetBeamsData(Path_TxtBox.Text);
             selectedRebars = GetSelectedRebarSizes();
             var newList = ManageData.transAreaData(beamsData, selectedRebars);
@@ -124,6 +122,14 @@ namespace BeamDesgin.UI
                 BeamsData.Add(beam); // Add the new data to the ObservableCollection
 
             }
+
+            // Check the Revit model once to avoid redundant calls
+            var revitCheck = RevitUtils.CheckRevitModel(BeamsData, doc);
+            StringBuilder missingBeams = revitCheck.notFoundBeam;
+            missingBeam_TxtBox.Text = missingBeams.ToString();
+
+            StringBuilder wrongBeams = revitCheck.wrongBeams;
+            wrongBeam_TxtBox.Text = wrongBeams.ToString();
 
             var uniqueList = ManageData.UniqueSortedData(newList);
 
@@ -135,13 +141,14 @@ namespace BeamDesgin.UI
 
             }
 
+            // Disable the design button after processing
             desgin_btn.IsEnabled = false;
 
         }
 
         private void Update_btn_Click(object sender, RoutedEventArgs e)
         {
-
+            var aselect = BeamDataGrid.Items.OfType<Beam>().Where(b =>b.SelectedRebarSize1 != 0).FirstOrDefault();
             var selectedBeams = BeamDataGrid.Items
                                 .OfType<Beam>() // Filter out non-Beam items
                                 .Where(b => b.IsSelected)
@@ -166,17 +173,59 @@ namespace BeamDesgin.UI
                 MessageBox.Show("No beams selected.");
             }
         }
-        private void refresh_btn_Click(object sender, RoutedEventArgs e)
+
+        private void Update_rebar_only_Click(object sender, RoutedEventArgs e)
         {
-            BeamDataGrid.Items.Refresh();
+            var aselect = BeamDataGrid.Items.OfType<Beam>().Where(b => b.SelectedRebarSize1 != 0).FirstOrDefault();
+            var selectedBeams = BeamDataGrid.Items
+                                .OfType<Beam>() // Filter out non-Beam items
+                                .Where(b => b.IsSelected)
+                                .ToList();
+            if (selectedBeams.Any())
+            {
+                bool IsChangeable = selectedBeams.Any(b => b.SelectedRebarSize1 != 0 || b.SelectedRebarSize2 != 0 ||
+                                                         b.SelectedRebarSize3 != 0 || b.SelectedRebarSize4 != 0 ||
+                                                         b.SelectedRebarSize5 != 0 || b.SelectedRebarSize6 != 0);
+
+
+                if (IsChangeable)
+                {
+                    List<Beam> changeableBeams = selectedBeams.Where(b => b.SelectedRebarSize1 != 0 || b.SelectedRebarSize2 != 0 ||
+                                                         b.SelectedRebarSize3 != 0 || b.SelectedRebarSize4 != 0 ||
+                                                         b.SelectedRebarSize5 != 0 || b.SelectedRebarSize6 != 0).ToList();
+                    foreach (Beam beam in changeableBeams)
+                    {
+                        ChangeRebarOnly(beam);
+                        //MessageBox.Show("This button is not working now Please try again later XD");
+                    }
+
+                    UpdateDataGrid();
+                }
+                else
+                {
+                    MessageBox.Show("No Rebar changes found selected.");
+                }
+ 
+            }
+            else
+            {
+                
+                MessageBox.Show("No beams selected.");
+            }
         }
+
         private void BeamDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if(BeamDataGrid.SelectedItems.Count > 0)
             {
                 Update_btn.IsEnabled=true;
+                rebar_only_btn.IsEnabled=true;
             }
-            else { Update_btn.IsEnabled=false; }
+            else 
+            { 
+                Update_btn.IsEnabled=false; 
+                rebar_only_btn.IsEnabled=false;
+            }
             
             
         }
@@ -246,6 +295,8 @@ namespace BeamDesgin.UI
 
         
 
+
+
         /// <summary>
         /// update the data grid in the UI
         /// needs List of Beams
@@ -278,6 +329,44 @@ namespace BeamDesgin.UI
             }
 
            
+        }
+
+        private void ChangeRebarOnly(Beam changingBeam )
+        {
+            foreach (var beam in BeamsData)
+            {
+                if (beam.Mark.Number == changingBeam.Mark.Number)
+                {
+                    if (beam.SelectedRebarSize1 != 0)
+                    {
+                        var newRft = ManageRft.ChangeRftDiameter(beam.ChosenAsMidBot,beam.SelectedRebarSize1,beam.Breadth);
+                        beam.ChosenAsMidBot.Diameter = newRft.diameter;
+                        beam.ChosenAsMidBot.NumberOfBars = newRft.noOfBars;
+                    }
+
+                    if (beam.SelectedRebarSize2 != 0)
+                    {
+                        var newRft = ManageRft.ChangeRftDiameter(beam.ChosenCornerAsBot,beam.SelectedRebarSize2,beam.Breadth);
+                        beam.ChosenCornerAsBot.Diameter = newRft.diameter;
+                        beam.ChosenCornerAsBot.NumberOfBars = newRft.noOfBars;
+                    }
+
+                    if (beam.SelectedRebarSize3 != 0)
+                    {
+                        var newRft = ManageRft.ChangeRftDiameter(beam.ChosenMidAsTop,beam.SelectedRebarSize3,beam.Breadth);
+                        beam.ChosenMidAsTop.Diameter = newRft.diameter;
+                        beam.ChosenMidAsTop.NumberOfBars = newRft.noOfBars;
+                    }
+
+                    if (beam.SelectedRebarSize4 != 0)
+                    {
+                        var newRft = ManageRft.ChangeRftDiameter(beam.ChosenCornerAsTop,beam.SelectedRebarSize4,beam.Breadth);
+                        beam.ChosenCornerAsTop.Diameter = newRft.diameter;
+                        beam.ChosenCornerAsTop.NumberOfBars = newRft.noOfBars;
+                    }
+
+                }
+            }
         }
 
         private Beam FindNextStrongerBeam(Beam selectedBeam)
@@ -319,6 +408,8 @@ namespace BeamDesgin.UI
 
            
         }
+
+       
 
         
     }

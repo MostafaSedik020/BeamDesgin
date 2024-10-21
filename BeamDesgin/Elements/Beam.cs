@@ -9,6 +9,7 @@ using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Events;
 using System.Windows;
+using System.Data;
 
 namespace BeamDesgin.Elements
 {
@@ -156,6 +157,94 @@ namespace BeamDesgin.Elements
                 }
             }
         }
+        public List<int> RebarSizes { get; } = new List<int> { 12, 14, 16, 18, 20, 22, 25 };  // Constant list of rebar sizes
+
+        private int _selectedRebarSize1;
+        public int SelectedRebarSize1
+        {
+            get { return _selectedRebarSize1; }
+            set
+            {
+                if (_selectedRebarSize1 != value)
+                {
+                    _selectedRebarSize1 = value;
+                    OnPropertyChanged(nameof(SelectedRebarSize1));
+                    
+                }
+            }
+        }
+
+        private int _selectedRebarSize2;
+        public int SelectedRebarSize2
+        {
+            get { return _selectedRebarSize2; }
+            set
+            {
+                if (_selectedRebarSize2 != value)
+                {
+                    _selectedRebarSize2 = value;
+                    OnPropertyChanged(nameof(SelectedRebarSize2));
+                }
+            }
+        }
+
+        private int _selectedRebarSize3;
+        public int SelectedRebarSize3
+        {
+            get { return _selectedRebarSize3; }
+            set
+            {
+                if (_selectedRebarSize3 != value)
+                {
+                    _selectedRebarSize3 = value;
+                    OnPropertyChanged(nameof(SelectedRebarSize3));
+                }
+            }
+        }
+
+        private int _selectedRebarSize4;
+        public int SelectedRebarSize4
+        {
+            get { return _selectedRebarSize4; }
+            set
+            {
+                if (_selectedRebarSize4 != value)
+                {
+                    _selectedRebarSize4 = value;
+                    OnPropertyChanged(nameof(SelectedRebarSize4));
+                }
+            }
+        }
+
+        private int _selectedRebarSize5;
+        public int SelectedRebarSize5
+        {
+            get { return _selectedRebarSize5; }
+            set
+            {
+                if (_selectedRebarSize5 != value)
+                {
+                    _selectedRebarSize5 = value;
+                    OnPropertyChanged(nameof(SelectedRebarSize5));
+                }
+            }
+        }
+
+        private int _selectedRebarSize6;
+        public int SelectedRebarSize6
+        {
+            get { return _selectedRebarSize6; }
+            set
+            {
+                if (_selectedRebarSize6 != value)
+                {
+                    _selectedRebarSize6 = value;
+                    OnPropertyChanged(nameof(SelectedRebarSize6));
+                }
+            }
+        }
+
+
 
         // Remaining public properties
         public string UniqueName { get; set; }
@@ -166,6 +255,7 @@ namespace BeamDesgin.Elements
         public double BotMiddleAs { get; set; }
         public double CornerShearAs { get; set; }
         public int Count { get; set; }
+        
 
         // Data exported to Revit
         // paramerter names a all uppercase because it mimic
@@ -178,6 +268,7 @@ namespace BeamDesgin.Elements
         public string TOP_RFT_MID => $"{ChosenMidAsTop.NumberOfBars}T{ChosenMidAsTop.Diameter}";
         public string LINKS_CORNER => $"{ChosenShearAsCorner.NumberOfBars}LT{ChosenShearAsCorner.Diameter}@{ChosenShearAsCorner.spacing}";
         public string LINKS_MID => $"{ChosenShearAsMid.NumberOfBars}LT{ChosenShearAsMid.Diameter}@{ChosenShearAsMid.spacing}";
+
 
         public Beam()
         {
@@ -194,6 +285,7 @@ namespace BeamDesgin.Elements
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            
         }
     }
 }

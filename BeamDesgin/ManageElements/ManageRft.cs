@@ -152,6 +152,31 @@ namespace BeamDesgin.ManageElements
 
             return (chosenAsDia, numberOfBranches, chosenSpacing);
         }
+        //public static (double noOfBars, int diameter) ChangeRftDiameter(Reinforcement rft , int newDia, double breadth)
+        //{
+        //    List<int> areaBars = new List<int>();
+        //    areaBars.Add(newDia);
+
+        //    double totalAs =  GetAreaRFT(rft );
+
+        //    var newRft = GetChosenFlexRFT(totalAs, breadth, areaBars);
+
+        //    return (newRft.noOfBars, newRft.diameter);
+
+        //}
+        public static (double noOfBars, double diameter) ChangeRftDiameter(Reinforcement rft, int newDia, double breadth)
+        {
+            List<int> areaBars = new List<int>();
+            areaBars.Add(newDia);
+
+            double totalAs = GetAreaRFT(rft);
+            double singleArea = (Math.PI * Math.Pow(newDia, 2)) / 4;
+            double newNoOfBars = Math.Ceiling(totalAs/singleArea);
+
+            return (newNoOfBars, newDia);
+
+        }
+
 
     }
 }

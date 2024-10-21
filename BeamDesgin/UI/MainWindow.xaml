@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BeamDesgin.UI"
-             mc:Ignorable="d" d:DesignWidth="800" Height="800"
+             mc:Ignorable="d" d:DesignWidth="1000" Height="800"
              Loaded="Window_Loaded"
         Title="Beam Desgin"
         Background="Transparent"
@@ -14,96 +14,126 @@
         MouseMove="Window_MouseMove">
 
     <Window.Resources>
-    <!-- Button Style with Gradient Background for Active and Inactive States -->
-    <Style TargetType="Button">
-        <Setter Property="Width" Value="100"/>
-        <Setter Property="Height" Value="30"/>
-        <Setter Property="Foreground" Value="#e7f4ff"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Background">
-            <Setter.Value>
-                <!-- Active Button Gradient -->
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#4d75aa" Offset="0.0"/>
-                    <GradientStop Color="#3b5d8f" Offset="1.0"/>
-                </LinearGradientBrush>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="BorderBrush" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="FontWeight" Value="Bold"/>
 
-        <!-- Triggers for Disabled Buttons -->
-        <Style.Triggers>
-            <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Background">
-                    <Setter.Value>
-                        <!-- Inactive Button Gradient -->
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                            <GradientStop Color="#e9edf5" Offset="0.0"/>
-                            <GradientStop Color="#e9edf5" Offset="1.0"/>
-                        </LinearGradientBrush>
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="Foreground" Value="#6f93c1"/>
-            </Trigger>
-        </Style.Triggers>
-    </Style>
 
-    <!-- CheckBox Style with Custom Colors for Active and Disabled States -->
-    <Style TargetType="CheckBox">
-        <Setter Property="Foreground" Value="Black"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="Margin" Value="5"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        
-        <!-- Background when unchecked -->
-        <Setter Property="Background">
-            <Setter.Value>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+        <!-- Button Style with Gradient Background for Active and Inactive States -->
+        <Style TargetType="Button">
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Foreground" Value="#e7f4ff"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <!-- Active Button Gradient -->
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#4d75aa" Offset="0.0"/>
+                        <GradientStop Color="#3b5d8f" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+
+            <!-- Triggers for Disabled Buttons -->
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <!-- Inactive Button Gradient -->
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#e9edf5" Offset="0.0"/>
+                                <GradientStop Color="#e9edf5" Offset="1.0"/>
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Foreground" Value="#6f93c1"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- CheckBox Style with Custom Colors for Active and Disabled States -->
+        <Style TargetType="CheckBox">
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+
+            <!-- Background when unchecked -->
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                         <GradientStop Color="White" Offset="0.0"/>
                         <GradientStop Color="White" Offset="1.0"/>
-                </LinearGradientBrush>
-            </Setter.Value>
-        </Setter>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
 
-        <Setter Property="BorderBrush" Value="Black"/>
-        <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="2"/>
 
-        <!-- Triggers for Checked, Unchecked, and Disabled States -->
-        <Style.Triggers>
-            <!-- Checked State -->
-            <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Background">
-                    <Setter.Value>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <!-- Triggers for Checked, Unchecked, and Disabled States -->
+            <Style.Triggers>
+                <!-- Checked State -->
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                                 <GradientStop Color="#a2b8d7" Offset="0.0"/>
                                 <GradientStop Color="#a2b8d7" Offset="1.0"/>
-                        </LinearGradientBrush>
-                    </Setter.Value>
-                </Setter>
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
                     <Setter Property="BorderBrush" Value="#3b5d8f"/>
-                <Setter Property="Foreground" Value="White"/>
-            </Trigger>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
 
-            <!-- Disabled State -->
-            <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Background">
-                    <Setter.Value>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <!-- Disabled State -->
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                                 <GradientStop Color="White" Offset="0.0"/>
                                 <GradientStop Color="White" Offset="1.0"/>
-                        </LinearGradientBrush>
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="BorderBrush" Value="White"/>
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="BorderBrush" Value="White"/>
                     <Setter Property="Foreground" Value="White"/>
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-</Window.Resources>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+        <local:RebarSizeToColorConverter x:Key="RebarSizeToColorConverter" />
+
+        <!-- styling comboboxes -->
+        <Style x:Key="RebarSize1CellStyle" TargetType="DataGridCell">
+            <Setter Property="Background" Value="{Binding SelectedRebarSize1, Converter={StaticResource RebarSizeToColorConverter}}" />
+        </Style>
+
+        <Style x:Key="RebarSize2CellStyle" TargetType="DataGridCell">
+            <Setter Property="Background" Value="{Binding SelectedRebarSize2, Converter={StaticResource RebarSizeToColorConverter}}" />
+        </Style>
+
+        <Style x:Key="RebarSize3CellStyle" TargetType="DataGridCell">
+            <Setter Property="Background" Value="{Binding SelectedRebarSize3, Converter={StaticResource RebarSizeToColorConverter}}" />
+        </Style>
+
+        <Style x:Key="RebarSize4CellStyle" TargetType="DataGridCell">
+            <Setter Property="Background" Value="{Binding SelectedRebarSize4, Converter={StaticResource RebarSizeToColorConverter}}" />
+        </Style>
+
+        <Style x:Key="RebarSize5CellStyle" TargetType="DataGridCell">
+            <Setter Property="Background" Value="{Binding SelectedRebarSize5, Converter={StaticResource RebarSizeToColorConverter}}" />
+        </Style>
+
+        <Style x:Key="RebarSize6CellStyle" TargetType="DataGridCell">
+            <Setter Property="Background" Value="{Binding SelectedRebarSize6, Converter={StaticResource RebarSizeToColorConverter}}" />
+        </Style>
+    </Window.Resources>
 
 
 
@@ -122,8 +152,9 @@
                 <RowDefinition Height="30"></RowDefinition>
                 <RowDefinition Height="70"></RowDefinition>
                 <RowDefinition Height="100"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="75*"></RowDefinition>
+                <RowDefinition Height="473*"/>
+                <RowDefinition Height="70"></RowDefinition>
             </Grid.RowDefinitions>
 
             <!-- Title bar with close button -->
@@ -132,66 +163,115 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Label Content="Beam Desgin" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="16"
+                <Label Content="ProMark" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="16"
                        FontWeight="Bold" FontFamily="Arial" Foreground="Black" Grid.Column="0"/>
 
                 <Button Content="X" Width="30" Height="30" Click="CloseButton_Click" Background="Transparent"
                         BorderBrush="Transparent" Foreground="Black" Grid.Column="1"/>
             </Grid>
 
-            <Button Name="Browse_btn" Content="Browse" HorizontalAlignment="Left" Margin="469,29,0,0" Grid.Row="1"
-                    VerticalAlignment="Top" Width="70" Height="30" Click="Browse_Button_Click"/>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="450"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <TextBox x:Name="Path_TxtBox" HorizontalAlignment="Left" Height="20" Margin="39,34,0,0" Grid.Row="1"
-                     TextWrapping="Wrap"  VerticalAlignment="Top" Width="384"/>
-
-            <!--check boxes-->
-            <Expander x:Name="RebarExpander" HorizontalAlignment="Left" Height="90" Header="Choose Rebar"
-                      Margin="24,10,0,0" Grid.RowSpan="2" Grid.Row="2" VerticalAlignment="Top" Width="300" >
+                <TextBox x:Name="Path_TxtBox" HorizontalAlignment="Left" Height="20" Margin="20,0,0,0" Grid.Column="0"
+                        TextWrapping="Wrap"  VerticalAlignment="Center" Width="400"/>
                 
-                
+                <Button Name="Browse_btn" Content="Browse" HorizontalAlignment="Center" Margin="20,0,0,0" Grid.Column="1"
+                    VerticalAlignment="Center" Width="70" Height="30" Click="Browse_Button_Click"/>
 
-                <Grid Background="#a2b8d7" >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="0">
-                        <CheckBox Content="8"  Grid.Column="0" Margin="0,2,6,2" />
-                        <CheckBox Content="10"  Grid.Column="1" Margin="0,2,0,2"/>
-                        <CheckBox Content="12"  Grid.Column="2" Margin="0,2,0,2"/>
-                    </StackPanel>
-                    <StackPanel Grid.Column="1" >
-                        <CheckBox Content="14"  Grid.Column="0" Margin="0,2,0,2" />
-                        <CheckBox Content="16"  Grid.Column="1" Margin="0,2,0,2"/>
-                        <CheckBox Content="18"  Grid.Column="2" Margin="0,2,0,2"/>
-                    </StackPanel>
-                    <StackPanel Grid.Column="2">
-                        <CheckBox Content="20"  Grid.Column="0" Margin="0,2,0,2"/>
-                        <CheckBox Content="22"  Grid.Column="1" Margin="0,2,0,2"/>
-                        <CheckBox Content="25"  Grid.Column="2" Margin="0,2,0,2"/>
-                    </StackPanel>
-                </Grid>
-            </Expander>
-            <Button x:Name="desgin_btn" Content="Desgin" HorizontalAlignment="Left" Margin="469,20,0,0" Grid.Row="2"
-                            VerticalAlignment="Top" Width="70" Height="30" Click="desgin_btn_click"/>
-            <Button x:Name="Update_btn" Content="Update" Width="70" HorizontalAlignment="Left" Margin="469,60,0,10" Grid.Row="2"
-                    Click="Update_btn_Click" IsEnabled="False"/>
+            </Grid>
 
-            <Button x:Name="Clear_btn" Content="Clear" Width="70" HorizontalAlignment="Left" Margin="564,20,0,50" Grid.Row="2"
-                     Click="Clear_btn_Click" />
-            <Button x:Name="Import_btn" Content="Import to Revit" Width="101" HorizontalAlignment="Left" Margin="654,20,0,50" Grid.Row="2"
-         Click="Import_btn_Click"/>
+            
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="450"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!--check boxes-->
+
+                <Expander x:Name="RebarExpander" HorizontalAlignment="Left" Height="90" Header="Choose Rebar"
+                    Margin="24,10,0,0" Grid.Column="0" VerticalAlignment="Top" Width="300" >
+
+
+
+                    <Grid Background="#a2b8d7" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <CheckBox Content="8"  Grid.Column="0" Margin="0,2,6,2" />
+                            <CheckBox Content="10"  Grid.Column="1" Margin="0,2,0,2"/>
+                            <CheckBox Content="12"  Grid.Column="2" Margin="0,2,0,2"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" >
+                            <CheckBox Content="14"  Grid.Column="0" Margin="0,2,0,2" />
+                            <CheckBox Content="16"  Grid.Column="1" Margin="0,2,0,2"/>
+                            <CheckBox Content="18"  Grid.Column="2" Margin="0,2,0,2"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2">
+                            <CheckBox Content="20"  Grid.Column="0" Margin="0,2,0,2"/>
+                            <CheckBox Content="22"  Grid.Column="1" Margin="0,2,0,2"/>
+                            <CheckBox Content="25"  Grid.Column="2" Margin="0,2,0,2"/>
+                        </StackPanel>
+                    </Grid>
+                </Expander>
+
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1">
+
+                    <Button x:Name="desgin_btn" Content="Design" Margin="20,0,0,10" Grid.Column="1"
+                             Width="70" Height="30" Click="desgin_btn_click"/>
+
+                    <Button x:Name="Clear_btn" Content="Clear" Width="70" Margin="20,0,0,0" Grid.Column="1"
+                        Click="Clear_btn_Click"  />
+                </StackPanel>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                            Grid.Column="2">
+                    <TextBox x:Name="missingBeam_TxtBox" Height="45" Margin="0,0,10,5"
+                             TextWrapping="Wrap" IsReadOnly="True"/>
+                    <TextBox x:Name="wrongBeam_TxtBox" Height="45" Margin="0,5,10,0"
+                        TextWrapping="Wrap" IsReadOnly="True"/>
+                </StackPanel>
+
+            </Grid>
+            
+            
+
+
+
+            <Grid Grid.Row="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="Import_btn" Content="Import to Revit" Width="170" HorizontalAlignment="Right" Margin="0,0,20,20" Grid.Column="1"
+                     Click="Import_btn_Click"  VerticalAlignment="Bottom"/>
+
+                <Button x:Name="rebar_only_btn" Content="Update Rebar only" HorizontalAlignment="Left" IsEnabled="False" Width="170" VerticalAlignment="Bottom"
+                        Grid.Column="0" Margin="200,15,0,20" Click="Update_rebar_only_Click"/>
+
+                <Button x:Name="Update_btn" Content="Merge &amp; Update" Width="170" HorizontalAlignment="Left" Margin="20,15,0,20"
+                     Click="Update_btn_Click" IsEnabled="False" Grid.Column="0" VerticalAlignment="Bottom"/>
+
+            </Grid>
+
 
 
 
             <!-- Data after sorting -->
 
-            <DataGrid x:Name="BeamDataGrid" Grid.Row="3" AutoGenerateColumns="False" IsReadOnly="False" Margin="10"
+            <DataGrid x:Name="BeamDataGrid" Grid.Row="3" AutoGenerateColumns="False" IsReadOnly="False" Margin="10,10,10,10"
                              CanUserResizeRows="False" CanUserResizeColumns="False" CanUserSortColumns="False"
                                 CanUserReorderColumns="False" ItemsSource="{Binding UserList}" SelectionChanged="BeamDataGrid_SelectionChanged"
-                                CanUserAddRows="False">
+                                CanUserAddRows="False" Grid.RowSpan="2">
 
 
 
@@ -208,11 +288,10 @@
                     <Style TargetType="DataGridCell">
                         <Setter Property="TextBlock.TextAlignment" Value="Center"/>
                     </Style>
-                    
                 </DataGrid.Resources>
 
-                
-                
+
+
 
                 <DataGrid.Columns>
                     <!-- Select Column -->
@@ -227,11 +306,11 @@
 
                     <!-- Count Column -->
                     <DataGridTextColumn Header="Count" Binding="{Binding Count, Mode=OneWay}" Width="50" IsReadOnly="True"/>
-                
 
-                     <!-- BeamMark Column -->
+
+                    <!-- BeamMark Column -->
                     <DataGridTextColumn Header="Beam Mark" Binding="{Binding BeamMark, Mode=OneWay}" Width="*" IsReadOnly="True" />
-                  
+
                     <!-- Size Breadth Column -->
                     <DataGridTextColumn Header="Breadth" Binding="{Binding Breadth, Mode=OneWay}" Width="*" IsReadOnly="True"/>
 
@@ -242,12 +321,132 @@
                     <DataGridTextColumn Header="Bot Left" Binding="{Binding BOTTOM_RFT_CORNER, Mode=OneWay}" Width="*" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Bot Mid" Binding="{Binding BOTTOM_RFT_MID, Mode=OneWay}" Width="*" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Bot Right" Binding="{Binding BOTTOM_RFT_CORNER, Mode=OneWay}" Width="*" IsReadOnly="True"/>
-                    
+                    <DataGridComboBoxColumn Header="Mid Dia." Width="70"
+                        SelectedItemBinding="{Binding SelectedRebarSize1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <DataGridComboBoxColumn.ElementStyle>
+                            <Style TargetType="ComboBox">
+                                <Setter Property="ItemsSource" Value="{Binding RebarSizes}" />
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsEditing, RelativeSource={RelativeSource AncestorType=DataGridRow}}" Value="True">
+                                        <Setter Property="IsDropDownOpen" Value="True" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGridComboBoxColumn.ElementStyle>
+                        <DataGridComboBoxColumn.EditingElementStyle>
+                            <Style TargetType="ComboBox">
+                                <Setter Property="ItemsSource" Value="{Binding RebarSizes}" />
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsEditing, RelativeSource={RelativeSource AncestorType=DataGridRow}}" Value="True">
+                                        <Setter Property="IsDropDownOpen" Value="True" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGridComboBoxColumn.EditingElementStyle>
+                        <DataGridComboBoxColumn.CellStyle>
+                            <StaticResource ResourceKey="RebarSize1CellStyle" />
+                        </DataGridComboBoxColumn.CellStyle>
+                    </DataGridComboBoxColumn>
+                    <DataGridComboBoxColumn Header="Corner Dia." Width="70"
+                             SelectedItemBinding="{Binding SelectedRebarSize2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <DataGridComboBoxColumn.ElementStyle>
+                            <Style TargetType="ComboBox">
+                                <Setter Property="ItemsSource" Value="{Binding RebarSizes}" />
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsEditing, RelativeSource={RelativeSource AncestorType=DataGridRow}}" Value="True">
+                                        <Setter Property="IsDropDownOpen" Value="True" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGridComboBoxColumn.ElementStyle>
+                        <DataGridComboBoxColumn.EditingElementStyle>
+                            <Style TargetType="ComboBox">
+                                <Setter Property="ItemsSource" Value="{Binding RebarSizes}" />
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsEditing, RelativeSource={RelativeSource AncestorType=DataGridRow}}" Value="True">
+                                        <Setter Property="IsDropDownOpen" Value="True" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGridComboBoxColumn.EditingElementStyle>
+                        <DataGridComboBoxColumn.CellStyle>
+                            <StaticResource ResourceKey="RebarSize2CellStyle" />
+                        </DataGridComboBoxColumn.CellStyle>
+                    </DataGridComboBoxColumn>
+
                     <!-- Top Reinforcemnt -->
                     <DataGridTextColumn Header="Top Left" Binding="{Binding TOP_RFT_CORNER, Mode=OneWay}" Width="*" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Top Mid" Binding="{Binding TOP_RFT_MID, Mode=OneWay}" Width="*" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Top Right" Binding="{Binding TOP_RFT_CORNER, Mode=OneWay}" Width="*" IsReadOnly="True"/>
-                    
+                    <DataGridComboBoxColumn Header="Mid Dia." Width="70"
+                         SelectedItemBinding="{Binding SelectedRebarSize3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <DataGridComboBoxColumn.ElementStyle>
+                            <Style TargetType="ComboBox">
+                                <Setter Property="ItemsSource" Value="{Binding RebarSizes}" />
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsEditing, RelativeSource={RelativeSource AncestorType=DataGridRow}}" Value="True">
+                                        <Setter Property="IsDropDownOpen" Value="True" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGridComboBoxColumn.ElementStyle>
+                        <DataGridComboBoxColumn.EditingElementStyle>
+                            <Style TargetType="ComboBox">
+                                <Setter Property="ItemsSource" Value="{Binding RebarSizes}" />
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsEditing, RelativeSource={RelativeSource AncestorType=DataGridRow}}" Value="True">
+                                        <Setter Property="IsDropDownOpen" Value="True" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGridComboBoxColumn.EditingElementStyle>
+                        <DataGridComboBoxColumn.CellStyle>
+                            <StaticResource ResourceKey="RebarSize3CellStyle" />
+                        </DataGridComboBoxColumn.CellStyle>
+                    </DataGridComboBoxColumn>
+                    <DataGridComboBoxColumn Header="Corner Dia." Width="70"
+                             SelectedItemBinding="{Binding SelectedRebarSize4, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <DataGridComboBoxColumn.ElementStyle>
+                            <Style TargetType="ComboBox">
+                                <Setter Property="ItemsSource" Value="{Binding RebarSizes}" />
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsEditing, RelativeSource={RelativeSource AncestorType=DataGridRow}}" Value="True">
+                                        <Setter Property="IsDropDownOpen" Value="True" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGridComboBoxColumn.ElementStyle>
+                        <DataGridComboBoxColumn.EditingElementStyle>
+                            <Style TargetType="ComboBox">
+                                <Setter Property="ItemsSource" Value="{Binding RebarSizes}" />
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsEditing, RelativeSource={RelativeSource AncestorType=DataGridRow}}" Value="True">
+                                        <Setter Property="IsDropDownOpen" Value="True" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGridComboBoxColumn.EditingElementStyle>
+                        <DataGridComboBoxColumn.CellStyle>
+                            <StaticResource ResourceKey="RebarSize4CellStyle" />
+                        </DataGridComboBoxColumn.CellStyle>
+                    </DataGridComboBoxColumn>
+
                     <!-- Shear reinforcement -->
                     <DataGridTextColumn Header="Links Left" Binding="{Binding LINKS_CORNER, Mode=OneWay}" Width="*" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Links Mid" Binding="{Binding LINKS_MID, Mode=OneWay}" Width="*" IsReadOnly="True"/>
@@ -256,6 +455,7 @@
 
                 </DataGrid.Columns>
             </DataGrid>
+
 
 
 

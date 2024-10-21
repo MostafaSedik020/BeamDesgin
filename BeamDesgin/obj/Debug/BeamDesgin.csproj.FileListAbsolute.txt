@@ -25,3 +25,6 @@ E:\Development\BeamDesgin\BeamDesgin\obj\Debug\BeamDesgin.csproj.CoreCompileInpu
 E:\Development\BeamDesgin\BeamDesgin\obj\Debug\BeamDesgin.csproj.Up2Date
 E:\Development\BeamDesgin\BeamDesgin\obj\Debug\BeamDesgin.dll
 E:\Development\BeamDesgin\BeamDesgin\obj\Debug\BeamDesgin.pdb
+E:\Development\BeamDesgin\BeamDesgin\obj\Debug\GeneratedInternalTypeHelper.g.cs
+E:\Development\BeamDesgin\BeamDesgin\obj\Debug\BeamDesgin.Properties.Resources.resources
+E:\Development\BeamDesgin\BeamDesgin\obj\Debug\BeamDesgin.csproj.GenerateResource.cache

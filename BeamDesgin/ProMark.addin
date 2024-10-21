@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<RevitAddIns>
+	<AddIn Type="Application">
+		<Name>ProMark</Name>
+		<Assembly>"E:\Development\BeamDesgin\BeamDesgin\bin\Debug\BeamDesgin.dll"</Assembly>
+		<AddInId>23126784-3B76-43F8-B55A-5FA78E18B59B</AddInId>
+		<FullClassName>BeamDesgin.Entry.ExtApp</FullClassName>
+		<VendorId>ADSK</VendorId>
+		<VendorDescription>Mostafa</VendorDescription>
+		<Text>Rebar arrangement and Beam Marking</Text>
+	</AddIn>
+</RevitAddIns>

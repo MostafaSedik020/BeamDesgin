@@ -55,15 +55,13 @@ namespace BeamDesgin.Entry
                 string assemblyPath = assembly.Location;
 
                 // Create push button data
-                PushButtonData pbData = new PushButtonData("ExtApp_btn", "Export BOQ", assemblyPath, typeof(ExtCmd).FullName);
+                PushButtonData pbData = new PushButtonData("ProMark_btn", "ProMark", assemblyPath, typeof(ExtCmd).FullName);
 
                 // Add the push button to the panel
                 PushButton pb = panel.AddItem(pbData) as PushButton;
                 pb.ToolTip = "Assgin Beam Mark and RFT from ETABS to Revit";
 
-                //pb.LargeImage = new BitmapImage(new Uri($@"{Path.GetDirectoryName(assembly.Location)}\boq32.png"));
-
-                pb.LargeImage = GetImageSource("ExportBOQ.Resources.bill-of-quantities-32.png");
+                pb.LargeImage = GetImageSource("BeamDesgin.Resources.PM24.png");
             }
         }
         private ImageSource GetImageSource(string imageFullName)

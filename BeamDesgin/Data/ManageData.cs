@@ -29,7 +29,7 @@ namespace BeamDesgin.Data
                 beam.ChosenAsMidBot.Diameter = chosenMidBot.diameter;
 
                 var chosenCornerBot = ManageRft.GetChosenFlexRFT(beam.BotCornerAs, breadth, bars, domainDia);
-                if(chosenCornerBot.noOfBars > chosenMidBot.noOfBars / 2 &&
+                if(chosenCornerBot.noOfBars > chosenMidBot.noOfBars / 2 ||
                     chosenCornerBot.noOfBars < chosenMidBot.noOfBars)
                 {
                     beam.ChosenCornerAsBot.NumberOfBars = chosenMidBot.noOfBars;
