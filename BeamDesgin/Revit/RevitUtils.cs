@@ -60,68 +60,79 @@ namespace BeamDesgin.Revit
             }
         }
 
-        public static (StringBuilder notFoundBeam, StringBuilder wrongBeams) CheckRevitModel(ObservableCollection<Beam> beamsData , Document doc)
+        public static (StringBuilder totalWarnings, int count) CheckRevitModel(ObservableCollection<Beam> beamsData, Document doc)
         {
-           
-            double revitDepth = 0;
-            double revitBreadth = 0;
+            int count = 0;
 
-
+            // Retrieve all beams from Revit
             FilteredElementCollector collector = new FilteredElementCollector(doc);
+            var revitBeams = collector.OfCategory(BuiltInCategory.OST_StructuralFraming)
+                                       .WhereElementIsNotElementType()
+                                       .ToList();
 
-            var beams = collector.OfCategory(BuiltInCategory.OST_StructuralFraming)
-                                 .WhereElementIsNotElementType()
-                                 .ToElements()
-                                 .ToList();
-            
-            StringBuilder notFoundBeam = new StringBuilder("Beams were not found in Revit:\n");
+            // Initialize warning builders
+            StringBuilder notFoundBeam = new StringBuilder("Beams found in ETABS but missing in Revit:\n");
             StringBuilder wrongBeams = new StringBuilder("Beams with wrong dimensions:\n");
-            
-            foreach ( var beam in beamsData )
+            StringBuilder totalWarnings = new StringBuilder();
+
+            // Iterate through each ETABS beam
+            foreach (var beam in beamsData)
             {
-                var revitBeam = beams.Where(b => b.Id.ToString() == beam.UniqueName).FirstOrDefault();
+                // Find Revit beams with matching ID
+                var selectedRevitBeams = revitBeams.Where(b => b.Id.ToString() == beam.UniqueName).ToList();
 
-                Parameter depthParam = null;
-                Parameter breadthParam = null;
-
-                if ( revitBeam != null)
+                if (!selectedRevitBeams.Any())
                 {
-                    ElementId typeId = revitBeam.GetTypeId();
-                    ElementType beamType = doc.GetElement(typeId) as ElementType;
-
-                     depthParam = beamType.LookupParameter("D");
-                     breadthParam = beamType.LookupParameter("B");
-                }
-                else
-                {
-                    notFoundBeam.Append(beam.UniqueName);
-                    notFoundBeam.Append(";");
+                    // Beam missing in Revit
+                    notFoundBeam.AppendLine($"{beam.UniqueName}");
+                    count++;
                     continue;
                 }
 
-                if (depthParam == null || breadthParam == null)
+                // Check dimensions for each selected Revit beam
+                bool isDimensionMismatch = false;
+
+                foreach (var rBeam in selectedRevitBeams)
                 {
-                    wrongBeams.Append(beam.UniqueName);
-                    wrongBeams.Append(";");
-                    continue;
-                }
-                else
-                {
-                    revitDepth = MathFun.convertUnitsToMiliMeters(depthParam.AsDouble());
-                    revitBreadth = MathFun.convertUnitsToMiliMeters(breadthParam.AsDouble());
-                }
-                if (beam.Depth != revitDepth || beam.Breadth != revitBreadth)
-                {
-                    wrongBeams.Append(beam.UniqueName);
-                    wrongBeams.Append(";");
-                    
+                    ElementType beamType = doc.GetElement(rBeam.GetTypeId()) as ElementType;
+
+                    // Retrieve depth (D) and breadth (B) parameters
+                    Parameter depthParam = beamType?.LookupParameter("D");
+                    Parameter breadthParam = beamType?.LookupParameter("B");
+
+                    if (depthParam == null || breadthParam == null)
+                    {
+                        isDimensionMismatch = true;
+                        break;
+                    }
+
+                    // Convert dimensions to millimeters
+                    double revitDepth = MathFun.convertUnitsToMiliMeters(depthParam.AsDouble());
+                    double revitBreadth = MathFun.convertUnitsToMiliMeters(breadthParam.AsDouble());
+
+                    // Compare with ETABS beam dimensions
+                    if (beam.Depth != revitDepth || beam.Breadth != revitBreadth)
+                    {
+                        isDimensionMismatch = true;
+                        break;
+                    }
                 }
 
+                if (isDimensionMismatch)
+                {
+                    wrongBeams.AppendLine($"{beam.UniqueName}");
+                    count++;
+                }
             }
 
-            // Return both StringBuilders as a tuple
-            return (notFoundBeam, wrongBeams);
+            // Consolidate warnings
+            totalWarnings.AppendLine(notFoundBeam.ToString());
+            totalWarnings.AppendLine(wrongBeams.ToString());
+
+            // Return warnings and count
+            return (totalWarnings, count);
         }
-    
+
+
     }
 }

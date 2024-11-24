@@ -163,7 +163,7 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Label Content="ProMark v1.0" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="16"
+                <Label Content="ProMark v1.1" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="16"
                        FontWeight="Bold" FontFamily="Arial" Foreground="Black" Grid.Column="0"/>
 
                 <Button Content="X" Width="30" Height="30" Click="CloseButton_Click" Background="Transparent"
@@ -241,11 +241,10 @@
                         Click="Clear_btn_Click"  />
                 </StackPanel>
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center"
-                            Grid.Column="2">
-                    <TextBox x:Name="missingBeam_TxtBox" Height="45" Margin="0,0,10,5"
-                             TextWrapping="Wrap" IsReadOnly="True"/>
-                    <TextBox x:Name="wrongBeam_TxtBox" Height="45" Margin="0,5,10,0"
-                        TextWrapping="Wrap" IsReadOnly="True"/>
+                            Grid.Column="2"/>
+                <StackPanel Grid.Column="2">
+                    <Label x:Name="warningcount_label" Content="Warnings found !" HorizontalAlignment="Center" Foreground="Red" FontSize="20" Visibility="Hidden"/>
+                    <Button x:Name="warning_btn" Content="Show Warnings" Visibility="Hidden" Click="warning_btn_Click" />
                 </StackPanel>
 
             </Grid>
@@ -262,10 +261,10 @@
                 <Button x:Name="Import_btn" Content="Import to Revit" Width="170" HorizontalAlignment="Right" Margin="0,0,20,20" Grid.Column="1"
                      Click="Import_btn_Click"  VerticalAlignment="Bottom"/>
 
-                <Button x:Name="rebar_only_btn" Content="Update Rebar only" HorizontalAlignment="Left" IsEnabled="False" Width="170" VerticalAlignment="Bottom"
+                <Button x:Name="rebar_only_btn" Content="Update Rebar" HorizontalAlignment="Left" IsEnabled="False" Width="170" VerticalAlignment="Bottom"
                         Grid.Column="0" Margin="200,15,0,20" Click="Update_rebar_only_Click"/>
 
-                <Button x:Name="Update_btn" Content="Merge &amp; Update" Width="170" HorizontalAlignment="Left" Margin="20,15,0,20"
+                <Button x:Name="Update_btn" Content="Merge" Width="170" HorizontalAlignment="Left" Margin="20,15,0,20"
                      Click="Update_btn_Click" IsEnabled="False" Grid.Column="0" VerticalAlignment="Bottom"/>
 
             </Grid>

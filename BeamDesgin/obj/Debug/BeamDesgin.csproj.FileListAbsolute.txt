@@ -28,3 +28,5 @@ E:\Development\BeamDesgin\BeamDesgin\obj\Debug\BeamDesgin.pdb
 E:\Development\BeamDesgin\BeamDesgin\obj\Debug\GeneratedInternalTypeHelper.g.cs
 E:\Development\BeamDesgin\BeamDesgin\obj\Debug\BeamDesgin.Properties.Resources.resources
 E:\Development\BeamDesgin\BeamDesgin\obj\Debug\BeamDesgin.csproj.GenerateResource.cache
+E:\Development\BeamDesgin\BeamDesgin\obj\Debug\UI\WarningWindow.g.cs
+E:\Development\BeamDesgin\BeamDesgin\obj\Debug\UI\WarningWindow.baml

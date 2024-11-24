@@ -1,6 +1,7 @@
 ﻿using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
+using BeamDesgin.Revit;
 using BeamDesgin.UI;
 using System;
 using System.Collections.Generic;
@@ -13,16 +14,22 @@ namespace BeamDesgin.Entry
     [Transaction(TransactionMode.Manual)]
     public class ExtCmd : IExternalCommand
     {
+        //public static ExtEventHan ExtEventHan {  get; set; }
+
+        //public ExternalEvent ExtEvent { get; set; }
         
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
 
             UIDocument uidoc = commandData.Application.ActiveUIDocument;
-
             Document doc = uidoc.Document;
 
+            //ExtEventHan = new ExtEventHan();
+            //ExtEvent = ExternalEvent.Create(ExtEventHan);
+            
             MainWindow mainWindow = new MainWindow(doc);
             mainWindow.ShowDialog();
+            //mainWindow.Show();
 
             return Result.Succeeded;
         }

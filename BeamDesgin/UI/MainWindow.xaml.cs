@@ -35,9 +35,11 @@ namespace BeamDesgin.UI
         Document doc;
         private ObservableCollection<Beam> _BeamsData;
         private ObservableCollection<Beam> _UserList;
+        
 
         
         private List<int> selectedRebars;
+        private int numOfWarnings;
         public ObservableCollection<Beam> BeamsData
         {
             get { return _BeamsData; }
@@ -112,7 +114,8 @@ namespace BeamDesgin.UI
                 MessageBox.Show("Please select a valid file path.", "Invalid Path", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-
+            string ssds = Path_TxtBox.Text;
+            int sds = 0;
             List<Beam> beamsData = ManageExcel.GetBeamsData(Path_TxtBox.Text);
             selectedRebars = GetSelectedRebarSizes();
             string prequal = "B";
@@ -129,32 +132,41 @@ namespace BeamDesgin.UI
 
             }
 
-            // Check the Revit model once to avoid redundant calls
-            var revitCheck = RevitUtils.CheckRevitModel(BeamsData, doc);
-            StringBuilder missingBeams = revitCheck.notFoundBeam;
-            missingBeam_TxtBox.Text = missingBeams.ToString();
-
-            StringBuilder wrongBeams = revitCheck.wrongBeams;
-            wrongBeam_TxtBox.Text = wrongBeams.ToString();
-
-            var uniqueList = ManageData.UniqueSortedData(newList);
-
-            foreach (Beam beam in uniqueList)
+            //Check the Revit model once to avoid redundant calls
+            numOfWarnings = RevitUtils.CheckRevitModel(BeamsData, doc).count;
+            if(numOfWarnings > 0)
             {
-                int count = BeamsData.Where(b => b.Mark.Number == beam.Mark.Number).Count();
-                beam.Count = count;
-                UserList.Add(beam); // Add the new data to the user
-
+                warningcount_label.Content = $"Warning Found : {numOfWarnings}";
+                warningcount_label.Visibility =System.Windows.Visibility.Visible;
+                warning_btn.Visibility =System.Windows.Visibility.Visible;
             }
+
+            foreach (Beam beam in BeamsData)
+            {
+                Beam incrementedBeam = FindNextStrongerBeam(beam);
+
+                if (incrementedBeam != null)
+                {
+                    UpdateBeamsMark(beam.Mark.Number, incrementedBeam);
+                }
+            }
+
+            UpdateDataGrid(prequal); // Update grid once after processing all beams
 
             // Disable the design button after processing
             desgin_btn.IsEnabled = false;
 
         }
+        private void warning_btn_Click(object sender, RoutedEventArgs e)
+        {
+            WarningWindow warningWindow = new WarningWindow(BeamsData,doc);
+
+            warningWindow.ShowDialog();
+        }
 
         private void Update_btn_Click(object sender, RoutedEventArgs e)
         {
-            var aselect = BeamDataGrid.Items.OfType<Beam>().Where(b =>b.SelectedRebarSize1 != 0).FirstOrDefault();
+            //var aselect = BeamDataGrid.Items.OfType<Beam>().Where(b =>b.SelectedRebarSize1 != 0).FirstOrDefault();
             var selectedBeams = BeamDataGrid.Items
                                 .OfType<Beam>() // Filter out non-Beam items
                                 .Where(b => b.IsSelected)
@@ -164,20 +176,17 @@ namespace BeamDesgin.UI
             {
                 prequal = prequal_txtbox.Text;
             }
-
-            if (selectedBeams.Any())
+            bool areAllConcDimEqual = selectedBeams.All(b => b.Breadth == selectedBeams.First().Breadth) &&
+                selectedBeams.All(b => b.Depth == selectedBeams.First().Depth);
+            if (selectedBeams.Any() && areAllConcDimEqual == true )
             {
-                foreach (Beam selectedBeam in selectedBeams)
-                {
-                    Beam incrementedBeam = FindNextStrongerBeam(selectedBeam);
-
-                    if (incrementedBeam != null)
-                    {
-                        UpdateBeamsMark(selectedBeam.Mark.Number, incrementedBeam); 
-                    }
-                }
+                MergeBeams(selectedBeams);
                 
                 UpdateDataGrid(prequal); // Update grid once after processing all beams
+            }
+            else if(selectedBeams.Any() && areAllConcDimEqual == false)
+            {
+                MessageBox.Show("Selected beams are not the same concrete dimensions","Process Failed",MessageBoxButton.OK,MessageBoxImage.Warning);
             }
             else
             {
@@ -187,7 +196,7 @@ namespace BeamDesgin.UI
 
         private void Update_rebar_only_Click(object sender, RoutedEventArgs e)
         {
-            var aselect = BeamDataGrid.Items.OfType<Beam>().Where(b => b.SelectedRebarSize1 != 0).FirstOrDefault();
+            //var aselect = BeamDataGrid.Items.OfType<Beam>().Where(b => b.SelectedRebarSize1 != 0).FirstOrDefault();
             var selectedBeams = BeamDataGrid.Items
                                 .OfType<Beam>() // Filter out non-Beam items
                                 .Where(b => b.IsSelected)
@@ -259,6 +268,8 @@ namespace BeamDesgin.UI
         private void Clear_btn_Click(object sender, RoutedEventArgs e)
         {
             desgin_btn.IsEnabled= true;
+            warning_btn.Visibility = System.Windows.Visibility.Hidden;
+            warningcount_label.Visibility = System.Windows.Visibility.Hidden;
             UserList.Clear();
             BeamsData.Clear();
         }
@@ -266,8 +277,20 @@ namespace BeamDesgin.UI
         private void Import_btn_Click(object sender, RoutedEventArgs e)
         {
 
+            if (numOfWarnings > 0)
+            {
+               MessageBoxResult result = MessageBox.Show($"There are {numOfWarnings} warnings left, proceed to revit?", "Warning",MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.Yes)
+                {
+                    RevitUtils.SendDataToRevit(BeamsData, doc);
+                }
+                
+            }
+            else
+            {
+                RevitUtils.SendDataToRevit(BeamsData, doc);
+            }
             
-            RevitUtils.SendDataToRevit(BeamsData, doc);
 
             
         }
@@ -387,18 +410,64 @@ namespace BeamDesgin.UI
 
         private Beam FindNextStrongerBeam(Beam selectedBeam)
         {
-            Beam newbeam = UserList.Where(b => b.Depth == selectedBeam.Depth &&
+            Beam newbeam = BeamsData.Where(b => b.Depth == selectedBeam.Depth &&
                                             b.Breadth == selectedBeam.Breadth &&
                                             b.Mark.Number > selectedBeam.Mark.Number &&
                                             //b.ChosenAsMidBot.Diameter == selectedBeam.ChosenAsMidBot.Diameter &&
                                             ManageRft.GetAreaRFT(b.ChosenAsMidBot) >= ManageRft.GetAreaRFT(selectedBeam.ChosenAsMidBot) &&
-                                            ManageRft.GetAreaRFT(b.ChosenCornerAsTop) >= ManageRft.GetAreaRFT(selectedBeam.ChosenCornerAsTop) &&
+                                            ManageRft.GetAreaRFT(b.ChosenCornerAsTop) == ManageRft.GetAreaRFT(selectedBeam.ChosenCornerAsTop) &&
                                             ManageRft.GetAreaRFT(b.ChosenShearAsCorner) == ManageRft.GetAreaRFT(selectedBeam.ChosenShearAsCorner))
                                       .FirstOrDefault();
 
 
             return newbeam;
                 
+        }
+        private void MergeBeams(List<Beam> beamList)
+        {
+            //get highest values
+            //bot mid rft
+            Beam beamWithMaxAreaBot = beamList.OrderByDescending(b => ManageRft.GetAreaRFT(b.ChosenAsMidBot))
+                                          .FirstOrDefault();
+            //top corner
+            Beam beamWithMaxAreaTop = beamList.OrderByDescending(b => ManageRft.GetAreaRFT(b.ChosenCornerAsTop))
+                                          .FirstOrDefault();
+
+            //shear rft
+            Beam beamWithMaxShearRft = beamList.OrderByDescending(b => ManageRft.GetAreaRFT(b.ChosenShearAsCorner))
+                                          .FirstOrDefault();
+
+
+
+            foreach (Beam beam in BeamsData)
+            {
+                if (beamList.Any(b => b.Mark.Number == beam.Mark.Number))
+                {
+                    //change bot rft
+                    beam.ChosenAsMidBot.Diameter = beamWithMaxAreaBot.ChosenAsMidBot.Diameter;
+                    beam.ChosenAsMidBot.NumberOfBars = beamWithMaxAreaBot.ChosenAsMidBot.NumberOfBars;
+
+                    beam.ChosenCornerAsBot.Diameter = beamWithMaxAreaBot.ChosenCornerAsBot.Diameter;
+                    beam.ChosenCornerAsBot.NumberOfBars = beamWithMaxAreaBot.ChosenCornerAsBot.NumberOfBars;
+
+                    //change top rft
+                    beam.ChosenMidAsTop.Diameter = beamWithMaxAreaTop.ChosenMidAsTop.Diameter;
+                    beam.ChosenMidAsTop.NumberOfBars = beamWithMaxAreaTop.ChosenMidAsTop.NumberOfBars;
+
+                    beam.ChosenCornerAsTop.Diameter = beamWithMaxAreaTop.ChosenCornerAsTop.Diameter;
+                    beam.ChosenCornerAsTop.NumberOfBars = beamWithMaxAreaTop.ChosenCornerAsTop.NumberOfBars;
+
+                    //change shear rft
+                    beam.ChosenShearAsMid.Diameter = beamWithMaxShearRft.ChosenShearAsMid.Diameter;
+                    beam.ChosenShearAsMid.NumberOfBars = beamWithMaxShearRft.ChosenShearAsMid.NumberOfBars;
+                    beam.ChosenShearAsMid.spacing = beamWithMaxShearRft.ChosenShearAsMid.spacing;
+
+                    beam.ChosenShearAsCorner.NumberOfBars = beamWithMaxShearRft.ChosenShearAsCorner.NumberOfBars;
+                    beam.ChosenShearAsCorner.Diameter = beamWithMaxShearRft.ChosenShearAsCorner.Diameter;
+                    beam.ChosenShearAsCorner.spacing = beamWithMaxShearRft.ChosenShearAsCorner.spacing;
+                }
+            }
+            
         }
 
         private void UpdateBeamsMark(int selectedMarkNumber, Beam incrementedBeam)
@@ -410,7 +479,7 @@ namespace BeamDesgin.UI
             {
                 if (beam.Mark.Number == selectedMarkNumber)
                 {
-                    //MessageBox.Show($"before {beam.BeamMark}");
+                    /*MessageBox.Show($"before {beam.BeamMark}")*/;
                     beam.Mark = incrementedBeam.Mark;
                     beam.ChosenCornerAsBot = incrementedBeam.ChosenCornerAsBot;
                     beam.ChosenAsMidBot = incrementedBeam.ChosenAsMidBot;
@@ -424,8 +493,6 @@ namespace BeamDesgin.UI
 
            
         }
-
-       
 
         
     }

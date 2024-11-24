@@ -101,11 +101,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Revit\ExtEventHan.cs" />
     <Compile Include="Revit\RevitUtils.cs" />
     <Compile Include="UI\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\RebarSizeToColorConverter.cs" />
+    <Compile Include="UI\WarningWindow.xaml.cs">
+      <DependentUpon>WarningWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utils\BeamMark.cs" />
     <Compile Include="Utils\MathFun.cs" />
   </ItemGroup>
@@ -115,6 +119,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="UI\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\WarningWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

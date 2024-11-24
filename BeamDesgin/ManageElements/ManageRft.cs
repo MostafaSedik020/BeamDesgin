@@ -70,6 +70,10 @@ namespace BeamDesgin.ManageElements
 
                 double numberOfBarsDec = As / areaBars[i];
                 double numberOfBars = Math.Ceiling(numberOfBarsDec);
+                if(numberOfBars == 0)
+                {
+                    numberOfBars = 2;
+                }
 
                 //get max number of bars in a beam
                 double maxNumberEqu = ((breadth - 40 - 20) / (bars[i] + 30));
@@ -117,6 +121,11 @@ namespace BeamDesgin.ManageElements
 
             //get the  number of branches in a beam
             double numberOfBranches = MathFun.RoundDownToEven(breadth / 100);
+
+            if (numberOfBranches == 0)
+            {
+                numberOfBranches = 2;
+            }
 
             for (int i = 0; i < areaBars.Count; i++)
             {
