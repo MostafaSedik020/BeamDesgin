@@ -3,40 +3,28 @@
   "WorkspaceRootPath": "E:\\Development\\BeamDesgin\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|e:\\development\\beamdesgin\\beamdesgin\\revit\\revitutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\revit\\revitutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|e:\\development\\beamdesgin\\beamdesgin\\etabs\\manageetabs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\etabs\\manageetabs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|e:\\development\\beamdesgin\\beamdesgin\\ui\\warningwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\ui\\warningwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|e:\\development\\beamdesgin\\beamdesgin\\ui\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\ui\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|e:\\development\\beamdesgin\\beamdesgin\\ui\\warningwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\ui\\warningwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|e:\\development\\beamdesgin\\beamdesgin\\utils\\mathfun.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\utils\\mathfun.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|E:\\Development\\BeamDesgin\\beamdesgin\\ui\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\ui\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|e:\\development\\beamdesgin\\beamdesgin\\ui\\mainwindow.xaml||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\ui\\mainwindow.xaml||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|e:\\development\\beamdesgin\\beamdesgin\\elements\\beam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\elements\\beam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|e:\\development\\beamdesgin\\beamdesgin\\ui\\warningwindow.xaml||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\ui\\warningwindow.xaml||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|E:\\Development\\BeamDesgin\\beamdesgin\\ui\\choosegroupwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\ui\\choosegroupwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|e:\\development\\beamdesgin\\beamdesgin\\entry\\extcmd.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\entry\\extcmd.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|E:\\Development\\BeamDesgin\\beamdesgin\\manageelements\\managerft.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\manageelements\\managerft.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|E:\\Development\\BeamDesgin\\beamdesgin\\ui\\choosegroupwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{61133767-4A74-47EC-8F35-B41630F44C98}|BeamDesgin\\BeamDesgin.csproj|solutionrelative:beamdesgin\\ui\\choosegroupwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 352,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -54,180 +42,78 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "RevitUtils.cs",
-              "DocumentMoniker": "E:\\Development\\BeamDesgin\\BeamDesgin\\Revit\\RevitUtils.cs",
-              "RelativeDocumentMoniker": "BeamDesgin\\Revit\\RevitUtils.cs",
-              "ToolTip": "E:\\Development\\BeamDesgin\\BeamDesgin\\Revit\\RevitUtils.cs",
-              "RelativeToolTip": "BeamDesgin\\Revit\\RevitUtils.cs",
-              "ViewState": "AQIAAEAAAAAAAAAAAAAcwHgAAAAoAAAA",
+              "DocumentIndex": 1,
+              "Title": "MathFun.cs",
+              "DocumentMoniker": "E:\\Development\\BeamDesgin\\BeamDesgin\\Utils\\MathFun.cs",
+              "RelativeDocumentMoniker": "BeamDesgin\\Utils\\MathFun.cs",
+              "ToolTip": "E:\\Development\\BeamDesgin\\BeamDesgin\\Utils\\MathFun.cs",
+              "RelativeToolTip": "BeamDesgin\\Utils\\MathFun.cs",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAwwDIAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-23T23:33:00.926Z",
+              "WhenOpened": "2024-12-09T04:05:13.55Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "MainWindow.xaml",
-              "DocumentMoniker": "E:\\Development\\BeamDesgin\\BeamDesgin\\UI\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "BeamDesgin\\UI\\MainWindow.xaml",
-              "ToolTip": "E:\\Development\\BeamDesgin\\BeamDesgin\\UI\\MainWindow.xaml",
-              "RelativeToolTip": "BeamDesgin\\UI\\MainWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-11-23T14:47:55.905Z",
+              "DocumentIndex": 0,
+              "Title": "ManageEtabs.cs",
+              "DocumentMoniker": "E:\\Development\\BeamDesgin\\BeamDesgin\\Etabs\\ManageEtabs.cs",
+              "RelativeDocumentMoniker": "BeamDesgin\\Etabs\\ManageEtabs.cs",
+              "ToolTip": "E:\\Development\\BeamDesgin\\BeamDesgin\\Etabs\\ManageEtabs.cs",
+              "RelativeToolTip": "BeamDesgin\\Etabs\\ManageEtabs.cs",
+              "ViewState": "AQIAAL0AAAAAAAAAAAAnwMwAAAAxAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-09T04:02:16.128Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "WarningWindow.xaml",
-              "DocumentMoniker": "E:\\Development\\BeamDesgin\\BeamDesgin\\UI\\WarningWindow.xaml",
-              "RelativeDocumentMoniker": "BeamDesgin\\UI\\WarningWindow.xaml",
-              "ToolTip": "E:\\Development\\BeamDesgin\\BeamDesgin\\UI\\WarningWindow.xaml",
-              "RelativeToolTip": "BeamDesgin\\UI\\WarningWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-11-23T14:47:35.605Z",
+              "Title": "Beam.cs",
+              "DocumentMoniker": "E:\\Development\\BeamDesgin\\BeamDesgin\\Elements\\Beam.cs",
+              "RelativeDocumentMoniker": "BeamDesgin\\Elements\\Beam.cs",
+              "ToolTip": "E:\\Development\\BeamDesgin\\BeamDesgin\\Elements\\Beam.cs",
+              "RelativeToolTip": "BeamDesgin\\Elements\\Beam.cs",
+              "ViewState": "AQIAAPEAAAAAAAAAAAAYwP8AAAAxAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-07T07:00:01.422Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "E:\\Development\\BeamDesgin\\BeamDesgin\\UI\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "BeamDesgin\\UI\\MainWindow.xaml.cs",
               "ToolTip": "E:\\Development\\BeamDesgin\\BeamDesgin\\UI\\MainWindow.xaml.cs",
               "RelativeToolTip": "BeamDesgin\\UI\\MainWindow.xaml.cs",
-              "ViewState": "AQIAAPEAAAAAAAAAAAAAABYBAAAAAAAA",
+              "ViewState": "AQIAAH0AAAAAAAAAAAAvwJAAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-27T22:11:16.99Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "ManageRft.cs",
-              "DocumentMoniker": "E:\\Development\\BeamDesgin\\BeamDesgin\\ManageElements\\ManageRft.cs",
-              "RelativeDocumentMoniker": "BeamDesgin\\ManageElements\\ManageRft.cs",
-              "ToolTip": "E:\\Development\\BeamDesgin\\BeamDesgin\\ManageElements\\ManageRft.cs",
-              "RelativeToolTip": "BeamDesgin\\ManageElements\\ManageRft.cs",
-              "ViewState": "AQIAAGgAAAAAAAAAAAAiwH0AAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-22T21:51:42.545Z"
+              "DocumentIndex": 5,
+              "Title": "ChooseGroupWindow.xaml",
+              "DocumentMoniker": "E:\\Development\\BeamDesgin\\BeamDesgin\\UI\\ChooseGroupWindow.xaml",
+              "RelativeDocumentMoniker": "BeamDesgin\\UI\\ChooseGroupWindow.xaml",
+              "ToolTip": "E:\\Development\\BeamDesgin\\BeamDesgin\\UI\\ChooseGroupWindow.xaml",
+              "RelativeToolTip": "BeamDesgin\\UI\\ChooseGroupWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-11-28T18:21:41.938Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ExtCmd.cs",
-              "DocumentMoniker": "E:\\Development\\BeamDesgin\\BeamDesgin\\Entry\\ExtCmd.cs",
-              "RelativeDocumentMoniker": "BeamDesgin\\Entry\\ExtCmd.cs",
-              "ToolTip": "E:\\Development\\BeamDesgin\\BeamDesgin\\Entry\\ExtCmd.cs",
-              "RelativeToolTip": "BeamDesgin\\Entry\\ExtCmd.cs",
-              "ViewState": "AQIAAAEAAAAAAAAAAAAmwBgAAAAqAAAA",
+              "DocumentIndex": 4,
+              "Title": "ChooseGroupWindow.xaml.cs",
+              "DocumentMoniker": "E:\\Development\\BeamDesgin\\BeamDesgin\\UI\\ChooseGroupWindow.xaml.cs",
+              "RelativeDocumentMoniker": "BeamDesgin\\UI\\ChooseGroupWindow.xaml.cs",
+              "ToolTip": "E:\\Development\\BeamDesgin\\BeamDesgin\\UI\\ChooseGroupWindow.xaml.cs",
+              "RelativeToolTip": "BeamDesgin\\UI\\ChooseGroupWindow.xaml.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAMwCQAAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-27T21:50:14.233Z",
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Orientation": 0,
-      "VerticalTabListWidth": 256,
-      "FloatingWindowState": {
-        "Id": "f4d0afad-a9e2-4b12-a780-a7a8c75216e6",
-        "Display": 1,
-        "X": 87,
-        "Y": 250,
-        "Width": 800,
-        "Height": 600,
-        "WindowState": 0
-      },
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "WarningWindow.xaml",
-              "DocumentMoniker": "E:\\Development\\BeamDesgin\\BeamDesgin\\UI\\WarningWindow.xaml",
-              "RelativeDocumentMoniker": "BeamDesgin\\UI\\WarningWindow.xaml",
-              "ToolTip": "E:\\Development\\BeamDesgin\\BeamDesgin\\UI\\WarningWindow.xaml",
-              "RelativeToolTip": "BeamDesgin\\UI\\WarningWindow.xaml",
-              "ViewState": "AQIAABEAAAAAAAAAAAAAACcAAABLAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-11-23T16:52:03.292Z",
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Orientation": 0,
-      "VerticalTabListWidth": 256,
-      "FloatingWindowState": {
-        "Id": "2285fb6c-94e8-4aeb-9cf3-3e95e03f3b64",
-        "Display": 1,
-        "X": -9,
-        "Y": 192,
-        "Width": 1194,
-        "Height": 734,
-        "WindowState": 0
-      },
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "WarningWindow.xaml.cs",
-              "DocumentMoniker": "E:\\Development\\BeamDesgin\\BeamDesgin\\UI\\WarningWindow.xaml.cs",
-              "RelativeDocumentMoniker": "BeamDesgin\\UI\\WarningWindow.xaml.cs",
-              "ToolTip": "E:\\Development\\BeamDesgin\\BeamDesgin\\UI\\WarningWindow.xaml.cs",
-              "RelativeToolTip": "BeamDesgin\\UI\\WarningWindow.xaml.cs",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAowBoAAAA9AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-23T22:18:23.914Z",
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Orientation": 0,
-      "VerticalTabListWidth": 256,
-      "FloatingWindowState": {
-        "Id": "aa8ea210-cd01-4520-bd97-283a17d8e4b1",
-        "Display": 1,
-        "X": 193,
-        "Y": 147,
-        "Width": 800,
-        "Height": 600,
-        "WindowState": 0
-      },
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "MainWindow.xaml",
-              "DocumentMoniker": "E:\\Development\\BeamDesgin\\BeamDesgin\\UI\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "BeamDesgin\\UI\\MainWindow.xaml",
-              "ToolTip": "E:\\Development\\BeamDesgin\\BeamDesgin\\UI\\MainWindow.xaml",
-              "RelativeToolTip": "BeamDesgin\\UI\\MainWindow.xaml",
-              "ViewState": "AQIAAAQBAAAAAAAAAAAhwBQBAAAVAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-11-24T01:32:38.138Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-28T18:26:41.51Z"
             }
           ]
         }

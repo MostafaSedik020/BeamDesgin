@@ -1,0 +1,23 @@
+﻿<Window x:Class="BeamDesgin.UI.ChooseGroupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Pop-Up" Height="200" Width="300">
+    <Grid>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">
+            <!-- ComboBox for options -->
+            <ComboBox Name="OptionsComboBox" Width="150" ItemsSource="{Binding}" />
+
+            <!-- RadioButtons for selecting ACI or ECP -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+                <RadioButton Name="AciRadioButton" Content="ACI" GroupName="DesignCode" Margin="5" />
+                <RadioButton Name="EcpRadioButton" Content="ECP" GroupName="DesignCode" Margin="5" />
+            </StackPanel>
+
+            <!-- OK and Cancel Buttons -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+                <Button Content="OK" Click="OKButton_Click" Width="100" Margin="5,0"/>
+                <Button Content="Cancel" Click="CancelButton_Click" Width="100" Margin="5,0"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

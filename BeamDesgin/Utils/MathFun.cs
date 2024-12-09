@@ -26,5 +26,28 @@ namespace BeamDesgin.Utils
             //double convertedNum = UnitUtils.ConvertFromInternalUnits((double)value, DisplayUnitType.DUT_METERS);
             return convertedNum;
         }
+        public static double GetSlopeAngle(double point1_x, double point1_y,double point2_x, double point2_y)
+        {
+            // Calculate the difference in coordinates
+            double deltaX = point2_x - point1_x;
+            double deltaY = point2_y - point1_y;
+
+            // Use Math.Atan2 to calculate the angle in radians
+            double slopeAngle = Math.Atan2(Math.Abs(deltaY), Math.Abs(deltaX)) * (180 / Math.PI);
+
+            return slopeAngle; // Guaranteed to be between 0 and 90
+        }
+        public static double NormalizeAngleTo90(double angle)
+        {
+            // Reduce the angle modulo 360 to get its equivalent within [0, 360]
+            double modAngle = angle % 360;
+            if (modAngle < 0)
+            {
+                modAngle += 360; // Ensure positive angles
+            }
+
+            // Map the angle to [0, 90] using symmetry
+            return modAngle % 90;
+        }
     }
 }

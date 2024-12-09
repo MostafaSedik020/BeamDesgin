@@ -255,7 +255,17 @@ namespace BeamDesgin.Elements
         public double BotMiddleAs { get; set; }
         public double CornerShearAs { get; set; }
         public int Count { get; set; }
-        
+
+        //properties for etabs only
+        public string EtabsStory { get; set; }
+        public double point1X { get; set; }
+        public double point1Y { get; set; }
+        public double point1Z { get; set; }
+        public double point2X { get; set; }
+        public double point2Y { get; set; }
+        public double point2Z { get; set; }
+        public double Angle { get; set; }
+
 
         // Data exported to Revit
         // paramerter names a all uppercase because it mimic

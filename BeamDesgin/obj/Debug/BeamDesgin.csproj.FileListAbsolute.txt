@@ -30,3 +30,6 @@ E:\Development\BeamDesgin\BeamDesgin\obj\Debug\BeamDesgin.Properties.Resources.r
 E:\Development\BeamDesgin\BeamDesgin\obj\Debug\BeamDesgin.csproj.GenerateResource.cache
 E:\Development\BeamDesgin\BeamDesgin\obj\Debug\UI\WarningWindow.g.cs
 E:\Development\BeamDesgin\BeamDesgin\obj\Debug\UI\WarningWindow.baml
+E:\Development\BeamDesgin\BeamDesgin\bin\Debug\ETABSv1.dll
+E:\Development\BeamDesgin\BeamDesgin\obj\Debug\UI\ChooseGroupWindow.baml
+E:\Development\BeamDesgin\BeamDesgin\obj\Debug\UI\ChooseGroupWindow.g.cs

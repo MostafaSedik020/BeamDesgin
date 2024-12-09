@@ -15,6 +15,9 @@ using System.Diagnostics;
 using BeamDesgin.ManageElements;
 using BeamDesgin.Revit;
 using System.ComponentModel;
+using BeamDesgin.Etabs;
+using System.Windows.Controls.Primitives;
+
 
 namespace BeamDesgin.UI
 {
@@ -114,10 +117,37 @@ namespace BeamDesgin.UI
                 MessageBox.Show("Please select a valid file path.", "Invalid Path", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            string ssds = Path_TxtBox.Text;
-            int sds = 0;
+            
+            //old version to get data using excel
             List<Beam> beamsData = ManageExcel.GetBeamsData(Path_TxtBox.Text);
+
+            //new version using etabs
+            //find etabs model
+            ManageEtabs.LinkEtabsModel();
+
+            //get all groups in etabs
+            string[] etabsGroupNames = ManageEtabs.GetGroupNames();
+            string selectedGroup = "All";
+            string selectedDesignCode = "ACI";
+
+            ChooseGroupWindow chooseGroupWindow = new ChooseGroupWindow(etabsGroupNames);
+            if (chooseGroupWindow.ShowDialog() == true)
+            {
+                selectedGroup = chooseGroupWindow.SelectedOption;
+                selectedDesignCode = chooseGroupWindow.SelectedDesignCode;
+            }
+            else
+            {
+                return;
+            }
+
+            //get data from etabs
+            List<Beam> beamsData2 = ManageEtabs.GetDataFromEtabs(selectedGroup,selectedDesignCode);
+
+            //get the selected rebars from the user
             selectedRebars = GetSelectedRebarSizes();
+
+
             string prequal = "B";
             if (!string.IsNullOrWhiteSpace(prequal_txtbox.Text))
             {
