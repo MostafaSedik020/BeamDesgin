@@ -262,12 +262,12 @@ namespace BeamDesgin.Etabs
 
                     if(selectedColumn1 != null)
                     {
-                        double anglei = Math.Abs(selectedColumn1.Angle - beamAngle);
+                        double anglei = Math.Abs(Math.Abs(selectedColumn1.Angle) - Math.Abs(beamAngle));
                         addi = GetOffsetvalue(selectedColumn1.Breadth, selectedColumn1.Depth, anglei);
                     }
                     if(selectedColumn2 != null)
                     {
-                        double anglej = Math.Abs(selectedColumn2.Angle - beamAngle);
+                        double anglej = Math.Abs(Math.Abs(selectedColumn2.Angle) - Math.Abs(beamAngle));
                         addj = GetOffsetvalue(selectedColumn2.Breadth, selectedColumn2.Depth, anglej);
                     }
                     ret = mySapModel.FrameObj.SetEndLengthOffset(beam.UniqueName, false, 0, 0, 0);
@@ -345,13 +345,13 @@ namespace BeamDesgin.Etabs
             double hyp = Math.Sqrt(Math.Pow(columnDepth, 2) + Math.Pow(columnWidth, 2));
             double radianAngle = angle * (Math.PI / 180);
 
-            if (angle > 45)
+            if (angle < 45)
             {
                 offsetValue = ((4*hyp-2*columnDepth)/Math.PI)*radianAngle+columnDepth/2;
             }
             else
             {
-                offsetValue = ((2*columnWidth-4*hyp)/Math.PI)*radianAngle-((columnWidth-2*hyp)/2)+hyp;
+                offsetValue = ((2*columnWidth-4*hyp) / Math.PI) * radianAngle + columnDepth / 2;
             }
 
             return offsetValue;
