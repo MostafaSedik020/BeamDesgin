@@ -141,7 +141,7 @@ namespace BeamDesgin.Etabs
 
                 ret = mySapModel.PropFrame.GetTypeRebar(allFramePropName[i], ref myType);// check if the type beam or column
                 ret = mySapModel.PropFrame.GetRectangle(allFramePropName[i], ref FileName, ref MatProp, ref T3, ref T2, ref Color, ref Notes, ref GUID);// get the beam concrete dimensions
-                if (myType == 1) //used to filter beam elements only
+                if (myType == 1) //used to filter column elements only
                 {
 
                     Beam column = new Beam
@@ -233,6 +233,7 @@ namespace BeamDesgin.Etabs
                 int count = 0;
                 foreach (var beam in beamList)
                 {
+                    
                     selectedColumn1 = null;
                     selectedColumn2 = null;
                     //get the supports
@@ -246,33 +247,54 @@ namespace BeamDesgin.Etabs
                     foreach (var column in columnsAtSameStory)
                     {
                         ret = mySapModel.FrameObj.GetPoints(column.UniqueName, ref columnPoint1, ref columnPoint2);
-                        if((columnPoint1 == beamPoint1 || columnPoint1 == beamPoint2 ||
-                            columnPoint2 == beamPoint1 || columnPoint2 == beamPoint2) && count <2)
+                        //if((columnPoint1 == beamPoint1 || columnPoint1 == beamPoint2 ||
+                        //    columnPoint2 == beamPoint1 || columnPoint2 == beamPoint2) && count <2)
+                        //{
+                        //    if (count == 0)
+                        //        selectedColumn1 = column;
+                        //    else
+                        //        selectedColumn2 = column;
+                        //    count++;
+                        //}
+                        if(columnPoint1 == beamPoint1 || columnPoint2 == beamPoint1)
                         {
-                            if (count == 0)
-                                selectedColumn1 = column;
-                            else
-                                selectedColumn2 = column;
-                            count++;
+                            selectedColumn1 = column;
                         }
+                        if (columnPoint1 == beamPoint2 || columnPoint2 == beamPoint2) // NOT TESTED YET, NEED TO BE TESTED FIRST THING
+                        {
+                            selectedColumn2 = column;
+                        }
+                    }
+                    if (beam.UniqueName == "1915")
+                    {
+                        MessageBox.Show("hey");
                     }
                     double beamAngle = MathFun.GetSlopeAngle(beam.point1X,beam.point1Y, beam.point2X, beam.point2Y);
                     double addi = 0;
                     double addj = 0;
+                    double offsetValue1 = 0;
+                    double offsetValue2 = 0;
+
+                    if (selectedColumn1 == null && selectedColumn2 == null)
+                    {
+                        ret = mySapModel.FrameObj.SetEndLengthOffset(beam.UniqueName, true, 0, 0, 0);
+                        continue;
+                    }
 
                     if(selectedColumn1 != null)
                     {
                         double anglei = Math.Abs(Math.Abs(selectedColumn1.Angle) - Math.Abs(beamAngle));
                         addi = GetOffsetvalue(selectedColumn1.Breadth, selectedColumn1.Depth, anglei);
+                        offsetValue1 = (beam.Depth - 50 + addi) / 1000;
                     }
+                    
                     if(selectedColumn2 != null)
                     {
                         double anglej = Math.Abs(Math.Abs(selectedColumn2.Angle) - Math.Abs(beamAngle));
                         addj = GetOffsetvalue(selectedColumn2.Breadth, selectedColumn2.Depth, anglej);
+                        offsetValue2 = (beam.Depth - 50 + addj) / 1000;
                     }
-                    ret = mySapModel.FrameObj.SetEndLengthOffset(beam.UniqueName, false, 0, 0, 0);
-                    double offsetValue1 = (beam.Depth-50 + addi) / 1000;
-                    double offsetValue2 = (beam.Depth - 50 + addj) / 1000;
+
                     ret = mySapModel.FrameObj.SetEndLengthOffset(beam.UniqueName, false, offsetValue1, offsetValue2, 0);
                 }
             }
@@ -351,7 +373,7 @@ namespace BeamDesgin.Etabs
             }
             else
             {
-                offsetValue = ((2*columnWidth-4*hyp) / Math.PI) * radianAngle + columnDepth / 2;
+                offsetValue = ((2*columnWidth-4*hyp) / Math.PI) * radianAngle + 2*hyp - columnWidth / 2;
             }
 
             return offsetValue;
