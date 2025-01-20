@@ -112,14 +112,14 @@ namespace BeamDesgin.UI
 
         private void desgin_btn_click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(Path_TxtBox.Text))
-            {
-                MessageBox.Show("Please select a valid file path.", "Invalid Path", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
+            //if (string.IsNullOrWhiteSpace(Path_TxtBox.Text))
+            //{
+            //    MessageBox.Show("Please select a valid file path.", "Invalid Path", MessageBoxButton.OK, MessageBoxImage.Warning);
+            //    return;
+            //}
             
             //old version to get data using excel
-            List<Beam> beamsData = ManageExcel.GetBeamsData(Path_TxtBox.Text);
+            //List<Beam> beamsData = ManageExcel.GetBeamsData(Path_TxtBox.Text);
 
             //new version using etabs
             //find etabs model
@@ -142,7 +142,7 @@ namespace BeamDesgin.UI
             }
 
             //get data from etabs
-            List<Beam> beamsData2 = ManageEtabs.GetDataFromEtabs(selectedGroup,selectedDesignCode);
+            List<Beam> beamsData = ManageEtabs.GetDataFromEtabs(selectedGroup,selectedDesignCode);
 
             //get the selected rebars from the user
             selectedRebars = GetSelectedRebarSizes();

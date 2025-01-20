@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
@@ -143,7 +144,10 @@ namespace BeamDesgin.Etabs
                 ret = mySapModel.PropFrame.GetRectangle(allFramePropName[i], ref FileName, ref MatProp, ref T3, ref T2, ref Color, ref Notes, ref GUID);// get the beam concrete dimensions
                 if (myType == 1) //used to filter column elements only
                 {
-
+                    //if (ObjectName[i] == "115")
+                    //{
+                    //    MessageBox.Show("hey");
+                    //}
                     Beam column = new Beam
                     {
                         UniqueName = allFramesUniName[i],
@@ -157,7 +161,7 @@ namespace BeamDesgin.Etabs
                         point2X = point2X[i],
                         point2Y = point2Y[i],
                         point2Z = point2Z[i],
-                        Angle = angle[i],
+                        Angle = MathFun.NormalizeAngleTo90( angle[i]),
 
                     };
 
@@ -191,11 +195,12 @@ namespace BeamDesgin.Etabs
 
                 if (myType == 2) //used to filter beam elements only
                 {
-
                     
+
                     Beam beam = new Beam
                     {
                         UniqueName = ObjectName[i],
+
                         Name = PropName,
                         Breadth = T2*1000,
                         Depth = T3*1000,
@@ -228,10 +233,11 @@ namespace BeamDesgin.Etabs
             
             Beam selectedColumn1 = null;
             Beam selectedColumn2 = null;
-            if (desginCode == "ACI")
-            {
-                int count = 0;
-                foreach (var beam in beamList)
+
+            
+            
+             int count = 0;
+           foreach (var beam in beamList)
                 {
                     
                     selectedColumn1 = null;
@@ -247,34 +253,36 @@ namespace BeamDesgin.Etabs
                     foreach (var column in columnsAtSameStory)
                     {
                         ret = mySapModel.FrameObj.GetPoints(column.UniqueName, ref columnPoint1, ref columnPoint2);
-                        //if((columnPoint1 == beamPoint1 || columnPoint1 == beamPoint2 ||
-                        //    columnPoint2 == beamPoint1 || columnPoint2 == beamPoint2) && count <2)
-                        //{
-                        //    if (count == 0)
-                        //        selectedColumn1 = column;
-                        //    else
-                        //        selectedColumn2 = column;
-                        //    count++;
-                        //}
+                        
                         if(columnPoint1 == beamPoint1 || columnPoint2 == beamPoint1)
                         {
                             selectedColumn1 = column;
                         }
-                        if (columnPoint1 == beamPoint2 || columnPoint2 == beamPoint2) // NOT TESTED YET, NEED TO BE TESTED FIRST THING
+                        if (columnPoint1 == beamPoint2 || columnPoint2 == beamPoint2) 
                         {
                             selectedColumn2 = column;
                         }
                     }
-                    if (beam.UniqueName == "1915")
-                    {
-                        MessageBox.Show("hey");
-                    }
+                    //if (beam.UniqueName == "1868")
+                    //{
+                    //    MessageBox.Show("hey");
+                    //}
                     double beamAngle = MathFun.GetSlopeAngle(beam.point1X,beam.point1Y, beam.point2X, beam.point2Y);
+                    double beamLength = MathFun.GetLineLength(beam.point1X, beam.point1Y, beam.point2X, beam.point2Y);
                     double addi = 0;
                     double addj = 0;
                     double offsetValue1 = 0;
                     double offsetValue2 = 0;
+                double beamPart = beam.Depth / 2;
 
+                if (desginCode == "ACI")
+                {
+                     beamPart = beam.Depth;
+                }
+                
+
+
+                    //check of there is no columns support beam then its auto selected by ETABS and skip this beam
                     if (selectedColumn1 == null && selectedColumn2 == null)
                     {
                         ret = mySapModel.FrameObj.SetEndLengthOffset(beam.UniqueName, true, 0, 0, 0);
@@ -285,77 +293,164 @@ namespace BeamDesgin.Etabs
                     {
                         double anglei = Math.Abs(Math.Abs(selectedColumn1.Angle) - Math.Abs(beamAngle));
                         addi = GetOffsetvalue(selectedColumn1.Breadth, selectedColumn1.Depth, anglei);
-                        offsetValue1 = (beam.Depth - 50 + addi) / 1000;
+                        offsetValue1 = (beamPart - 50 + addi) / 1000;
+                        if (offsetValue1 > beamLength/2)
+                        {
+                            offsetValue1 = beamLength/2;
+                        }
                     }
                     
                     if(selectedColumn2 != null)
                     {
                         double anglej = Math.Abs(Math.Abs(selectedColumn2.Angle) - Math.Abs(beamAngle));
                         addj = GetOffsetvalue(selectedColumn2.Breadth, selectedColumn2.Depth, anglej);
-                        offsetValue2 = (beam.Depth - 50 + addj) / 1000;
+                        offsetValue2 = (beamPart - 50 + addj) / 1000;
+                        if (offsetValue2 > beamLength / 2)
+                        {
+                            offsetValue2 = beamLength / 2;
+                        }
                     }
 
+                    
                     ret = mySapModel.FrameObj.SetEndLengthOffset(beam.UniqueName, false, offsetValue1, offsetValue2, 0);
                 }
-            }
-            else
-            {
-                foreach (var beam in beamList)
-                {
-                    ret = mySapModel.FrameObj.GetEndLengthOffset(beam.UniqueName, ref AutoOffset, ref Length1, ref Length2, ref RZ);
-                    string beamName = beam.UniqueName;
-                    double offsetValue1 = ((beam.Depth/2 - 50) / 1000) + Length1;
-                    double offsetValue2 = ((beam.Depth/2 - 50) / 1000) + Length2;
-                    ret = mySapModel.FrameObj.SetEndLengthOffset(beamName, false, offsetValue1, offsetValue2, 0);
-                }
-            }
+
+
+
+
 
             //run the analysis and desgin
-            //ret = mySapModel.Analyze.RunAnalysis();
-            //ret = mySapModel.DesignConcrete.StartDesign();
+            ret = mySapModel.Analyze.RunAnalysis();
+            ret = mySapModel.DesignConcrete.StartDesign();
 
-            ////beams parameters
-            //NumberItems = 0;
-            //string[] FrameName = null;
-            //double[] Location = null;
-            ////flexural
-            //string[] TopCombo = null;
-            //double[] TopArea = null;
-            //string[] BotCombo = null;
-            //double[] BotArea = null;
-            ////shear
-            //string[] VMajorCombo = null;
-            //double[] VMajorArea = null;
-            ////torsion
-            //string[] TLCombo = null;
-            //double[] TLArea = null;
-            //string[] TTCombo = null;
-            //double[] TTArea = null;
-            //string[] ErrorSummary = null;
-            //string[] WarningSummary = null;
+            //beams parameters
+            NumberItems = 0;
+            string[] FrameName = null;
+            double[] Location = null;
+            //flexural
+            string[] TopCombo = null;
+            double[] TopArea = null;
+            string[] BotCombo = null;
+            double[] BotArea = null;
+            //shear
+            string[] VMajorCombo = null;
+            double[] VMajorArea = null;
+            //torsion
+            string[] TLCombo = null;
+            double[] TLArea = null;
+            string[] TTCombo = null;
+            double[] TTArea = null;
+            string[] ErrorSummary = null;
+            string[] WarningSummary = null;
 
-            ////get shear RFT
-            //ret = mySapModel.DesignConcrete.GetSummaryResultsBeam(groupName,ref NumberItems,ref FrameName,ref Location,
-            //    ref TopCombo,ref TopArea,ref BotCombo,ref BotArea,ref VMajorCombo,ref VMajorArea,ref TLCombo,ref TLArea,ref TTCombo, ref TTArea
-            //    ,ref ErrorSummary,ref WarningSummary,eItemType.Group);
+            //get shear RFT
+            ret = mySapModel.DesignConcrete.GetSummaryResultsBeam(groupName, ref NumberItems, ref FrameName, ref Location,
+                ref TopCombo, ref TopArea, ref BotCombo, ref BotArea, ref VMajorCombo, ref VMajorArea, ref TLCombo, ref TLArea, ref TTCombo, ref TTArea
+                , ref ErrorSummary, ref WarningSummary, eItemType.Group);
 
-            //foreach (var beam in beamList)
-            //{
-            //    var indices = FrameName
-            //                    .Select((value, index) => new { value, index })
-            //                    .Where(x => x.value == beam.UniqueName)
-            //                    .Select(x => x.index)
-            //                    .ToArray();
-            //}
+            foreach (var beam in beamList)
+            {
+                // Get indices matching the beam's unique name
+                var indices = FrameName
+                    .Select((value, idx) => new { value, idx })
+                    .Where(x => x.value == beam.UniqueName)
+                    .Select(x => x.idx)
+                    .ToArray();
+                // Find the maximum VMajorArea value for these indices
+                if (indices.Any()) // Ensure there are matching indices
+                {
+                    beam.CornerShearAs = indices.Select(idx => VMajorArea[idx]).Max();
+
+                    if (beam.CornerShearAs < 0)
+                    {
+                        beam.CornerShearAs = 0;
+                    }
+                }
+                else
+                {
+                    beam.CornerShearAs = 0;
+                }
+
+
+            }
 
             //unlock model
-
+            ret = mySapModel.SetModelIsLocked(false);
             //remove offset
-
+            foreach (var beam in beamList)
+            {
+                ret = mySapModel.FrameObj.SetEndLengthOffset(beam.UniqueName, true, 0, 0, 0);
+            }
             //runagain and desgin
+            ret = mySapModel.Analyze.RunAnalysis();
+            ret = mySapModel.DesignConcrete.StartDesign();
 
             //get flexural RFT
+            ret = mySapModel.DesignConcrete.GetSummaryResultsBeam(groupName, ref NumberItems, ref FrameName, ref Location,
+                ref TopCombo, ref TopArea, ref BotCombo, ref BotArea, ref VMajorCombo, ref VMajorArea, ref TLCombo, ref TLArea, ref TTCombo, ref TTArea
+                , ref ErrorSummary, ref WarningSummary, eItemType.Group);
 
+            double factor = 1000000;
+
+            foreach (var beam in beamList)
+            {
+                // Get indices matching the beam's unique name
+                var indices = FrameName
+                    .Select((value, idx) => new { value, idx })
+                    .Where(x => x.value == beam.UniqueName)
+                    .Select(x => x.idx)
+                    .ToArray();
+                // Find the maximum Top Area value for these indices
+                if (indices.Any()) // Ensure there are matching indices
+                {
+
+                    beam.TopCornerAs = Math.Max( indices.Select(idx => TopArea[idx]).First(), indices.Select(idx => TopArea[idx]).Last())*factor;
+
+                    if (beam.TopCornerAs < 0)
+                    {
+                        beam.TopCornerAs = 0;
+                    }
+                    //get bot corner
+                    beam.BotCornerAs = Math.Max(indices.Select(idx => BotArea[idx]).First(), indices.Select(idx => BotArea[idx]).Last())*factor;
+                    if (beam.BotCornerAs < 0)
+                    {
+                        beam.BotCornerAs = 0;
+                    }
+
+                    //get mid location
+                    var chosenLocation = indices.Select(idx => Location[idx]).ToArray();
+                    
+                    double mean = chosenLocation.Average();
+                    double closestNumber = chosenLocation.OrderBy(num => Math.Abs(num - mean)).First();
+
+                    int midIndex = Array.IndexOf(chosenLocation, closestNumber);
+
+                    var chosenAsBot = indices.Select(idx => BotArea[idx]).ToArray(); // get as bot for mid of the beam
+                    var chosenAsTop = indices.Select(idx => TopArea[idx]).ToArray(); // get as top for mid of the beam
+
+                    //get bot middle
+
+                    beam.BotMiddleAs = chosenAsBot[midIndex]*factor;
+
+                    //get top middle
+
+                    beam.TopMiddleAs = chosenAsTop[midIndex] * factor;
+
+                    if (beam.TopMiddleAs < beam.BotMiddleAs * 0.2)
+                    {
+                        beam.TopMiddleAs = beam.BotMiddleAs * 0.2;
+                    }
+                }
+                else
+                {
+                    beam.TopCornerAs = 0;
+                    beam.BotCornerAs = 0;
+                    beam.BotMiddleAs = 0;
+                    beam.TopMiddleAs = 0;
+                }
+
+
+            }
 
 
             return beamList;
@@ -364,18 +459,43 @@ namespace BeamDesgin.Etabs
         public static double GetOffsetvalue(double columnWidth, double columnDepth,double angle)
         {
             double offsetValue = 0;
-            double hyp = Math.Sqrt(Math.Pow(columnDepth, 2) + Math.Pow(columnWidth, 2));
+            double hyp = Math.Sqrt(Math.Pow(columnDepth/2, 2) + Math.Pow(columnWidth/2, 2));
             double radianAngle = angle * (Math.PI / 180);
+            double midAngle = Math.Atan((columnWidth/2)/(columnDepth/2));
+            double midAngleInDegree = (midAngle*180)/Math.PI;
+            double a = 0; double b = 0;
+            double c = 0;
 
-            if (angle < 45)
+            if (angle == 90)
             {
-                offsetValue = ((4*hyp-2*columnDepth)/Math.PI)*radianAngle+columnDepth/2;
+                offsetValue = columnWidth/2;
+            }
+            else if (angle < 90 && angle > midAngleInDegree)
+            {
+                c = Math.Tan(radianAngle);
+                a = columnWidth / (2 * Math.Tan(radianAngle));
+                b = columnWidth /2;
+                offsetValue = Math.Sqrt(Math.Pow(a, 2) + Math.Pow(b, 2));
+            }
+            else if (angle < midAngleInDegree && angle > 0)
+            {
+                c = Math.Tan(radianAngle);
+                a = (columnDepth * Math.Tan(radianAngle)/2);
+                b = columnDepth/2;
+                offsetValue = Math.Sqrt(Math.Pow(a, 2) + Math.Pow(b, 2));
+            }
+            else if(angle == midAngleInDegree)
+            {
+                offsetValue = hyp;
+            }
+            else if ( angle == 0)
+            {
+                offsetValue = columnDepth/2;
             }
             else
             {
-                offsetValue = ((2*columnWidth-4*hyp) / Math.PI) * radianAngle + 2*hyp - columnWidth / 2;
+                offsetValue = columnDepth / 2;
             }
-
             return offsetValue;
         }
     }

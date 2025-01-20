@@ -1,4 +1,5 @@
 ﻿using Autodesk.Revit.DB;
+using OfficeOpenXml.FormulaParsing.Excel.Functions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,6 +49,11 @@ namespace BeamDesgin.Utils
 
             // Map the angle to [0, 90] using symmetry
             return modAngle % 90;
+        }
+        public static double GetLineLength(double point1_x, double point1_y, double point2_x, double point2_y)
+        {
+            double length = Math.Sqrt(Math.Pow(point1_x-point2_x, 2)+Math.Pow(point1_y-point2_y,2));
+            return length;
         }
     }
 }
