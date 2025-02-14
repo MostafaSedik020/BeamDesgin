@@ -163,7 +163,7 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Label Content="ProMark v1.1" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="16"
+                <Label Content="ProMark v2.0" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="16"
                        FontWeight="Bold" FontFamily="Arial" Foreground="Black" Grid.Column="0"/>
 
                 <Button Content="X" Width="30" Height="30" Click="CloseButton_Click" Background="Transparent"
@@ -176,12 +176,6 @@
                     <ColumnDefinition Width="200"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-
-                <TextBox x:Name="Path_TxtBox" HorizontalAlignment="Left" Height="20" Margin="20,0,0,0" Grid.Column="0"
-                        TextWrapping="Wrap"  VerticalAlignment="Center" Width="400"/>
-
-                <Button Name="Browse_btn" Content="Browse" HorizontalAlignment="Center" Margin="20,0,0,0" Grid.Column="1"
-                    VerticalAlignment="Center" Width="70" Height="30" Click="Browse_Button_Click"/>
 
             </Grid>
 
@@ -229,12 +223,14 @@
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1">
                     <Label Content="Prequal" />
                     <TextBox x:Name="prequal_txtbox"  Width="40" Height="20" Margin="0,0,0,0"/>
+                    <Label Content="Start Number" />
+                    <TextBox x:Name="startNum_txtbox"  Width="40" Height="20" Margin="0,0,0,0"/>
                     <!--<Label Content="{Binding ElementName=prequal_txtbox, Path=Text, StringFormat='{}{0}5 200X700'}"
                            x:Name="preEx_label" Margin="0,10,0,0"/>-->
                 </StackPanel>
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1">
 
-                    <Button x:Name="desgin_btn" Content="Design" Margin="20,0,20,10" Grid.Column="1"
+                    <Button x:Name="desgin_btn" Content="Link ETABS" Margin="20,0,20,10" Grid.Column="1"
                              Width="70" Height="30" Click="desgin_btn_click"/>
 
                     <Button x:Name="Clear_btn" Content="Clear" Width="70" Margin="20,0,20,0" Grid.Column="1"

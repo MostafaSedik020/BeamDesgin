@@ -17,6 +17,7 @@ using BeamDesgin.Revit;
 using System.ComponentModel;
 using BeamDesgin.Etabs;
 using System.Windows.Controls.Primitives;
+using BeamDesgin.Entry;
 
 
 namespace BeamDesgin.UI
@@ -38,9 +39,9 @@ namespace BeamDesgin.UI
         Document doc;
         private ObservableCollection<Beam> _BeamsData;
         private ObservableCollection<Beam> _UserList;
-        
 
-        
+
+
         private List<int> selectedRebars;
         private int numOfWarnings;
         public ObservableCollection<Beam> BeamsData
@@ -95,20 +96,20 @@ namespace BeamDesgin.UI
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-            
+
         }
 
-        private void Browse_Button_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Excel Files|*.xls;*.xlsx|All Files|*.*";
+        //private void Browse_Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    OpenFileDialog openFileDialog = new OpenFileDialog();
+        //    openFileDialog.Filter = "Excel Files|*.xls;*.xlsx|All Files|*.*";
 
-            if (openFileDialog.ShowDialog() == true)
-            {
-                string selectedFilePath = openFileDialog.FileName;
-                Path_TxtBox.Text = selectedFilePath;
-            }
-        }
+        //    if (openFileDialog.ShowDialog() == true)
+        //    {
+        //        string selectedFilePath = openFileDialog.FileName;
+        //        Path_TxtBox.Text = selectedFilePath;
+        //    }
+        //}
 
         private void desgin_btn_click(object sender, RoutedEventArgs e)
         {
@@ -117,7 +118,7 @@ namespace BeamDesgin.UI
             //    MessageBox.Show("Please select a valid file path.", "Invalid Path", MessageBoxButton.OK, MessageBoxImage.Warning);
             //    return;
             //}
-            
+
             //old version to get data using excel
             //List<Beam> beamsData = ManageExcel.GetBeamsData(Path_TxtBox.Text);
 
@@ -142,19 +143,25 @@ namespace BeamDesgin.UI
             }
 
             //get data from etabs
-            List<Beam> beamsData = ManageEtabs.GetDataFromEtabs(selectedGroup,selectedDesignCode);
+            List<Beam> beamsData = ManageEtabs.GetDataFromEtabs(selectedGroup, selectedDesignCode);
 
             //get the selected rebars from the user
             selectedRebars = GetSelectedRebarSizes();
 
 
             string prequal = "B";
+            int startNum = 1;
+            int result;
+            bool isInt = int.TryParse(startNum_txtbox.Text, out result);
             if (!string.IsNullOrWhiteSpace(prequal_txtbox.Text))
             {
                 prequal = prequal_txtbox.Text;
             }
-            
-            var newList = ManageData.transAreaData(beamsData, selectedRebars,prequal);
+            if (!string.IsNullOrWhiteSpace(startNum_txtbox.Text) || isInt)
+            {
+                startNum = result;
+            }
+            var newList = ManageData.transAreaData(beamsData, selectedRebars, prequal, startNum);
 
             foreach (Beam beam in newList)
             {
@@ -164,11 +171,11 @@ namespace BeamDesgin.UI
 
             //Check the Revit model once to avoid redundant calls
             numOfWarnings = RevitUtils.CheckRevitModel(BeamsData, doc).count;
-            if(numOfWarnings > 0)
+            if (numOfWarnings > 0)
             {
                 warningcount_label.Content = $"Warning Found : {numOfWarnings}";
-                warningcount_label.Visibility =System.Windows.Visibility.Visible;
-                warning_btn.Visibility =System.Windows.Visibility.Visible;
+                warningcount_label.Visibility = System.Windows.Visibility.Visible;
+                warning_btn.Visibility = System.Windows.Visibility.Visible;
             }
 
             foreach (Beam beam in BeamsData)
@@ -181,7 +188,7 @@ namespace BeamDesgin.UI
                 }
             }
 
-            UpdateDataGrid(prequal); // Update grid once after processing all beams
+            UpdateDataGrid(prequal, startNum); // Update grid once after processing all beams
 
             // Disable the design button after processing
             desgin_btn.IsEnabled = false;
@@ -189,7 +196,7 @@ namespace BeamDesgin.UI
         }
         private void warning_btn_Click(object sender, RoutedEventArgs e)
         {
-            WarningWindow warningWindow = new WarningWindow(BeamsData,doc);
+            WarningWindow warningWindow = new WarningWindow(BeamsData, doc);
 
             warningWindow.ShowDialog();
         }
@@ -202,21 +209,28 @@ namespace BeamDesgin.UI
                                 .Where(b => b.IsSelected)
                                 .ToList();
             string prequal = "B";
+            int startNum = 1;
+            int result;
+            bool isInt = int.TryParse(startNum_txtbox.Text, out result);
             if (!string.IsNullOrWhiteSpace(prequal_txtbox.Text))
             {
                 prequal = prequal_txtbox.Text;
             }
+            if (!string.IsNullOrWhiteSpace(startNum_txtbox.Text) || isInt)
+            {
+                startNum = result;
+            }
             bool areAllConcDimEqual = selectedBeams.All(b => b.Breadth == selectedBeams.First().Breadth) &&
                 selectedBeams.All(b => b.Depth == selectedBeams.First().Depth);
-            if (selectedBeams.Any() && areAllConcDimEqual == true )
+            if (selectedBeams.Any() && areAllConcDimEqual == true)
             {
                 MergeBeams(selectedBeams);
-                
-                UpdateDataGrid(prequal); // Update grid once after processing all beams
+
+                UpdateDataGrid(prequal,startNum); // Update grid once after processing all beams
             }
-            else if(selectedBeams.Any() && areAllConcDimEqual == false)
+            else if (selectedBeams.Any() && areAllConcDimEqual == false)
             {
-                MessageBox.Show("Selected beams are not the same concrete dimensions","Process Failed",MessageBoxButton.OK,MessageBoxImage.Warning);
+                MessageBox.Show("Selected beams are not the same concrete dimensions", "Process Failed", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
@@ -232,9 +246,16 @@ namespace BeamDesgin.UI
                                 .Where(b => b.IsSelected)
                                 .ToList();
             string prequal = "B";
+            int startNum = 1;
+            int result;
+            bool isInt = int.TryParse(startNum_txtbox.Text, out result);
             if (!string.IsNullOrWhiteSpace(prequal_txtbox.Text))
             {
                 prequal = prequal_txtbox.Text;
+            }
+            if (!string.IsNullOrWhiteSpace(startNum_txtbox.Text) || isInt )
+            {
+                startNum = result;
             }
             if (selectedBeams.Any())
             {
@@ -254,7 +275,7 @@ namespace BeamDesgin.UI
                         //MessageBox.Show("This button is not working now Please try again later XD");
                     }
 
-                    UpdateDataGrid(prequal);
+                    UpdateDataGrid(prequal, startNum);
                 }
                 else
                 {
@@ -312,17 +333,27 @@ namespace BeamDesgin.UI
                MessageBoxResult result = MessageBox.Show($"There are {numOfWarnings} warnings left, proceed to revit?", "Warning",MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.Yes)
                 {
+                    //model from
                     RevitUtils.SendDataToRevit(BeamsData, doc);
+
+                    //modless form
+                    //RvtData.BeamsData = BeamsData;
+                    //ExtCmd.ExtEvent.Raise();
                 }
-                
+
             }
             else
             {
+                //model from
                 RevitUtils.SendDataToRevit(BeamsData, doc);
-            }
-            
 
-            
+                //modless form
+                //RvtData.BeamsData = BeamsData;
+                //ExtCmd.ExtEvent.Raise();
+            }
+
+
+
         }
 
         /// <summary>
@@ -371,11 +402,11 @@ namespace BeamDesgin.UI
         /// needs List of Beams
         /// </summary>
         /// <param name="beamList"> the beam list that will be represented to the user (aka  a unique list)</param>
-        private void UpdateDataGrid(string prequal)
+        private void UpdateDataGrid(string prequal, int startNum)
         {
             UserList.Clear();
 
-            var newSortedData = ManageData.sortData(BeamsData, prequal);
+            var newSortedData = ManageData.sortData(BeamsData, prequal, startNum);
             BeamsData.Clear();
 
             foreach (var beam in newSortedData)

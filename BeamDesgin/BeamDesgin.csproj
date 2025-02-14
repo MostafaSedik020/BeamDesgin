@@ -107,6 +107,7 @@
     </Compile>
     <Compile Include="Revit\ExtEventHan.cs" />
     <Compile Include="Revit\RevitUtils.cs" />
+    <Compile Include="Revit\RvtData.cs" />
     <Compile Include="UI\ChooseGroupWindow.xaml.cs">
       <DependentUpon>ChooseGroupWindow.xaml</DependentUpon>
     </Compile>

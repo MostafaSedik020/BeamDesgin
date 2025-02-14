@@ -12,7 +12,7 @@ namespace BeamDesgin.Data
 {
     public static class ManageData
     {
-        public static List<Beam> transAreaData(List<Beam> beamList,List<int> bars, string prequal)
+        public static List<Beam> transAreaData(List<Beam> beamList,List<int> bars, string prequal, int startNum)
         {
 
 
@@ -70,7 +70,7 @@ namespace BeamDesgin.Data
 
             }
             //sorting
-            var sortedBeamList = sortData(beamList ,prequal);
+            var sortedBeamList = sortData(beamList ,prequal, startNum);
 
             //StringBuilder sb = new StringBuilder();
 
@@ -111,7 +111,7 @@ namespace BeamDesgin.Data
         }
 
 
-        public static List<Beam> sortData(List<Beam> beamList ,string prequal)
+        public static List<Beam> sortData(List<Beam> beamList ,string prequal , int startNum)
         {
             var sortedList =  beamList.OrderBy(b => b.Breadth)
                                          .ThenBy(b => b.Depth)
@@ -126,7 +126,7 @@ namespace BeamDesgin.Data
                                          .ToList();
 
             string currentMarkType = prequal;
-            int markNumber = 1;
+            int markNumber = startNum;
 
             if (sortedList.Any())
             {
@@ -164,7 +164,7 @@ namespace BeamDesgin.Data
 
             return sortedList;
         }
-        public static List<Beam> sortData(ObservableCollection<Beam> beamList , string prequal)
+        public static List<Beam> sortData(ObservableCollection<Beam> beamList , string prequal, int startNum)
         {
             var sortedList = beamList.OrderBy(b => b.Breadth)
                                          .ThenBy(b => b.Depth)
@@ -178,7 +178,7 @@ namespace BeamDesgin.Data
                                          .ThenBy(b => b.ChosenShearAsCorner.spacing)
                                          .ToList();
             string currentMarkType = prequal;
-            int markNumber = 1;
+            int markNumber = startNum;
 
             if (sortedList.Any())
             {

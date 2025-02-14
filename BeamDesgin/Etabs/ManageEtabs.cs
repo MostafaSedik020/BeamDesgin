@@ -67,11 +67,11 @@ namespace BeamDesgin.Etabs
             //Check ret value 
             if (ret == 0)
             {
-                MessageBox.Show("API script completed successfully.");
+                MessageBox.Show("ETABS Linked successfully.");
             }
             else
             {
-                MessageBox.Show("API script FAILED to complete.");
+                MessageBox.Show("ETABS Linked Failed.");
             }
 
         }
