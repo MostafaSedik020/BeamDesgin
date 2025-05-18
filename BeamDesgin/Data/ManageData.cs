@@ -26,7 +26,11 @@ namespace BeamDesgin.Data
                 //{
                 //    MessageBox.Show("hi");
                 //}
-                int domainDia = ManageRft.GetChosenFlexRFT(beam.BotMiddleAs, beam.Breadth, bars).diameter;
+
+                // get the domain diameter for the bars
+                int midDia = ManageRft.GetChosenFlexRFT(beam.BotMiddleAs, beam.Breadth, bars).diameter;
+                int cornerDia = ManageRft.GetChosenFlexRFT(beam.BotCornerAs, beam.Breadth, bars).diameter;
+                int domainDia = Math.Max(midDia, cornerDia);
                 double breadth = beam.Breadth;
                 //if (beam.Depth == 750)
                 //{
@@ -39,19 +43,7 @@ namespace BeamDesgin.Data
                 beam.ChosenAsMidBot.Diameter = chosenMidBot.diameter;
                 
                 var chosenCornerBot = ManageRft.GetChosenFlexRFT(beam.BotCornerAs, breadth, bars, domainDia);
-                //ver 2.0
-                //if(chosenCornerBot.noOfBars > chosenMidBot.noOfBars / 2 ||
-                //    chosenCornerBot.noOfBars < chosenMidBot.noOfBars)
-                //{
-                //    beam.ChosenCornerAsBot.NumberOfBars = chosenMidBot.noOfBars;
-                //    beam.ChosenCornerAsBot.Diameter = chosenMidBot.diameter;
-                //}
-                //else
-                //{
-                //    beam.ChosenCornerAsBot.NumberOfBars = chosenCornerBot.noOfBars;
-                //    beam.ChosenCornerAsBot.Diameter = chosenCornerBot.diameter;
-                //}
-
+  
                 //ver 2.1
                 if (chosenCornerBot.noOfBars > chosenMidBot.noOfBars) //if corner is higher : case corner dominates
                 {

@@ -88,11 +88,21 @@ namespace BeamDesgin.ManageElements
                     barsNumber = minNumberOfBars; //check if the bars numbers are lower than min 
                     diameter = bars[i];
                 }
-                else /*if (numberOfBars < maxNumberofBars)*/
+                else if (numberOfBars < maxNumberofBars)
                 {
                     barsNumber = numberOfBars;    //check if the bars numbers are higher than max
                     diameter = bars[i];
                 }
+                else if (i == areaBars.Count - 1)
+                {
+                    barsNumber = numberOfBars; //check if the bars numbers are higher than max
+                    diameter = bars[i];
+                }
+                //else
+                //{
+                //    continue; //skip the rest of the bars
+                //}
+                
 
                 double totalAs = barsNumber * areaBars[i];
 

@@ -275,9 +275,7 @@ namespace BeamDesgin.Elements
         public string BOTTOM_RFT_CORNER => $"{ChosenCornerAsBot.NumberOfBars}T{ChosenCornerAsBot.Diameter}";
         public string BOTTOM_RFT_MID => $"{ChosenAsMidBot.NumberOfBars}T{ChosenAsMidBot.Diameter}";
         public string TOP_RFT_CORNER => $"{ChosenCornerAsTop.NumberOfBars}T{ChosenCornerAsTop.Diameter}";
-        public string TOP_RFT_MID => ChosenShearAsMid.Diameter == 8
-        ? $"{ChosenShearAsMid.NumberOfBars}LR{ChosenShearAsMid.Diameter}@{ChosenShearAsMid.spacing}"
-        : $"{ChosenShearAsMid.NumberOfBars}LT{ChosenShearAsMid.Diameter}@{ChosenShearAsMid.spacing}";
+        public string TOP_RFT_MID => $"{ChosenMidAsTop.NumberOfBars}T{ChosenMidAsTop.Diameter}";
         public string LINKS_CORNER => ChosenShearAsMid.Diameter == 8
             ? $"{ChosenShearAsCorner.NumberOfBars}LR{ChosenShearAsCorner.Diameter}@{ChosenShearAsCorner.spacing}"
             : $"{ChosenShearAsCorner.NumberOfBars}LT{ChosenShearAsCorner.Diameter}@{ChosenShearAsCorner.spacing}";
