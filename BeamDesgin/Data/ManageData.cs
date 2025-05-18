@@ -1,4 +1,5 @@
-﻿using Autodesk.Revit.UI;
+﻿using Autodesk.Revit.DB.Electrical;
+using Autodesk.Revit.UI;
 using BeamDesgin.Elements;
 using BeamDesgin.ManageElements;
 using System;
@@ -7,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace BeamDesgin.Data
 {
@@ -19,30 +21,62 @@ namespace BeamDesgin.Data
             // Calculate bottom Reinforcment
             foreach (Beam beam in beamList)
             {
+                //check for defect beams
+                //if (beam.UniqueName == "77")
+                //{
+                //    MessageBox.Show("hi");
+                //}
                 int domainDia = ManageRft.GetChosenFlexRFT(beam.BotMiddleAs, beam.Breadth, bars).diameter;
                 double breadth = beam.Breadth;
-
+                //if (beam.Depth == 750)
+                //{
+                //    MessageBox.Show("depth is 750");
+                //}
                 #region Bottom Reinforcement
 
                 var chosenMidBot = ManageRft.GetChosenFlexRFT(beam.BotMiddleAs, breadth, bars, domainDia);
                 beam.ChosenAsMidBot.NumberOfBars = chosenMidBot.noOfBars;
                 beam.ChosenAsMidBot.Diameter = chosenMidBot.diameter;
-
+                
                 var chosenCornerBot = ManageRft.GetChosenFlexRFT(beam.BotCornerAs, breadth, bars, domainDia);
-                if(chosenCornerBot.noOfBars > chosenMidBot.noOfBars / 2 ||
-                    chosenCornerBot.noOfBars < chosenMidBot.noOfBars)
+                //ver 2.0
+                //if(chosenCornerBot.noOfBars > chosenMidBot.noOfBars / 2 ||
+                //    chosenCornerBot.noOfBars < chosenMidBot.noOfBars)
+                //{
+                //    beam.ChosenCornerAsBot.NumberOfBars = chosenMidBot.noOfBars;
+                //    beam.ChosenCornerAsBot.Diameter = chosenMidBot.diameter;
+                //}
+                //else
+                //{
+                //    beam.ChosenCornerAsBot.NumberOfBars = chosenCornerBot.noOfBars;
+                //    beam.ChosenCornerAsBot.Diameter = chosenCornerBot.diameter;
+                //}
+
+                //ver 2.1
+                if (chosenCornerBot.noOfBars > chosenMidBot.noOfBars) //if corner is higher : case corner dominates
+                {
+                    // corner rft dominates and mid is changed
+                    beam.ChosenCornerAsBot.NumberOfBars = chosenCornerBot.noOfBars;
+                    beam.ChosenCornerAsBot.Diameter = chosenCornerBot.diameter;
+
+                    beam.ChosenAsMidBot.NumberOfBars = chosenCornerBot.noOfBars;
+                    beam.ChosenAsMidBot.Diameter = chosenCornerBot.diameter;
+                }
+                else if (chosenCornerBot.noOfBars > chosenMidBot.noOfBars *0.75) // case mid dominates
                 {
                     beam.ChosenCornerAsBot.NumberOfBars = chosenMidBot.noOfBars;
                     beam.ChosenCornerAsBot.Diameter = chosenMidBot.diameter;
                 }
-                else
+                else 
                 {
                     beam.ChosenCornerAsBot.NumberOfBars = chosenCornerBot.noOfBars;
                     beam.ChosenCornerAsBot.Diameter = chosenCornerBot.diameter;
                 }
-                
 
-                
+
+
+
+
                 #endregion
 
                 #region Top Reinforcement
